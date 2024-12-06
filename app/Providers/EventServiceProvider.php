@@ -13,24 +13,11 @@ class EventServiceProvider extends ServiceProvider
      * @var array
      */
     protected $listen = [
-	    'Illuminate\Auth\Events\Login' => [
-		    'App\Listeners\LogSuccessfulLogin',
-	    ],
+        'Illuminate\Auth\Events\Login' => [
+            'App\Listeners\LogSuccessfulLogin',
+        ],
         'App\Events\LogEvent' => [
-	        'App\Listeners\LogListenerAction',
-        ],
-        'App\Events\RegisterEvent' => [
-//            'App\Listeners\RegisterListenerNotification',
-            'App\Listeners\SendMailActiveAfterRegisterAgent',
-        ],
-        'App\Events\PhoneBookingEvent' => [
-            'App\Listeners\PhoneBookingListenerNotification',
-        ],
-        'App\Events\MailContactEvent' => [
-            'App\Listeners\SendMailContactListener',
-        ],
-        'App\Events\MailOrderEvent' => [
-            'App\Listeners\SendMailOrderListener',
+            'App\Listeners\LogListenerAction',
         ],
     ];
 
