@@ -1,17 +1,16 @@
 @extends('adminlte::layouts.app')
 @section('htmlheader_title')
-    {{ __('theme::categories.category') }}
+    {{ __('categories.category') }}
 @endsection
 @section('contentheader_title')
-    {{ __('theme::categories.category') }}
+    {{ __('categories.category') }}
 @endsection
 @section('contentheader_description')
-
 @endsection
 @section('breadcrumb')
     <ol class="breadcrumb">
-        <li><a href="{{ url("admin") }}"><i class="fa fa-home"></i> {{ __("message.dashboard") }}</a></li>
-        <li><a href="{{ url('/admin/categories') }}">{{ __('theme::categories.category') }}</a></li>
+        <li><a href="{{ url('admin') }}"><i class="fa fa-home"></i> {{ __('message.dashboard') }}</a></li>
+        <li><a href="{{ url('/admin/categories') }}">{{ __('categories.category') }}</a></li>
         <li class="active">{{ __('message.edit_title') }}</li>
     </ol>
 @endsection
@@ -21,7 +20,8 @@
         <div class="box-header with-border">
             <h3 class="box-title">{{ __('message.edit_title') }}</h3>
             <div class="box-tools">
-                <a href="{{ url('/admin/categories') }}" class="btn btn-warning btn-sm"><i class="fa fa-arrow-left" aria-hidden="true"></i> <span class="hidden-xs">{{ __('message.lists') }}</span></a>
+                <a href="{{ url('/admin/categories') }}" class="btn btn-warning btn-sm"><i class="fa fa-arrow-left" aria-hidden="true"></i> <span
+                        class="hidden-xs">{{ __('message.lists') }}</span></a>
             </div>
         </div>
 
@@ -29,7 +29,7 @@
             'method' => 'PATCH',
             'url' => ['/admin/categories', $category->id],
             'class' => 'form-horizontal',
-            'files' => true
+            'files' => true,
         ]) !!}
 
         @include ('admin.categories.form', ['submitButtonText' => __('message.update')])
