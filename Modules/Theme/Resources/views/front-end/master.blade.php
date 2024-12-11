@@ -48,6 +48,9 @@
     <link rel="preconnect" href="//fonts.googleapis.com">
     <link rel="shortcut icon" href="{{ asset('img/favicon.ico') }}"/>
     <link rel="canonical" href="{{ Request::fullUrl() }}"/>
+    <link rel="stylesheet" href="{{ asset('css/huesoft_css/bootstrap.css')}}">
+    <link rel="stylesheet" href="{{ asset('css/font-awesome/all.min.css')}}">
+    <link rel="stylesheet" href="{{ asset('css/huesoft_css/swiper.css')}}">
 
     {!! str_replace('<br />', '', $settings['google_analytics']) !!}
 </head>
@@ -87,6 +90,8 @@
     </div>
 </body>
 
+<script src="{{ asset('js/huesoft_js/jquery.js')}}"></script>
+<script src="{{ asset('js/huesoft_js/swiper.js')}}"></script>
+<script src="{{ asset('js/sweetalert2/sweetalert2@11.js')}}"></script>
 @yield('script')
-
 </html>
