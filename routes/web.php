@@ -10,6 +10,10 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
+
+use App\Http\Controllers\Admin\MenuController;
+use App\Http\Controllers\Admin\SlideController;
+
 header('Access-Control-Allow-Origin:  *');
 header('Access-Control-Allow-Methods:  POST, GET, OPTIONS, PUT, DELETE');
 header('Access-Control-Allow-Headers:  Content-Type, X-Auth-Token, Origin, Authorization');
@@ -45,4 +49,8 @@ Route::group(['prefix' => 'admin','middleware' => ['auth', 'locale']], function 
 	Route::post('change_locale', 'LocaleController@changeLocale');
 
 
+	Route::resource('slides', 'Admin\SlideController');
+	Route::resource('menus', 'Admin\MenuController');
+	Route::post('admin/slides/update-arrange', [SlideController::class, 'updateArrange'])->name('slides.updateArrange');
+	Route::post('admin/menus/update-arrange', [MenuController::class, 'updateArrange'])->name('menus.updateArrange');
 });

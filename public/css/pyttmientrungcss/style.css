@@ -1,0 +1,96 @@
+/*
+Author : Onextrapixel
+URL: http://www.onextrapixel.com
+*/
+
+
+
+
+
+
+
+#room_slide {
+	/*margin:10px auto;*/
+	width:248px;
+	padding-bottom: 5px;
+}
+
+/************************************************
+	      JCAROUSEL LITE		
+************************************************/
+#room_slide #list {
+/*	height:190px;*/
+	width:248px;
+	margin: 0px auto;
+        position:relative; 
+}
+
+#room_slide .sliderroom {
+/*	left: -5000px;
+	margin: 15px 5px; */
+	position:relative; 
+	visibility:hidden;	
+}
+	
+#room_slide .sliderroom ul {
+/*	height:100px;
+	width:600px; */
+}
+
+#room_slide .sliderroom ul li {
+/*	padding:0 7px;*/
+        width: 248px;
+}
+
+#room_slide .sliderroom ul li img {
+	cursor:pointer;
+	height:148px;
+	/*padding-top:3px;*/
+	width:248px;
+}
+
+#room_slide .prevroom {
+	cursor:pointer; 	
+	position: absolute;
+        top: 60px;
+        z-index: 1000;
+}
+
+#room_slide .nextroom {
+	cursor:pointer; 
+	position: absolute;
+        top: 60px;
+        right: 0px;
+        z-index: 1000;
+}
+
+/************************************************
+	      CAPTIFY CAPTION		
+************************************************/
+#promotion .caption-top, .caption-bottom {
+	background: #000000;
+	color: #ffffff; 
+	cursor:default;
+	padding:2px; 
+	font-size:11px;   
+	text-align:center;
+}
+
+#promotion .caption-top {
+	border-width:0px;
+}
+
+#promotion .caption-bottom {
+	border-width:0px;
+}
+
+#promotion .caption a, .caption a {
+	background:#000;
+	border:none; 
+	text-decoration:none;  
+	padding:2px;
+}
+
+#promotion .caption a:hover, .caption a:hover {
+	background:#202020;
+}

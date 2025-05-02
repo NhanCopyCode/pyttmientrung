@@ -1,0 +1,37 @@
+<?php
+
+namespace App\Models;
+
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
+
+class SysMenu extends Model
+{
+    use HasFactory;
+
+    protected $table = 'sys_menu';
+    protected $fillable = [
+        'ptypeid',
+        'title',
+        'url',
+        'keyword',
+        'content',
+        'arrange',
+        'position',
+        'approved',
+        'lang',
+        'pathimage',
+        'functionid',
+
+    ];
+    public $timestamps = false;
+    public function children()
+    {
+        return $this->hasMany(SysMenu::class, 'ptypeid');
+    }
+
+    public function parent()
+    {
+        return $this->belongsTo(SysMenu::class, 'ptypeid');
+    }
+}

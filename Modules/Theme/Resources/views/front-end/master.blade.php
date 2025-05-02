@@ -5,60 +5,76 @@
     @section('title')
         <title>{{ !empty($settings['meta_title']) ? $settings['meta_title'] : trans('frontend.title') }}</title>
         <meta name="description"
-              content="{{ !empty($settings['meta_description']) ? $settings['meta_description'] : trans('frontend.description') }}"/>
+            content="{{ !empty($settings['meta_description']) ? $settings['meta_description'] : trans('frontend.description') }}" />
         <meta name="keywords"
-              content="{{ !empty($settings['meta_keyword']) ? $settings['meta_keyword'] : trans('frontend.keyword') }}"/>
+            content="{{ !empty($settings['meta_keyword']) ? $settings['meta_keyword'] : trans('frontend.keyword') }}" />
     @show
-    <link rel="sitemap" type="application/xml" title="Sitemap" href="{{ url('sitemap.xml') }}"/>
-    <meta content="INDEX,FOLLOW" name="robots"/>
+    <link rel="sitemap" type="application/xml" title="Sitemap" href="{{ url('sitemap.xml') }}" />
+    <meta content="INDEX,FOLLOW" name="robots" />
     <meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1, user-scalable=yes, minimal-ui">
     <meta http-equiv="Content-type" content="text/html;charset=UTF-8">
     <meta name="google" value="notranslate">
     <meta name="google-site-verification" content="">
-    <meta name="copyright" content="{{ $settings['meta_title'] }}"/>
-    <meta name="author" content="{{ $settings['meta_title'] }}"/>
-    <meta name="GENERATOR" content="{{ $settings['meta_title'] }}"/>
-    <meta http-equiv="audience" content="General"/>
-    <meta name="resource-type" content="Document"/>
-    <meta name="distribution" content="Global"/>
-    <meta name="geo.position" content="Huế"/>
-    <meta name="geo.region" content="VN"/>
-    <meta name="csrf-token" content="{{ csrf_token() }}"/>
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
-    <meta http-equiv="content-language" content="{{ app()->getLocale() }}"/>
-    <meta property="fb:app_id" content="678581042953588"/>
-    <meta property="og:site_name" content="{{ $settings['company_link'] }}"/>
-    <meta property="og:type" content="product"/>
-    <meta property="og:locale" content="{{ app()->getLocale() }}"/>
-    <meta property="og:url" itemprop="url" content="{{ Request::fullUrl() }}"/>
+    <meta name="copyright" content="{{ $settings['meta_title'] }}" />
+    <meta name="author" content="{{ $settings['meta_title'] }}" />
+    <meta name="GENERATOR" content="{{ $settings['meta_title'] }}" />
+    <meta http-equiv="audience" content="General" />
+    <meta name="resource-type" content="Document" />
+    <meta name="distribution" content="Global" />
+    <meta name="geo.position" content="Huế" />
+    <meta name="geo.region" content="VN" />
+    <meta name="csrf-token" content="{{ csrf_token() }}" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta http-equiv="content-language" content="{{ app()->getLocale() }}" />
+    <meta property="fb:app_id" content="678581042953588" />
+    <meta property="og:site_name" content="{{ $settings['company_link'] }}" />
+    <meta property="og:type" content="product" />
+    <meta property="og:locale" content="{{ app()->getLocale() }}" />
+    <meta property="og:url" itemprop="url" content="{{ Request::fullUrl() }}" />
     @section('facebook')
         <meta property="og:title"
-              content="{{ !empty($settings['meta_title']) ? $settings['meta_title'] : trans('frontend.title') }}"/>
+            content="{{ !empty($settings['meta_title']) ? $settings['meta_title'] : trans('frontend.title') }}" />
         <meta property="og:description"
-              content="{{ !empty($settings['meta_description']) ? $settings['meta_description'] : trans('frontend.description') }}"/>
-        <meta property="og:image" content="{{ asset(Storage::url($settings['company_logo'])) }}"/>
-        <meta property="og:image:type" content="image/jpeg"/>
-        <meta property="og:image:width" content="600"/>
-        <meta property="og:image:height" content="315"/>
+            content="{{ !empty($settings['meta_description']) ? $settings['meta_description'] : trans('frontend.description') }}" />
+        <meta property="og:image" content="{{ asset(Storage::url($settings['company_logo'])) }}" />
+        <meta property="og:image:type" content="image/jpeg" />
+        <meta property="og:image:width" content="600" />
+        <meta property="og:image:height" content="315" />
     @show
-    <meta name="twitter:card" content="article"/>
-    <meta name="twitter:description" content="{{ $settings['meta_description'] }}"/>
-    <meta name="twitter:title" content="{{ $settings['meta_title'] }}"/>
-    <meta name="twitter:image" content="{{ asset(Storage::url($settings['company_logo'])) }}"/>
+    <meta name="twitter:card" content="article" />
+    <meta name="twitter:description" content="{{ $settings['meta_description'] }}" />
+    <meta name="twitter:title" content="{{ $settings['meta_title'] }}" />
+    <meta name="twitter:image" content="{{ asset(Storage::url($settings['company_logo'])) }}" />
     <link rel="preconnect" href="//fonts.googleapis.com">
-    <link rel="shortcut icon" href="{{ asset('img/favicon.ico') }}"/>
-    <link rel="canonical" href="{{ Request::fullUrl() }}"/>
-    <link rel="stylesheet" href="{{ asset('css/huesoft_css/bootstrap.css')}}">
-    <link rel="stylesheet" href="{{ asset('css/font-awesome/all.min.css')}}">
-    <link rel="stylesheet" href="{{ asset('css/huesoft_css/swiper.css')}}">
+    <link rel="shortcut icon" href="{{ asset('img/favicon.ico') }}" />
+    <link rel="canonical" href="{{ Request::fullUrl() }}" />
+    <link rel="stylesheet" href="{{ asset('css/huesoft_css/bootstrap.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/font-awesome/all.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/huesoft_css/swiper.css') }}">
+    {{-- Pyttmientrung Css --}}
+    <link rel="stylesheet" href="{{ asset('css/pyttmientrungcss/main.css') }}">
+
+    <script src="{{ asset('js/huesoft_js/jquery.js') }}"></script>
+    <script src="{{ asset('js/pyttmientrungjs/jquery-latest.pack.js') }}" type="text/javascript"></script>
+    <script src="{{ asset('js/pyttmientrungjs/jquery-ui.min.js') }}" type="text/javascript"></script>
+    <script src="{{ asset('js/pyttmientrungjs/jquery.nivo.slider.pack.js') }}" type="text/javascript"></script>
+    <script src="{{ asset('js/pyttmientrungjs/jquery.jcarousel.min.js') }}" type="text/javascript"></script>
+    <script src="{{ asset('js/pyttmientrungjs/functions.js') }}" type="text/javascript"></script>
+    <script src="{{ asset('js/pyttmientrungjs/jquery.fancybox.pack.js') }}" type="text/javascript"></script>
+    <script src="{{ asset('js/pyttmientrungjs/jquery.lightbox.js') }}" type="text/javascript"></script>
+    <script src="{{ asset('js/pyttmientrungjs/tabs.js') }}" type="text/javascript"></script>
+    <script src="{{ asset('js/pyttmientrungjs/jquery.smartmarquee.js') }}" type="text/javascript"></script>
+    <script src="{{ asset('js/pyttmientrungjs/stuHover.js') }}" type="text/javascript"></script>
+    <script src="{{ asset('js/pyttmientrungjs/search_vn.js') }}" type="text/javascript"></script>
+    <script src="{{ asset('js/pyttmientrungjs/index.js') }}" type="text/javascript"></script>
 
     {!! str_replace('<br />', '', $settings['google_analytics']) !!}
 </head>
 
 <body>
-{!! str_replace('<br />', '', $settings['fanpage_facebook_body']) !!}
-@section('schema')
-    <script type="application/ld+json">
+    {!! str_replace('<br />', '', $settings['fanpage_facebook_body']) !!}
+    @section('schema')
+        <script type="application/ld+json">
             {
                 "@context": "http://schema.org",
                 "@type": "Organization",
@@ -82,16 +98,20 @@
             }
 
     </script>
-    <div class="app">
-        @include('theme::front-end.layouts.header')
-        @section('content')
-        @show
-        @include('theme::front-end.layouts.footer')
+        <div class="app">
+            <div id="page_container">
+                @include('theme::front-end.layouts.header')
+            @section('content')
+            @show
+            @include('theme::front-end.layouts.footer')
+        </div>
     </div>
 </body>
 
-<script src="{{ asset('js/huesoft_js/jquery.js')}}"></script>
-<script src="{{ asset('js/huesoft_js/swiper.js')}}"></script>
-<script src="{{ asset('js/sweetalert2/sweetalert2@11.js')}}"></script>
-@yield('script')
+<script src="{{ asset('js/huesoft_js/swiper.js') }}"></script>
+{{-- Pyttmiengtrung js  --}}
+
+<script src="{{ asset('js/sweetalert    2/sweetalert2@11.js') }}"></script>
+@yield('script')`
+
 </html>

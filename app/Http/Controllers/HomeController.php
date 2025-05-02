@@ -33,7 +33,6 @@ class HomeController extends Controller
     public function index()
     {
         $usr = User::all()->count();
-
         return view('adminlte::home',compact('usr'));
     }
 }

@@ -9,6 +9,7 @@ use App\Models\Setting;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\FlashSlide;
 use App\Models\News;
 use Modules\Theme\Entities\Menu;
 
@@ -17,18 +18,22 @@ class FrontendController extends Controller
 {
     public function __construct()
     {
-        $mainMenus = $this->menu(1);
+        // $mainMenus = $this->menu(1);
         $settings = Setting::allConfigsKeyValue();
-
+        $slides = FlashSlide::where('approved', 1)
+            ->orderBy('arrange')
+            ->get();
         \View::share([
-            'mainMenus' => $mainMenus,
+            // 'mainMenus' => $mainMenus,
             'settings' => $settings,
+            'slides' => $slides,
         ]);
     }
 
 
     public function index()
     {
+
         return view('theme::front-end.pages.home');
     }
 
@@ -73,8 +78,5 @@ class FrontendController extends Controller
             default:
                 return view('theme::front-end.pages.page', compact('page', 'menu'));
         }
-
     }
-
-
 }

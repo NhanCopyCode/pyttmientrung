@@ -160,4 +160,9 @@ return [
 		'updated_success' => 'Language has been updated!',
 		'deleted_success' => 'Language has been deleted!',
 	],
+
+	"interface_management" => "Interface Management",
+	"slide_management" => "Slide Management",
+	"menu_management" => "Menu management",
+
 ];

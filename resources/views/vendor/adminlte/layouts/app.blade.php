@@ -29,34 +29,39 @@ desired effect
 |               | sidebar-mini                            |
 |---------------------------------------------------------|
 -->
+
 <body class="skin-blue-light sidebar-mini">
-<div id="app" v-cloak>
-    <div class="wrapper">
+    <div id="app" v-cloak>
+        <div class="wrapper">
 
-    @include('adminlte::layouts.partials.mainheader')
+            @include('adminlte::layouts.partials.mainheader')
 
-    @include('adminlte::layouts.partials.sidebar')
+            @include('adminlte::layouts.partials.sidebar')
 
-    <!-- Content Wrapper. Contains page content -->
-    <div class="content-wrapper">
+            <!-- Content Wrapper. Contains page content -->
+            <div class="content-wrapper">
 
-        <!-- Main content -->
-        <section class="content">
-            <!-- Your Page Content Here -->
-            @yield('main-content')
-        </section><!-- /.content -->
-    </div><!-- /.content-wrapper -->
+                <!-- Main content -->
+                <section class="content">
+                    <!-- Your Page Content Here -->
+                    @yield('main-content')
+                </section><!-- /.content -->
+            </div><!-- /.content-wrapper -->
 
-    @include('adminlte::layouts.partials.controlsidebar')
+            @include('adminlte::layouts.partials.controlsidebar')
 
-    @include('adminlte::layouts.partials.footer')
+            @include('adminlte::layouts.partials.footer')
 
-</div><!-- ./wrapper -->
-</div>
-@section('scripts')
-    @include('adminlte::layouts.partials.scripts')
-@show
-@toastr_render
-@yield('scripts-footer')
+        </div><!-- ./wrapper -->
+    </div>
+    @include('sweetalert::alert')
+    @section('scripts')
+        @include('adminlte::layouts.partials.scripts')
+    @show
+    @toastr_render
+    <script src="{{ asset('js/sweetsweetalert::alert2/sweetalert2@11.js') }}"></script>
+
+    @yield('scripts-footer')
 </body>
+
 </html>

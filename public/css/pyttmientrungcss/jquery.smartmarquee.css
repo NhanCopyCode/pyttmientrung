@@ -1,0 +1,14 @@
+.smartmarquee {
+    position: relative;
+    overflow: hidden;
+}
+.smartmarquee .container {
+    position: absolute;
+    padding-left: 10px;
+    list-style-image: url('../images/dotter.png');
+}
+.example .container li {   
+    margin: 0 0 0 5px;
+    padding: 5px 0 5px 0;
+    border-bottom: 1px dotted #999
+}
