@@ -10,7 +10,7 @@
 @section('breadcrumb')
     <ol class="breadcrumb">
         <li><a href="{{ url('admin') }}"><i class="fa fa-home"></i> {{ __('message.dashboard') }}</a></li>
-        <li><a href="{{ url('/admin/categories') }}">{{ __('categories.category') }}</a></li>
+        <li><a href="{{ url('/admin/menus') }}">{{ __('categories.category') }}</a></li>
         <li class="active">{{ __('message.detail') }}</li>
     </ol>
 @endsection
@@ -19,24 +19,28 @@
         <div class="box-header">
             <h3 class="box-title">{{ __('message.detail') }}</h3>
             <div class="box-tools">
-                <a href="{{ url('/admin/slides') }}" class="btn btn-warning btn-sm"><i class="fa fa-arrow-left" aria-hidden="true"></i> <span
-                        class="hidden-xs">{{ trans('message.lists') }}</span></a>
-                @can('SlideController@update')
-                    <a href="{{ url('/admin/slides/' . $category->id . '/edit') }}" class="btn btn-primary btn-sm"><i class="fa fa-pencil-square-o"
-                            aria-hidden="true"></i> <span class="hidden-xs">{{ __('message.edit') }}</span></a>
+                <a href="{{ url('/admin/menus') }}" class="btn btn-warning btn-sm"><i class="fa fa-arrow-left"
+                        aria-hidden="true"></i> <span class="hidden-xs">{{ trans('message.lists') }}</span></a>
+                @can('MenuController@update')
+                    <a href="{{ url('/admin/menus/' . $menu->id . '/edit') }}" class="btn btn-primary btn-sm"><i
+                            class="fa fa-pencil-square-o" aria-hidden="true"></i> <span
+                            class="hidden-xs">{{ __('message.edit') }}</span></a>
                 @endcan
-                @can('SlideController@destroy')
+                @can('MenuController@destroy')
                     {!! Form::open([
                         'method' => 'DELETE',
-                        'url' => ['admin/slides', $category->id],
+                        'url' => ['admin/menus', $menu->id],
                         'style' => 'display:inline',
                     ]) !!}
-                    {!! Form::button('<i class="fa fa-trash-o" aria-hidden="true"></i> <span class="hidden-xs">' . __('message.delete') . '</span>', [
-                        'type' => 'submit',
-                        'class' => 'btn btn-danger btn-sm',
-                        'title' => __('message.delete'),
-                        'onclick' => 'return confirm("' . __('message.confirm_delete') . '")',
-                    ]) !!}
+                    {!! Form::button(
+                        '<i class="fa fa-trash-o" aria-hidden="true"></i> <span class="hidden-xs">' . __('message.delete') . '</span>',
+                        [
+                            'type' => 'submit',
+                            'class' => 'btn btn-danger btn-sm',
+                            'title' => __('message.delete'),
+                            'onclick' => 'return confirm("' . __('message.confirm_delete') . '")',
+                        ],
+                    ) !!}
                     {!! Form::close() !!}
                 @endcan
             </div>
@@ -46,29 +50,23 @@
                 <tbody>
                     <tr>
                         <th> {{ trans('theme::categories.title') }} </th>
-                        <td> {{ $category->name }} </td>
+                        <td> {{ $menu->title }} </td>
+                    </tr>
+                    <tr>
+                        <th> {{ 'Thể loại cha' }} </th>
+                        @if (isset($menu->parent->title))
+                            <td > {{ $menu->parent->title }} </td>
+                        @else
+                            <td style="color: red;"> {{ 'Không có' }} </td>
+                        @endif
                     </tr>
                     <tr>
                         <th> {{ trans('theme::categories.url') }} </th>
-                        <td> <a href="">{{ $category->slug_ }}</a> </td>
+                        <td> <a href="">{{ $menu->url }}</a> </td>
 
                     </tr>
-                    <tr>
-                        <th> {{ trans('theme::categories.avatar') }} </th>
-                        <td>
-                            @if (!empty($category->avatar))
-                                <img width="100" src="{{ asset($category->avatar) }}" alt="{{ $category->title }}" />
-                            @endif
-                        </td>
-                    </tr>
-                    <tr>
-                        <th> {{ trans('theme::categories.description') }} </th>
-                        <td>{!! $category->description !!}</td>
-                    </tr>
-                    <tr>
-                        <th> {{ trans('theme::categories.updated_at') }} </th>
-                        <td> {{ Carbon\Carbon::parse($category->updated_at)->format(config('settings.format.datetime')) }} </td>
-                    </tr>
+
+
                 </tbody>
             </table>
         </div>

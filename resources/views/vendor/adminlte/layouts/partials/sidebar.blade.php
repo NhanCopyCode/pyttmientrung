@@ -10,7 +10,7 @@
                     'title' => __('message.home'),
                     'href' => 'admin',
                 ],
-              
+
                 [
                     'icon' => 'fa fa-th',
                     'title' => __('message.system'),
@@ -47,7 +47,12 @@
                         ],
                     ],
                 ],
-
+                [
+                    'icon' => 'fa fa-th',
+                    'title' => __('message.post_management'),
+                    'href' => 'admin/posts',
+                    'permission' => "PostController@index"
+                ],
                 //   [
 
                 //     'icon' => 'fad fa-newspaper' ,
@@ -92,7 +97,6 @@
 
                 //         ],
                 //     ],
-
             ];
         @endphp
         {{ Menu::sidebar(Auth::user(), $arLink) }}

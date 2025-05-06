@@ -59,6 +59,13 @@ class PermissionsTableSeeder extends Seeder
             "33" => ["MenuController@destroy", "Quản lý Menu"],
             "34" => ["MenuController@updateArrange", "Quản lý Menu"],
 
+            "35" => ["PostController@index", "Quản lý bài viết"],
+            "36" => ["PostController@show", "Quản lý bài viết"],
+            "37" => ["PostController@store", "Quản lý bài viết"],
+            "38" => ["PostController@update", "Quản lý bài viết"],
+            "39" => ["PostController@destroy", "Quản lý bài viết"],
+            "40" => ["PostController@updateArrange", "Quản lý bài viết"],
+
 
             // "22" => ["NewsController@index", "Quản lý tin tức"],
             // "23" => ["NewsController@show", "Quản lý tin tức"],

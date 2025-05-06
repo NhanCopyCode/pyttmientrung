@@ -164,5 +164,6 @@ return [
 	"interface_management" => "Interface Management",
 	"slide_management" => "Slide Management",
 	"menu_management" => "Menu management",
+	"post_management" => "Post management",
 
 ];

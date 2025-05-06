@@ -6,7 +6,7 @@
             @include('theme::front-end.layouts.sidebar_left')
 
             <div id="ads_01">
-                <div class="panel">
+            <div class="panel">
                     <div>
                         <a href="http://moh.gov.vn/Pages/Index.aspx" target="_blank" title="Bộ y tế"><img
                                 src="/upload/image/quangcao/adv_01_01.png"
@@ -167,33 +167,33 @@
                         </ul>
                     </div> <span id="prevBtn"><a href="javascript:void(0);">Previous</a></span> <span id="nextBtn"><a
                             href="javascript:void(0);">Next</a></span>
-                    <div class="list-next1"> <a
+                    <div class="list-next1" style="background: url('{{ asset('img/bullet.jpg') }}') 0 13px no-repeat"> <a
                             href="https://pyttmientrung.moh.gov.vn/c24/t24-480/chao-mung-ky-niem-70-nam-ngay-thay-thuoc-viet-nam-27-02-1955--27-02-2025-.html">CHÀO
                             MỪNG KỶ NIỆM 70 NĂM NGÀY THẦY THUỐC VIỆT NAM (27/02/1955 - 27/02/2025)</a></div>
 
 
-                    <div class="list-next1"> <a
+                    <div class="list-next1" style="background: url('{{ asset('img/bullet.jpg') }}') 0 13px no-repeat"> <a
                             href="https://pyttmientrung.moh.gov.vn/c24/t24-479/gap-mat-dau-nam-xuan-at-ty-nam-2025.html">GẶP
                             MẶT ĐẦU NĂM XUÂN ẤT TỴ NĂM 2025</a></div>
 
 
-                    <div class="list-next1"> <a
+                    <div class="list-next1" style="background: url('{{ asset('img/bullet.jpg') }}') 0 13px no-repeat"> <a
                             href="https://pyttmientrung.moh.gov.vn/c24/t24-477/hoi-nghi-tong-ket-hoat-dong-cong-doan-nam-2024-va-trien-khai-ke-hoach-hoat-dong-nam-2025.html">HỘI
                             NGHỊ TỔNG KẾT HOẠT ĐỘNG CÔNG ĐOÀN NĂM 2024 VÀ TRIỂN KHAI KẾ HOẠCH HOẠT ĐỘNG NĂM 2025</a></div>
 
 
-                    <div class="list-next1"> <a
+                    <div class="list-next1" style="background: url('{{ asset('img/bullet.jpg') }}') 0 13px no-repeat"> <a
                             href="https://pyttmientrung.moh.gov.vn/c24/t24-475/hoi-nghi-tong-ket-hoat-dong-nam-2024-trien-khai-nhiem-vu-nam-2025-cua-trung-tam-phap-y-tam-than-khu-vuc-mien-trung-.html">
                             HỘI NGHỊ TỔNG KẾT HOẠT ĐỘNG NĂM 2024, TRIỂN KHAI NHIỆM VỤ NĂM 2025 CỦA TRUNG TÂM PHÁP Y
                             TÂM...</a></div>
 
 
-                    <div class="list-next1"> <a
+                    <div class="list-next1" style="background: url('{{ asset('img/bullet.jpg') }}') 0 13px no-repeat"> <a
                             href="https://pyttmientrung.moh.gov.vn/c24/t24-474/hoi-nghi-vien-chuc-va-nguoi-lao-dong-nam-2025.html">HỘI
                             NGHỊ VIÊN CHỨC VÀ NGƯỜI LAO ĐỘNG NĂM 2025</a></div>
 
 
-                    <div class="list-next1"> <a
+                    <div class="list-next1" style="background: url('{{ asset('img/bullet.jpg') }}') 0 13px no-repeat"> <a
                             href="https://pyttmientrung.moh.gov.vn/c24/t24-476/cong-doan-trung-tam-phap-y-tam-than-khu-vuc-mien-trung-cham-lo-tet-nguyen-dan-at-ty-2025-cho-doan-vien-cong-doan.html">
                             CÔNG ĐOÀN TRUNG TÂM PHAP Y TÂM THẦN KHU VỰC MIỀN TRUNG CHĂM LO TẾT NGUYÊN ĐÁN ẤT TỴ 2025 CHO
                             ĐOÀN...</a></div>
@@ -528,7 +528,7 @@
             </div><br>
 
         </div>
-       @include('theme::front-end.layouts.sidebar_right')
+        @include('theme::front-end.layouts.sidebar_right')
         <div class="clear"></div>
     </div>
 @endsection

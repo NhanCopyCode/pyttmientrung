@@ -50,10 +50,11 @@
     <link rel="canonical" href="{{ Request::fullUrl() }}" />
     <link rel="stylesheet" href="{{ asset('css/huesoft_css/bootstrap.css') }}">
     <link rel="stylesheet" href="{{ asset('css/font-awesome/all.min.css') }}">
+
     <link rel="stylesheet" href="{{ asset('css/huesoft_css/swiper.css') }}">
     {{-- Pyttmientrung Css --}}
     <link rel="stylesheet" href="{{ asset('css/pyttmientrungcss/main.css') }}">
-
+    <script src="{{ asset('js/huesoft_js/swiper.js') }}"></script>
     <script src="{{ asset('js/huesoft_js/jquery.js') }}"></script>
     <script src="{{ asset('js/pyttmientrungjs/jquery-latest.pack.js') }}" type="text/javascript"></script>
     <script src="{{ asset('js/pyttmientrungjs/jquery-ui.min.js') }}" type="text/javascript"></script>
@@ -108,7 +109,6 @@
     </div>
 </body>
 
-<script src="{{ asset('js/huesoft_js/swiper.js') }}"></script>
 {{-- Pyttmiengtrung js  --}}
 
 <script src="{{ asset('js/sweetalert    2/sweetalert2@11.js') }}"></script>

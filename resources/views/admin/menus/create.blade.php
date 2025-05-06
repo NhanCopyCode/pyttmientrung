@@ -10,7 +10,7 @@
 @section('breadcrumb')
     <ol class="breadcrumb">
         <li><a href="{{ url('admin') }}"><i class="fa fa-home"></i> {{ __('message.dashboard') }}</a></li>
-        <li><a href="{{ url('/admin/slides') }}">{{ __('categories.category') }}</a></li>
+        <li><a href="{{ url('/admin/menus') }}">{{ __('categories.category') }}</a></li>
         <li class="active">{{ __('message.new_add') }}</li>
     </ol>
 @endsection
@@ -20,14 +20,14 @@
         <div class="box-header with-border">
             <h3 class="box-title">{{ __('message.new_add') }}</h3>
             <div class="box-tools">
-                <a href="{{ url('/admin/slides') }}" class="btn btn-warning btn-sm"><i class="fa fa-arrow-left" aria-hidden="true"></i> <span
+                <a href="{{ url('/admin/menus') }}" class="btn btn-warning btn-sm"><i class="fa fa-arrow-left" aria-hidden="true"></i> <span
                         class="hidden-xs">{{ __('message.lists') }}</span></a>
             </div>
         </div>
 
-        {!! Form::open(['url' => '/admin/slides', 'class' => 'form-horizontal', 'files' => true]) !!}
+        {!! Form::open(['url' => '/admin/menus', 'class' => 'form-horizontal', 'files' => true]) !!}
 
-        @include('admin.slides.form')
+        @include('admin.menus.form')
 
         {!! Form::close() !!}
     </div>

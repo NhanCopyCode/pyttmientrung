@@ -4,8 +4,10 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\SysMenu;
+use App\Models\SysPosition;
 use Illuminate\Http\Request;
-
+use RealRashid\SweetAlert\Facades\Alert;
+use Illuminate\Support\Str;
 class MenuController extends Controller
 {
     /**
@@ -47,8 +49,10 @@ class MenuController extends Controller
     public function create()
     {
         //
+
         $listParent = SysMenu::where('ptypeid', 0)->where('approved', 1)->orderBy('arrange')->get();
-        return view('admin.menus.create', compact('listParent'));
+        $listPosition = SysPosition::all();
+        return view('admin.menus.create', compact('listParent', 'listPosition'));
     }
 
     /**
@@ -60,6 +64,29 @@ class MenuController extends Controller
     public function store(Request $request)
     {
         //
+        // dd($request->all());
+        $validated = $request->validate([
+            'title'     => 'required|string|max:255',
+            'ptypeid' => "nullable|integer|exists:sys_menu,id",
+            'position'  => 'array', // optional: you can require it
+            'position.*' => 'exists:sys_position,id',
+            'arrange'   => 'nullable|integer',
+            'active'    => 'boolean',
+        ]);
+        $slug = Str::slug($validated['title'], '-');
+        $data = [
+            'title' => $validated['title'],
+            'ptypeid' => $validated['ptypeid'],
+            'url' => $slug,
+            'arrange' => $validated['arrange'],
+            'approved' => $validated['active'],
+        ];
+
+        // Create the menu
+        $menu = SysMenu::create($data);
+        $menu->positions()->attach($validated['position']);
+
+        return redirect('admin/menus');
     }
 
     /**
@@ -71,6 +98,8 @@ class MenuController extends Controller
     public function show($id)
     {
         //
+        $menu = SysMenu::with('parent')->findOrFail($id);
+        return view('admin.menus.show', compact('menu'));
     }
 
     /**
@@ -82,6 +111,11 @@ class MenuController extends Controller
     public function edit($id)
     {
         //
+        $menu = SysMenu::findOrFail($id);
+        $listParent = SysMenu::where('ptypeid', 0)->where('approved', 1)->orderBy('arrange')->get();
+        $listPosition = SysPosition::all();
+
+        return view('admin.menus.edit', compact('menu', 'listParent', 'listPosition'));
     }
 
     /**
@@ -93,8 +127,31 @@ class MenuController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $validatedData = $request->validate([
+            'title' => 'required|string|max:255',
+            'ptypeid' => 'required|integer',
+            'position' => 'array', // optional, default empty array if none selected
+            'arrange' => 'nullable|integer',
+            'active' => 'nullable|boolean',
+        ]);
+        $slug = Str::slug($validatedData['title'], '-');
+
+        $menu = SysMenu::findOrFail($id);
+
+        $menu->title = $validatedData['title'];
+        $menu->ptypeid = $validatedData['ptypeid'];
+        $menu->arrange = $validatedData['arrange'] ?? 0;
+        $menu->approved = $request->has('active') ? 1 : 0; // checkbox
+        $menu->url = $slug;
+
+        $menu->save();
+
+        $menu->positions()->sync($request->input('position', []));
+        Alert::success(__('message.menu.updated_success'));
+
+        return redirect()->route('menus.index')->with('success', 'Cập nhật menu thành công!');
     }
+
 
     /**
      * Remove the specified resource from storage.
@@ -104,7 +161,14 @@ class MenuController extends Controller
      */
     public function destroy($id)
     {
-        //
+        SysMenu::destroy($id);
+
+        Alert::success(trans('message.menu.deleted_success'));
+
+
+        // toastr()->success(trans('message.role.role.deleted_success'));
+
+        return redirect('admin/menus');
     }
 
     public function updateArrange(Request $request)
@@ -117,6 +181,8 @@ class MenuController extends Controller
         $menu = SysMenu::findOrFail($request->id);
         $menu->arrange = $request->arrange;
         $menu->save();
+
+        // Alert::success(__('message.menu.updated_success'));
 
         return response()->json(['success' => true, 'message' => 'Cập nhật thành công']);
     }

@@ -52,7 +52,6 @@
                         <th>@sortablelink('title', trans('slides.title'))</th>
                         <th class="text-center">{{ trans('slides.arrange') }}</th>
                         <th class="text-center">{{ trans('slides.active') }}</th>
-                        <th class="text-center">@sortablelink('updated_at', trans('slides.updated_at'))</th>
                         <th style="width: 7%;"></th>
                     </tr>
                     @foreach ($menus as $parent)
@@ -78,9 +77,7 @@
                             <td class="text-center">
                                 {!! $parent->approved == config('settings.active') ? '<i class="fa fa-check text-primary"></i>' : '' !!}
                             </td>
-                            <td class="text-center">
-                                {{ optional($parent->updated_at)->format(config('settings.format.date')) }}
-                            </td>
+
                             <td class="dropdown">
                                 <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown"
                                     aria-haspopup="true" aria-expanded="false">
@@ -118,17 +115,16 @@
                             </td>
                         </tr>
 
-                        {{-- Show children --}}
                         @foreach ($parent->children as $child)
                             <tr>
                                 <td class="text-center">
                                     <input type="checkbox" name="chkId" id="chkId" value="{{ $child->id }}"
                                         data-id="{{ $child->id }}" />
                                 </td>
-                                <td class="text-center"> - </td> {{-- Child: no index --}}
+                                <td class="text-center"> - </td>
                                 <td class="">
                                     <a href="{{ url('/admin/menus/' . $child->id) }}" style="color: gray;">
-                                        &nbsp;&nbsp;&nbsp;└ {{ $child->title }} {{-- Child: indent + lighter color --}}
+                                        &nbsp;&nbsp;&nbsp;└ {{ $child->title }}
                                     </a>
                                 </td>
                                 <td class="text-center d-flex align-items-center justify-content-center gap-2">
@@ -141,9 +137,7 @@
                                 <td class="text-center">
                                     {!! $child->approved == config('settings.active') ? '<i class="fa fa-check text-primary"></i>' : '' !!}
                                 </td>
-                                <td class="text-center">
-                                    {{ optional($child->updated_at)->format(config('settings.format.date')) }}
-                                </td>
+
                                 <td class="dropdown">
                                     <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown"
                                         aria-haspopup="true" aria-expanded="false">

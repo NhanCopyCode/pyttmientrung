@@ -60,6 +60,7 @@ desired effect
     @show
     @toastr_render
     <script src="{{ asset('js/sweetsweetalert::alert2/sweetalert2@11.js') }}"></script>
+    <script src="{{ asset('js/sweetalert2/sweetalert2@11.js') }}"></script>
 
     @yield('scripts-footer')
 </body>

@@ -1,7 +1,8 @@
  <div id="wrapper_right">
      <div id="notice">
          <div class="panel">
-             <div class="panel_tcat notice" style="background: url(' {{ asset('img/icon_thongbao.png') }}') 5px 3px no-repeat #156aec;">
+             <div class="panel_tcat notice"
+                 style="background: url(' {{ asset('img/icon_thongbao.png') }}') 5px 3px no-repeat #156aec;">
                  <a href="https://pyttmientrung.moh.gov.vn/c37/thong-bao.html">Thông báo</a>
              </div>
              <div class="smartmarquee example" style="height: 250px">
@@ -70,7 +71,8 @@
      </div>
      <div id="faqs">
          <div class="panel">
-             <div class="panel_tcat faq" style="background: url(' {{ asset('img/faq.png') }}') 5px 3px no-repeat #156aec;">
+             <div class="panel_tcat faq"
+                 style="background: url(' {{ asset('img/faq.png') }}') 5px 3px no-repeat #156aec;">
                  <a href="https://pyttmientrung.moh.gov.vn/c58/hoi--dap.html">Hỏi - đáp</a>
              </div>
              <div class="smartmarquee example" style="height: 250px">
@@ -146,25 +148,11 @@
 
                      </ul>
                  </div>
-                 <div class="prevroom"><img
-                         src="http://eldorahotel.com/templates/default/modules/room/images/media-left.png"
-                         alt="prev"></div>
-                 <div class="nextroom"><img
-                         src="http://eldorahotel.com/templates/default/modules/room/images/media-right.png"
-                         alt="next"></div>
+
                  <div class="clearfloat"></div>
              </div>
          </div>
          <script type="text/javascript">
-             $(function() {
-                 $(".sliderroom").jCarouselLite({
-                     btnNext: ".nextroom",
-                     btnPrev: ".prevroom",
-                     visible: 1,
-                     auto: 5000,
-                     speed: 3000
-                 });
-             });
              $(document).ready(function() {
                  $('img.captify').captify({
                      speedOver: 'fast',
@@ -186,7 +174,46 @@
              <a href="#">Video</a>
          </div>
          <center>
-             <div id="container1" style="text-align: center;">Đang tải ...</div>
+             <div class="swiper mySwiper videoSwiper">
+                 <div class="swiper-wrapper">
+                     @foreach ($videos as $video)
+                         <div class="swiper-slide">
+                             <div class="video-container">
+                                 <h5 style="font-size: 14px; font-weight: lighter; padding-top: 8px;">{{ $video->title }}</h5>
+
+                                 @php
+                                     parse_str(parse_url($video->pathfile, PHP_URL_QUERY), $queryParams);
+                                     $youtubeId = $queryParams['v'] ?? null;
+                                 @endphp
+
+                                 @if ($youtubeId)
+                                     <iframe width="100%" src="https://www.youtube.com/embed/{{ $youtubeId }}"
+                                         frameborder="0"
+                                         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                         allowfullscreen>
+                                     </iframe>
+                                 @endif
+
+                             </div>
+                         </div>
+                     @endforeach
+                 </div>
+
+                 <!-- Swiper navigation -->
+                 <div class="swiper-button-next"></div>
+                 <div class="swiper-button-prev"></div>
+             </div>
+
+
+             <script>
+                 var swiper = new Swiper(".videoSwiper", {
+                     navigation: {
+                         nextEl: ".swiper-button-next",
+                         prevEl: ".swiper-button-prev",
+                     },
+                 });
+             </script>
+             {{-- <div id="container1" style="text-align: center;">Đang tải ...</div>
              <div style="color:#000000; text-align:center;"><b>Phóng sự nghiện game</b></div>
              <br>
              <script type="text/javascript">
@@ -202,11 +229,12 @@
                          controlbar: 'bottom'
                      });
                  });
-             </script>
+             </script> --}}
          </center>
      </div>
      <div id="staitics">
-         <div class="panel_tcat statitis" style="background: url(' {{ asset('img/icon_statitis.png') }}') 5px 3px no-repeat #156aec;">
+         <div class="panel_tcat statitis"
+             style="background: url(' {{ asset('img/icon_statitis.png') }}') 5px 3px no-repeat #156aec;">
              <a href="#">Thống kê truy cập</a>
          </div>
          <div style="float: left">

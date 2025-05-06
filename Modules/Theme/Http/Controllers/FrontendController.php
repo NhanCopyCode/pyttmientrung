@@ -11,6 +11,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\FlashSlide;
 use App\Models\News;
+use App\Models\Video;
 use Modules\Theme\Entities\Menu;
 
 
@@ -33,8 +34,9 @@ class FrontendController extends Controller
 
     public function index()
     {
-
-        return view('theme::front-end.pages.home');
+        $videos = Video::orderBy('postdate', 'desc')->get();
+        // dd($videos);
+        return view('theme::front-end.pages.home', compact('videos'));
     }
 
     public function menu($position = 1)

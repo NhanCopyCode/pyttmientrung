@@ -7,35 +7,71 @@
         </div>
     @endif
     <table class="table table-condensed">
-        {{-- <tr class="row {{ $errors->has('name') ? 'has-error' : '' }}">
+
+        <tr class="row {{ $errors->has('title') ? 'has-error' : '' }}">
             <td class="col-md-4 col-lg-3">
-                {!! Form::label('name', trans('news.meta_title_vi'), ['class' => 'control-label label-required']) !!}
+                {!! Form::label('title', trans('menus.title'), ['class' => 'control-label']) !!}
             </td>
             <td class="col-md-8 col-lg-9">
-                {!! Form::text('name', null, ['class' => 'form-control input-sm', 'required' => 'required']) !!}
-                {!! $errors->first('name', '<p class="help-block">:message</p>') !!}
+                {!! Form::text('title', null, ['class' => 'form-control input-sm']) !!}
+                {!! $errors->first('title', '<p class="help-block">:message</p>') !!}
             </td>
-        </tr> --}}
-        {{-- @if (isset($slide))
-            <tr class="row {{ $errors->has('slug') ? 'has-error' : '' }}">
-                <td class="col-md-4 col-lg-3">
-                    {!! Form::label('slug', trans('news.slug'), ['class' => 'control-label']) !!}
-                </td>
-                <td class="col-md-8 col-lg-9">
-                    {!! Form::text('slug', null, ['class' => 'form-control input-sm']) !!}
-                    {!! $errors->first('slug', '<p class="help-block">:message</p>') !!}
-                </td>
-            </tr>
-        @endif --}}
+        </tr>
+        <tr class="row {{ $errors->has('ptypeid') ? 'has-error' : '' }}">
+            <td class="col-md-4 col-lg-3">
+                {!! Form::label('ptypeid', 'Chọn thể loại cha', ['class' => 'control-label']) !!}
+            </td>
+            <td class="col-md-8 col-lg-9">
+                <select name="ptypeid" class="form-control input-sm" required>
+                    <option value="">-- Chọn thể loại cha --</option>
+                    <option value="0">Không có thể loại cha</option>
+                    @foreach ($listParent as $parent)
+                        <option value="{{ $parent->id }}"
+                            {{ old('ptypeid', $menu->ptypeid ?? '') == $parent->id ? 'selected' : '' }}>
+                            {{ $parent->title }}
+                        </option>
+                    @endforeach
+                </select>
+                {!! $errors->first('ptypeid', '<p class="help-block">:message</p>') !!}
+            </td>
+        </tr>
 
-        <tr class="row {{ $errors->has('avatar') ? 'has-error' : '' }}">
+
+
+        <tr class="row {{ $errors->has('position') ? 'has-error' : '' }}">
+            <td class="col-md-4 col-lg-3">
+                {!! Form::label('position', trans('menus.position'), ['class' => 'control-label']) !!}
+            </td>
+            <td class="col-md-8 col-lg-9">
+                <div class="row">
+                    @foreach ($listPosition as $key => $item)
+                        <div class="col-md-3">
+                            <label>
+                                {!! Form::checkbox(
+                                    'position[]',
+                                    $item->id,
+                                    in_array($item->id, old('position', isset($menu) ? $menu->positions->pluck('id')->toArray() : [])),
+                                ) !!}
+                                {{ $item->title }}
+                            </label>
+                        </div>
+                    @endforeach
+                </div>
+
+                {!! $errors->first('position', '<p class="help-block">:message</p>') !!}
+            </td>
+        </tr>
+
+
+
+        {{-- <tr class="row {{ $errors->has('avatar') ? 'has-error' : '' }}">
             <td class="col-md-4 col-lg-3">
                 {!! Form::label('avatar', trans('slides.avatar'), ['class' => 'control-label']) !!}
             </td>
             <td class="col-md-8 col-lg-9">
                 <div>
                     <div class="input-group inputfile-wrap ">
-                        <input type="text" class="form-control input-sm" readonly>
+                        <input type="text" class="form-control input-sm" readonly />
                         <div class="input-group-btn">
                             <button type="button" class="btn btn-danger btn-sm">
                                 <i class=" fa fa-upload"></i>
@@ -57,7 +93,7 @@
                     </div>
                 </div>
             </td>
-        </tr>
+        </tr> --}}
         <tr class="row {{ $errors->has('arrange') ? 'has-error' : '' }}">
             <td class="col-md-4 col-lg-3">
                 {!! Form::label('arrange', trans('slides.arrange'), ['class' => 'control-label label-required']) !!}
@@ -81,7 +117,7 @@
                 {!! Form::label('active', trans('news.active'), ['class' => 'control-label']) !!}
             </td>
             <td class="col-md-8 col-lg-9">
-                {!! Form::checkbox('active', 1, isset($slide) && +$slide->approved === 1 ? true : false, [
+                {!! Form::checkbox('active', 1, isset($menu) && +$menu->approved === 1 ? true : false, [
                     'class' => 'flat-blue',
                     'id' => 'active',
                 ]) !!}
@@ -93,7 +129,7 @@
     {!! Form::submit(isset($submitButtonText) ? $submitButtonText : __('message.save'), [
         'class' => 'btn btn-md btn-info',
     ]) !!}
-    <a href="{{ url('/admin/slides') }}" class="btn btn-secondary">{{ __('message.close') }}</a>
+    <a href="{{ url('/admin/menus') }}" class="btn btn-secondary">{{ __('message.close') }}</a>
 </div>
 @section('scripts-footer')
     <script type="text/javascript" src="{{ asset('plugins/ckeditor_full/ckeditor.js') }}"></script>
