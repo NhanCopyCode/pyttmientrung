@@ -13,6 +13,7 @@
 
 use App\Http\Controllers\Admin\MenuController;
 use App\Http\Controllers\Admin\SlideController;
+use App\Http\Controllers\Admin\VideoController;
 
 header('Access-Control-Allow-Origin:  *');
 header('Access-Control-Allow-Methods:  POST, GET, OPTIONS, PUT, DELETE');
@@ -53,4 +54,7 @@ Route::group(['prefix' => 'admin','middleware' => ['auth', 'locale']], function 
 	Route::resource('menus', 'Admin\MenuController');
 	Route::post('admin/slides/update-arrange', [SlideController::class, 'updateArrange'])->name('slides.updateArrange');
 	Route::post('admin/menus/update-arrange', [MenuController::class, 'updateArrange'])->name('menus.updateArrange');
+	Route::post('admin/videos/update-arrange', [VideoController::class, 'updateArrange'])->name('videos.updateArrange');
+	Route::resource('videos', 'Admin\VideoController');
+
 });

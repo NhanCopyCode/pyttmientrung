@@ -53,6 +53,12 @@
                     'href' => 'admin/posts',
                     'permission' => "PostController@index"
                 ],
+                 [
+                    'icon' => 'fa fa-video',
+                    'title' => __('message.video_management'),
+                    'href' => 'admin/videos',
+                    'permission' => "VideoController@index"
+                ],
                 //   [
 
                 //     'icon' => 'fad fa-newspaper' ,

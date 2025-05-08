@@ -5,23 +5,23 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Video extends Model
+class Faq extends Model
 {
     use HasFactory;
-    protected $table = 'videos';
+    protected $table = 'faq';
     protected $fillable = [
         'typeid',
-        'url',
+        'nameq',
+        'namea',
+        'email',
         'title',
-        'typefile',
-        'pathimage',
-        'pathfile',
-        'summary',
-        'arrange',
+        'question',
+        'answer',
         'postdate',
+        'changedate',
         'approved',
         'lang',
-        'view',
+
     ];
     public $timestamps = false;
 }

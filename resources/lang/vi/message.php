@@ -105,6 +105,12 @@ return [
         "deleted_success" => "Menu đã được xóa!",
 
     ],
+    "video" => [
+        "created_success" => "Video đã được thêm!",
+        "updated_success" => "Video đã được cập nhật!",
+        "deleted_success" => "Video đã được xóa!",
+
+    ],
     'embed_form' => [
         'title' => 'Đăng ký thông tin',
         'title_register' => 'Đăng ký tham gia chương trình',
@@ -290,5 +296,6 @@ return [
     "interface_management" => "Quản lý giao diện",
     "slide_management" => "Quản lý slide",
     "menu_management" => "Quản lý menu",
-    "post_managemnent" => "Quản lý bài viết",
+	"video_management" => "Quản lý video",
+    "post_management" => "Quản lý bài viết",
 ];
