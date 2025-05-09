@@ -111,6 +111,12 @@ return [
         "deleted_success" => "Video đã được xóa!",
 
     ],
+    "ads" => [
+        "created_success" => "Quảng cáo đã được thêm!",
+        "updated_success" => "Quảng cáo đã được cập nhật!",
+        "deleted_success" => "Quảng cáo đã được xóa!",
+
+    ],
     'embed_form' => [
         'title' => 'Đăng ký thông tin',
         'title_register' => 'Đăng ký tham gia chương trình',
@@ -298,4 +304,5 @@ return [
     "menu_management" => "Quản lý menu",
 	"video_management" => "Quản lý video",
     "post_management" => "Quản lý bài viết",
+    "ads_management" => "Quản lý quảng cáo",
 ];

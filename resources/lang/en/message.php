@@ -166,5 +166,6 @@ return [
 	"menu_management" => "Menu management",
 	"post_management" => "Post management",
 	"video_management" => "Video management",
+	"ads_management" => "Ads management",
 
 ];

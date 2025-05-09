@@ -173,7 +173,7 @@ class VideoController extends Controller
     public function updateArrange(Request $request)
     {
         $request->validate([
-            'id' => 'required|exists:sys_menu,id',
+            'id' => 'required|exists:videos,id',
             'arrange' => 'required|integer',
         ]);
 

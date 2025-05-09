@@ -74,6 +74,14 @@ class PermissionsTableSeeder extends Seeder
             "46" => ["VideoController@updateArrange", "Quản lý video"],
 
 
+            "47" => ["AdsController@index", "Quản lý ads"],
+            "48" => ["AdsController@show", "Quản lý ads"],
+            "49" => ["AdsController@store", "Quản lý ads"],
+            "50" => ["AdsController@update", "Quản lý ads"],
+            "51" => ["AdsController@destroy", "Quản lý ads"],
+            "52" => ["AdsController@updateArrange", "Quản lý ads"],
+
+
             // "22" => ["NewsController@index", "Quản lý tin tức"],
             // "23" => ["NewsController@show", "Quản lý tin tức"],
             // "24" => ["NewsController@store", "Quản lý tin tức"],

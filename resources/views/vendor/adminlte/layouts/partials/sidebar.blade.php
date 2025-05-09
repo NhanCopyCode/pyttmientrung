@@ -45,6 +45,12 @@
                             'href' => 'admin/menus',
                             'permission' => 'MenuController@index',
                         ],
+                        [
+                            'icon' => 'dot fa fa-circle',
+                            'title' => __('message.ads_management'),
+                            'href' => 'admin/ads',
+                            'permission' => 'AdsController@index',
+                        ],
                     ],
                 ],
                 [
