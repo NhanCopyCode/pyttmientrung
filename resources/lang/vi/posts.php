@@ -3,13 +3,11 @@
 return [
     'category' => 'Video',
     'category1' => 'Tên danh mục sản phẩm',
-
+    'typeid' => 'Loại',
     'title' => 'Tiêu đề',
     'meta_title' => 'Tiêu đề (meta_title)',
     'slug' => 'Slug',
     'url' => 'Đường dẫn URL',
-    'content' => 'Nội dung',
-    'summary' => 'Bản tóm tắt',
     'avatar' => 'Ảnh',
     'description_index' => 'Mô tả',
     'description' => 'Mô tả ',
@@ -19,6 +17,8 @@ return [
     'parent' => 'Danh mục cha',
     'parent1' => 'Tên danh mục sản phẩm cha',
     'related_categories' => 'Danh mục liên quan',
+    'summary' => 'Bản tóm tắt',
+    'content' => 'Nội dung',
 
 
 

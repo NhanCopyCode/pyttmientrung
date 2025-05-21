@@ -126,14 +126,14 @@ class VideoController extends Controller
             'title' => 'required|string|max:255',
             'pathfile' => 'required|string|max:255',
             'arrange' => 'nullable|integer',
-            'approved' => 'required|boolean',
+            'approved' => 'boolean',
         ]);
 
         $video = Video::findOrFail($id);
 
         $video->title = $validated['title'];
         $video->pathfile = $validated['pathfile']; // pathfile maps to url in DB
-        $video->approved = $validated['approved'];
+        $video->approved = $validated['approved'] ?? 0;
         $video->url = Str::slug($validated['title']);
         $video->arrange = $validated['arrange'];
 

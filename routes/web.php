@@ -13,6 +13,7 @@
 
 use App\Http\Controllers\Admin\AdsController;
 use App\Http\Controllers\Admin\MenuController;
+use App\Http\Controllers\Admin\PostController;
 use App\Http\Controllers\Admin\SlideController;
 use App\Http\Controllers\Admin\VideoController;
 
@@ -53,11 +54,13 @@ Route::group(['prefix' => 'admin','middleware' => ['auth', 'locale']], function 
 
 	Route::resource('slides', 'Admin\SlideController');
 	Route::resource('menus', 'Admin\MenuController');
+	Route::resource('videos', 'Admin\VideoController');
+	Route::resource('ads', 'Admin\AdsController');
+	Route::resource('posts', 'Admin\PostController');
 	Route::post('admin/slides/update-arrange', [SlideController::class, 'updateArrange'])->name('slides.updateArrange');
 	Route::post('admin/menus/update-arrange', [MenuController::class, 'updateArrange'])->name('menus.updateArrange');
 	Route::post('admin/videos/update-arrange', [VideoController::class, 'updateArrange'])->name('videos.updateArrange');
 	Route::post('admin/ads/update-arrange', [AdsController::class, 'updateArrange'])->name('ads.updateArrange');
-	Route::resource('videos', 'Admin\VideoController');
-	Route::resource('ads', 'Admin\AdsController');
+	Route::post('admin/posts/update-arrange', [PostController::class, 'updateArrange'])->name('posts.updateArrange');
 
 });

@@ -117,6 +117,12 @@ return [
         "deleted_success" => "Quảng cáo đã được xóa!",
 
     ],
+    "post" => [
+        "created_success" => "Bài viết đã được thêm!",
+        "updated_success" => "Bài viết đã được cập nhật!",
+        "deleted_success" => "Bài viết đã được xóa!",
+
+    ],
     'embed_form' => [
         'title' => 'Đăng ký thông tin',
         'title_register' => 'Đăng ký tham gia chương trình',
