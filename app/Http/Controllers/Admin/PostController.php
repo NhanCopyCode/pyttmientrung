@@ -70,12 +70,14 @@ class PostController extends Controller
         $post = new Post();
 
         $post->title     = $validated['title'];
-        $post->url =  Str::slug($validated['title']);
+        $post->url = Str::slug($validated['title']) . '-' . now()->format('YmdHis');
+
         $post->typeid    = $validated['typeid'];
         $post->content   = $validated['content'] ?? null;
         $post->summary   = $validated['summary'] ?? null;
         $post->arrange   = $validated['arrange'] ?? 0;
         $post->approved  = $validated['approved'] ?? 0;
+        $post->postdate = now();
         $post->author = 'Administrator';
         $post->lang = 'vn';
 
@@ -141,12 +143,14 @@ class PostController extends Controller
         $post = Post::findOrFail($id);
 
         $post->title     = $validated['title'];
-        $post->url       = Str::slug($validated['title']);
+        $post->url = Str::slug($validated['title']) . '-' . now()->format('YmdHis');
+
         $post->typeid    = $validated['typeid'];
         $post->content   = $validated['content'] ?? null;
         $post->summary   = $validated['summary'] ?? null;
         $post->arrange   = $validated['arrange'] ?? 0;
         $post->approved  = $validated['approved'] ?? 0;
+        $post->changedate = now();
         $post->author    = 'Administrator';
         $post->lang      = 'vn';
 
@@ -179,10 +183,6 @@ class PostController extends Controller
         Post::destroy($id);
 
         Alert::success(trans('message.post.deleted_success'));
-
-
-        // toastr()->success(trans('message.role.role.deleted_success'));
-
         return redirect('admin/posts');
     }
 
@@ -196,7 +196,6 @@ class PostController extends Controller
         $post = Post::findOrFail($request->id);
         $post->arrange = $request->arrange;
         $post->save();
-
 
         return response()->json(['success' => true, 'message' => 'Cập nhật thành công']);
     }

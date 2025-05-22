@@ -20,15 +20,16 @@ class FrontendController extends Controller
 {
     public function __construct()
     {
-        // $mainMenus = $this->menu(1);
         $settings = Setting::allConfigsKeyValue();
         $slides = FlashSlide::where('approved', 1)
             ->orderBy('arrange')
             ->get();
+        $videos = Video::orderBy('postdate', 'desc')->get();
+
         \View::share([
-            // 'mainMenus' => $mainMenus,
             'settings' => $settings,
             'slides' => $slides,
+            'videos' => $videos,
         ]);
     }
 
@@ -40,7 +41,6 @@ class FrontendController extends Controller
     }
 
     public function search(Request $request) {
-        $videos = Video::orderBy('postdate', 'desc')->get();
         $keyword = $request->get('s'); 
         $perPage = 20;
 
@@ -53,14 +53,14 @@ class FrontendController extends Controller
             })
             ->paginate($perPage)
             ->appends(['s' => $keyword]);
-        return view('theme::front-end.pages.search_page', compact('search_result', 'videos'));
+        return view('theme::front-end.pages.search_page', compact('search_result'));
     }
     
     public function showPost($postId)
     {
-        $post = Post::findOrFail($postId);
-        $relatedPosts = Post::where('id', '<>', $post->id)->orderBy('created_at', 'desc')->take(3)->get();
-        return view('theme::front-end.pages.post', compact('post', 'relatedPosts'));
+        $post = Post::where('url', $postId)->first();
+        $relatedPosts = Post::where('id', '<>', $post->id)->orderBy('postdate', 'desc')->take(5)->get();
+        return view('theme::front-end.pages.show_post', compact('post', 'relatedPosts'));
     }
     public function menu($position = 1)
     {
