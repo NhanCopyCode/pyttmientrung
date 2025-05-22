@@ -6,7 +6,7 @@
             @include('theme::front-end.layouts.sidebar_left')
 
             <div id="ads_01">
-            <div class="panel">
+                <div class="panel">
                     <div>
                         <a href="http://moh.gov.vn/Pages/Index.aspx" target="_blank" title="Bộ y tế"><img
                                 src="/upload/image/quangcao/adv_01_01.png"
@@ -69,8 +69,32 @@
             </div>
         </div>
         <div id="wrapper_center">
-            <script src="/jscripts/easySlider1.7.js" type="text/javascript"></script>
-            <link href="/templates/default/images/easyslider.css" type="text/css" rel="stylesheet">
+            @if (isset($search_result) && count($search_result) == 0)
+                <div class="panel">
+                    <h2 style="text-align: center;">Không tìm thấy kết quả nào cho từ khóa: {{ request()->input('s') }}
+                    </h2>
+                </div>
+            @endif
+            @if (isset($search_result) && $search_result->isNotEmpty())
+                <div class="panel">
+                    <h2 style="text-align: center;">Kết quả tìm kiếm: {{ request()->input('s') }} </h2>
+                    <ul>
+                        @foreach ($search_result as $result)
+                            <li style=" margin: 12px 0;">
+                                <a style="font-size: 14px;"
+                                    href="{{ url('bai-viet/' . $result->url) }}">{{ $result->title }}</a>
+                                <div style="font-size: 13px;">{!! html_entity_decode($result->summary) !!}</div>
+                            </li>
+                        @endforeach
+                    </ul>
+
+                    <div class="pagination-wrapper" style="text-align: center; margin-top: 20px;">
+                        {{ $search_result->links() }}
+                    </div>
+                </div>
+            @endif
+
+         
             <div class="box-container1">
 
                 <div class="box-cat">
@@ -167,33 +191,33 @@
                         </ul>
                     </div> <span id="prevBtn"><a href="javascript:void(0);">Previous</a></span> <span id="nextBtn"><a
                             href="javascript:void(0);">Next</a></span>
-                    <div class="list-next1" style="background: url('{{ asset('img/bullet.jpg') }}') 0 13px no-repeat"> <a
+                    <div class="list-next1"> <a
                             href="https://pyttmientrung.moh.gov.vn/c24/t24-480/chao-mung-ky-niem-70-nam-ngay-thay-thuoc-viet-nam-27-02-1955--27-02-2025-.html">CHÀO
                             MỪNG KỶ NIỆM 70 NĂM NGÀY THẦY THUỐC VIỆT NAM (27/02/1955 - 27/02/2025)</a></div>
 
 
-                    <div class="list-next1" style="background: url('{{ asset('img/bullet.jpg') }}') 0 13px no-repeat"> <a
+                    <div class="list-next1"> <a
                             href="https://pyttmientrung.moh.gov.vn/c24/t24-479/gap-mat-dau-nam-xuan-at-ty-nam-2025.html">GẶP
                             MẶT ĐẦU NĂM XUÂN ẤT TỴ NĂM 2025</a></div>
 
 
-                    <div class="list-next1" style="background: url('{{ asset('img/bullet.jpg') }}') 0 13px no-repeat"> <a
+                    <div class="list-next1"> <a
                             href="https://pyttmientrung.moh.gov.vn/c24/t24-477/hoi-nghi-tong-ket-hoat-dong-cong-doan-nam-2024-va-trien-khai-ke-hoach-hoat-dong-nam-2025.html">HỘI
                             NGHỊ TỔNG KẾT HOẠT ĐỘNG CÔNG ĐOÀN NĂM 2024 VÀ TRIỂN KHAI KẾ HOẠCH HOẠT ĐỘNG NĂM 2025</a></div>
 
 
-                    <div class="list-next1" style="background: url('{{ asset('img/bullet.jpg') }}') 0 13px no-repeat"> <a
+                    <div class="list-next1"> <a
                             href="https://pyttmientrung.moh.gov.vn/c24/t24-475/hoi-nghi-tong-ket-hoat-dong-nam-2024-trien-khai-nhiem-vu-nam-2025-cua-trung-tam-phap-y-tam-than-khu-vuc-mien-trung-.html">
                             HỘI NGHỊ TỔNG KẾT HOẠT ĐỘNG NĂM 2024, TRIỂN KHAI NHIỆM VỤ NĂM 2025 CỦA TRUNG TÂM PHÁP Y
                             TÂM...</a></div>
 
 
-                    <div class="list-next1" style="background: url('{{ asset('img/bullet.jpg') }}') 0 13px no-repeat"> <a
+                    <div class="list-next1"> <a
                             href="https://pyttmientrung.moh.gov.vn/c24/t24-474/hoi-nghi-vien-chuc-va-nguoi-lao-dong-nam-2025.html">HỘI
                             NGHỊ VIÊN CHỨC VÀ NGƯỜI LAO ĐỘNG NĂM 2025</a></div>
 
 
-                    <div class="list-next1" style="background: url('{{ asset('img/bullet.jpg') }}') 0 13px no-repeat"> <a
+                    <div class="list-next1"> <a
                             href="https://pyttmientrung.moh.gov.vn/c24/t24-476/cong-doan-trung-tam-phap-y-tam-than-khu-vuc-mien-trung-cham-lo-tet-nguyen-dan-at-ty-2025-cho-doan-vien-cong-doan.html">
                             CÔNG ĐOÀN TRUNG TÂM PHAP Y TÂM THẦN KHU VỰC MIỀN TRUNG CHĂM LO TẾT NGUYÊN ĐÁN ẤT TỴ 2025 CHO
                             ĐOÀN...</a></div>
@@ -237,27 +261,27 @@
 
                     </div>
                     <div style="clear:both;"></div>
-                    <div class="list-next" style="background: url('{{ asset('img/bullet.jpg') }}') 0 13px no-repeat"> <a
+                    <div class="list-next"> <a
                             href="https://pyttmientrung.moh.gov.vn/c2/t2-242/danh-gia-thuc-hien-thong-tu-18-2015-tt-byt-va-mot-so-kien-nghi-sua-doi-quy-trinh-giam-dinh-phap-y-tam-than.html">
                             ĐÁNH GIÁ THỰC HIỆN THÔNG TƯ 18/2015/TT-BYT VÀ MỘT SỐ KIẾN NGHỊ SỬA ĐỔI QUY TRÌNH GIÁM ĐỊNH PHÁP
                             Y...</a>
 
                     </div>
                     <div style="clear:both;"></div>
-                    <div class="list-next" style="background: url('{{ asset('img/bullet.jpg') }}') 0 13px no-repeat"> <a
+                    <div class="list-next"> <a
                             href="https://pyttmientrung.moh.gov.vn/c2/t2-238/giam-dinh-phap-y-tam-than-doi-tuong-pham-toi-lien-quan-den-su-dung-ma-tuy-moi.html">GIÁM
                             ĐỊNH PHÁP Y TÂM THẦN ĐỐI TƯỢNG PHẠM TỘI LIÊN QUAN ĐẾN SỬ DỤNG MA TÚY MỚI </a>
 
                     </div>
                     <div style="clear:both;"></div>
-                    <div class="list-next" style="background: url('{{ asset('img/bullet.jpg') }}') 0 13px no-repeat"> <a
+                    <div class="list-next"> <a
                             href="https://pyttmientrung.moh.gov.vn/c2/t2-117/bao-cao-hoat-dong-nam-2015-va-trien-khai-ke-hoach-nam-2016-cua-trung-tam-phap-y-tam-than-khu-vuc-mien-trung.html">
                             BÁO CÁO HOẠT ĐỘNG NĂM 2015 VÀ TRIỂN KHAI KẾ HOẠCH NĂM 2016 CỦA TRUNG TÂM PHÁP Y TÂM THẦN KHU VỰC
                             MIỀN...</a>
 
                     </div>
                     <div style="clear:both;"></div>
-                    <div class="list-next" style="background: url('{{ asset('img/bullet.jpg') }}') 0 13px no-repeat"> <a
+                    <div class="list-next"> <a
                             href="https://pyttmientrung.moh.gov.vn/c2/t2-58/doan-kiem-tra-cua-trung-uong-ve-giam-dinh-tu-phap-lam-viec-tai-trung-tam-giam-dinh-phap-y-tam-than-thua-thien-hue.html">
                             Đoàn Kiểm tra của Trung ương về giám định tư pháp làm việc tại Trung tâm Giám định pháp y tâm
                             thần...</a>
@@ -290,28 +314,28 @@
 
                     </div>
                     <div style="clear:both;"></div>
-                    <div class="list-next" style="background: url('{{ asset('img/bullet.jpg') }}') 0 13px no-repeat"> <a
+                    <div class="list-next"> <a
                             href="https://pyttmientrung.moh.gov.vn/c45/t45-399/nghien-cuu-dac-diem-lam-sang-roi-loan-tam-than-va-mot-so-yeu-to-lien-quan-thuc-day-hanh-vi-pham-toi-cac-doi-tuong-roi-loan-phan-liet-cam-xuc-trong-giam-dinh-phap-y-tam-than.html">
                             NGHIÊN CỨU ĐẶC ĐIỂM LÂM SÀNG RỐI LOẠN TÂM THẦN VÀ MỘT SỐ YẾU TỐ LIÊN QUAN THÚC ĐẨY HÀNH VI
                             PHẠM...</a>
 
                     </div>
                     <div style="clear:both;"></div>
-                    <div class="list-next" style="background: url('{{ asset('img/bullet.jpg') }}') 0 13px no-repeat"> <a
+                    <div class="list-next"> <a
                             href="https://pyttmientrung.moh.gov.vn/c45/t45-367/nghien-cuu-dac-diem-lam-sang--yeu-to-thuc-day-hanh-vi-pham-toi-cac-doi-tuong-roi-loan-tam-than-va-hanh-vi-do-su-dung-ruou-trong-gdpytt.html">
                             NGHIÊN CỨU ĐẶC ĐIỂM LÂM SÀNG &amp; YẾU TỐ THÚC ĐẨY HÀNH VI PHẠM TỘI CÁC ĐỐI TƯỢNG RỐI LOẠN
                             TÂM...</a>
 
                     </div>
                     <div style="clear:both;"></div>
-                    <div class="list-next" style="background: url('{{ asset('img/bullet.jpg') }}') 0 13px no-repeat"> <a
+                    <div class="list-next"> <a
                             href="https://pyttmientrung.moh.gov.vn/c45/t45-315/nghien-cuu-dac-diem-lam-sang-va-yeu-to-thuc-day-hanh-vi-pham-toi-o-cac-doi-tuong-cham-phat-trien-tam-than-trong-giam-dinh-phap-y-tam-than.html">
                             NGHIÊN CỨU ĐẶC ĐIỂM LÂM SÀNG VÀ YẾU TỐ THÚC ĐẨY HÀNH VI PHẠM TỘI Ở CÁC ĐỐI TƯỢNG CHẬM
                             PHÁT...</a>
 
                     </div>
                     <div style="clear:both;"></div>
-                    <div class="list-next" style="background: url('{{ asset('img/bullet.jpg') }}') 0 13px no-repeat"> <a
+                    <div class="list-next"> <a
                             href="https://pyttmientrung.moh.gov.vn/c45/t45-294/nghien-cuu-dac-diem-lam-sang-mot-so-yeu-to-thuc-day-hanh-vi-pham-toi-o-benh-nhan-tam-than-phan-liet-trong-giam-dinh-phap-y-tam-than.html">
                             NGHIÊN CỨU ĐẶC ĐIỂM LÂM SÀNG, MỘT SỐ YẾU TỐ THÚC ĐẨY HÀNH VI PHẠM TỘI Ở BỆNH NHÂN TÂM
                             THẦN...</a>
@@ -339,26 +363,26 @@
 
                     </div>
                     <div style="clear:both;"></div>
-                    <div class="list-next" style="background: url('{{ asset('img/bullet.jpg') }}') 0 13px no-repeat"> <a
+                    <div class="list-next"> <a
                             href="https://pyttmientrung.moh.gov.vn/c48/t48-404/ngay-suc-khoe-the-gioi-7-4--suc-khoe-cho-moi-nguoi-.html">NGÀY
                             SỨC KHỎE THẾ GIỚI (7/4) "SỨC KHỎE CHO MỌI NGƯỜI"</a>
 
                     </div>
                     <div style="clear:both;"></div>
-                    <div class="list-next" style="background: url('{{ asset('img/bullet.jpg') }}') 0 13px no-repeat"> <a
+                    <div class="list-next"> <a
                             href="https://pyttmientrung.moh.gov.vn/c48/t48-377/huong-ung-ngay-suc-khoe-tam-than-the-gioi-10-10-2022--lam-cho-suc-khoe-tam-than-va-suc-khoe-cua-moi-nguoi-tro-thanh-uu-tien-toan-cau.html">
                             HƯỞNG ỨNG NGÀY SỨC KHỎE TÂM THẦN THẾ GIỚI 10/10/2022 - LÀM CHO SỨC KHỎE TÂM THẦN VÀ SỨC KHỎE
                             CỦA...</a>
 
                     </div>
                     <div style="clear:both;"></div>
-                    <div class="list-next" style="background: url('{{ asset('img/bullet.jpg') }}') 0 13px no-repeat"> <a
+                    <div class="list-next"> <a
                             href="https://pyttmientrung.moh.gov.vn/c48/t48-366/ky-niem-110-nam-ngay-sinh-dong-chi-to-hieu-1912--2022-.html">Kỷ
                             niệm 110 năm Ngày sinh đồng chí Tô Hiệu (1912 - 2022)</a>
 
                     </div>
                     <div style="clear:both;"></div>
-                    <div class="list-next" style="background: url('{{ asset('img/bullet.jpg') }}') 0 13px no-repeat"> <a
+                    <div class="list-next"> <a
                             href="https://pyttmientrung.moh.gov.vn/c48/t48-354/fda-canh-bao-ve-bien-co-ho-hap-nghiem-trong-khi-su-dung--cac-thuoc-chong-dong-kinh-gabapentin-va-pregabalin.html">
                             FDA: CẢNH BÁO VỀ BIẾN CỐ HÔ HẤP NGHIÊM TRỌNG KHI SỬ DỤNG - CÁC THUỐC CHỐNG ĐỘNG KINH GABAPENTIN
                             VÀ...</a>
@@ -387,7 +411,7 @@
 
                     </div>
                     <div style="clear:both;"></div>
-                    <div class="list-next" style="background: url('{{ asset('img/bullet.jpg') }}') 0 13px no-repeat"> <a
+                    <div class="list-next"> <a
                             href="https://pyttmientrung.moh.gov.vn/c52/t52-97/sinh-hoa-benh-tam-than-phan-liet-va-co-che-hoat-dong-cua-cac-thuoc-an-than-kinh.html">Sinh
                             hóa bệnh Tâm thần phân liệt và cơ chế hoạt động của các thuốc an thần kinh</a>
 
@@ -416,13 +440,13 @@
 
                     </div>
                     <div style="clear:both;"></div>
-                    <div class="list-next" style="background: url('{{ asset('img/bullet.jpg') }}') 0 13px no-repeat"> <a
+                    <div class="list-next"> <a
                             href="https://pyttmientrung.moh.gov.vn/c53/t53-109/tap-huan-thong-tu-18-va-thong-tu-31-2015-tt--byt-ve-giam-dinh-phap-y-tam-than.html">TẬP
                             HUẤN THÔNG TƯ 18 VÀ THÔNG TƯ 31 /2015/TT - BYT VỀ GIÁM ĐỊNH PHÁP Y TÂM THẦN</a>
 
                     </div>
                     <div style="clear:both;"></div>
-                    <div class="list-next" style="background: url('{{ asset('img/bullet.jpg') }}') 0 13px no-repeat"> <a
+                    <div class="list-next"> <a
                             href="https://pyttmientrung.moh.gov.vn/c53/t53-49/hoi-nghi-tap-huan--cap-nhat-chan-doan-va-dieu-tri-cac-roi-loan-tam-than-do-su-dung-cac-chat-dang-amphetamine--.html">
                             Hội nghị Tập huấn “Cập nhật chẩn đoán và điều trị các rối loạn tâm thần do sử dụng các
                             chất...</a>
@@ -450,27 +474,27 @@
 
                     </div>
                     <div style="clear:both;"></div>
-                    <div class="list-next" style="background: url('{{ asset('img/bullet.jpg') }}') 0 13px no-repeat"> <a
+                    <div class="list-next"> <a
                             href="https://pyttmientrung.moh.gov.vn/c59/t59-352/luat-bao-ve-bi-mat-nha-nuoc-.html">LUẬT BẢO
                             VỆ BÍ MẬT NHÀ NƯỚC.</a>
 
                     </div>
                     <div style="clear:both;"></div>
-                    <div class="list-next" style="background: url('{{ asset('img/bullet.jpg') }}') 0 13px no-repeat"> <a
+                    <div class="list-next"> <a
                             href="https://pyttmientrung.moh.gov.vn/c59/t59-351/nghi-dinh-60-2021-nd-cp-cua-chinh-phu-ve-viec-quy-dinh-co-che-tu-chu-tai-chinh-cua-don-vi-su-nghiep-cong-lap.html">
                             Nghị định 60/2021/NĐ-CP của Chính phủ về việc quy định cơ chế tự chủ tài chính của đơn vị
                             sự...</a>
 
                     </div>
                     <div style="clear:both;"></div>
-                    <div class="list-next" style="background: url('{{ asset('img/bullet.jpg') }}') 0 13px no-repeat"> <a
+                    <div class="list-next"> <a
                             href="https://pyttmientrung.moh.gov.vn/c59/t59-335/tim-hieu-noi-dung-dieu-125-blhs-nam-2015-ve---toi-giet-nguoi-trong-trang-thai-tinh-than-bi-kich-dong-manh--.html">
                             Tìm hiểu nội dung Điều 125 BLHS năm 2015 về “ Tội giết người trong trạng thái tinh thần bị
                             kích...</a>
 
                     </div>
                     <div style="clear:both;"></div>
-                    <div class="list-next" style="background: url('{{ asset('img/bullet.jpg') }}') 0 13px no-repeat"> <a
+                    <div class="list-next"> <a
                             href="https://pyttmientrung.moh.gov.vn/c59/t59-334/phan-biet-cac-toi-hiep-dam-cuong-dam-dam-o-giao-cau-theo-quy-dinh-tai-bo-luat-hinh-su-nam-2015.html">Phân
                             biệt các tội hiếp dâm, cưỡng dâm, dâm ô, giao cấu theo quy định tại Bộ luật hình sự năm 2015</a>
 
@@ -497,25 +521,25 @@
 
                     </div>
                     <div style="clear:both;"></div>
-                    <div class="list-next" style="background: url('{{ asset('img/bullet.jpg') }}') 0 13px no-repeat"> <a
+                    <div class="list-next"> <a
                             href="https://pyttmientrung.moh.gov.vn/c64/t64-455/chu-nhat-xanh-nam-2024.html">CHỦ NHẬT XANH
                             NĂM 2024</a>
 
                     </div>
                     <div style="clear:both;"></div>
-                    <div class="list-next" style="background: url('{{ asset('img/bullet.jpg') }}') 0 13px no-repeat"> <a
+                    <div class="list-next"> <a
                             href="https://pyttmientrung.moh.gov.vn/c64/t64-440/chuong-trinh--xuan-tinh-nguyen-2024--cua-chi-doan-trung-tam-phap-y-tam-than-khu-vuc-mien-trung-.html">CHƯƠNG
                             TRÌNH “XUÂN TÌNH NGUYỆN 2024” CỦA CHI ĐOÀN TRUNG TÂM PHÁP Y TÂM THẦN KHU VỰC MIỀN TRUNG.</a>
 
                     </div>
                     <div style="clear:both;"></div>
-                    <div class="list-next" style="background: url('{{ asset('img/bullet.jpg') }}') 0 13px no-repeat"> <a
+                    <div class="list-next"> <a
                             href="https://pyttmientrung.moh.gov.vn/c64/t64-396/nhieu-hoat-dong--thang-ba-bien-gioi--.html">Nhiều
                             hoạt động “Tháng ba biên giới”</a>
 
                     </div>
                     <div style="clear:both;"></div>
-                    <div class="list-next" style="background: url('{{ asset('img/bullet.jpg') }}') 0 13px no-repeat"> <a
+                    <div class="list-next"> <a
                             href="https://pyttmientrung.moh.gov.vn/c64/t64-385/hoat-dong--xuan-dong-day--tet-se-chia--nam-2023-cua-chi-doan-trung-tam-phap-y-tam-than-khu-vuc-mien-trung.html">
                             Hoạt động “Xuân đong đầy - Tết sẻ chia” năm 2023 của Chi đoàn Trung tâm Pháp y tâm thần khu
                             vực...</a>
@@ -526,6 +550,7 @@
 
                 <div style="clear:both;"></div>
             </div><br>
+
 
         </div>
         @include('theme::front-end.layouts.sidebar_right')

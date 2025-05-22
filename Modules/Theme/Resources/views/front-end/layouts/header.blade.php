@@ -64,7 +64,7 @@
             <div class="panel">
                 <div class="search_panel" style="background: url('{{ asset('img/search_bg.jpg') }}')">
                     <div style="padding: 10px 0 0 10px;">
-                        <input type="hidden" value="https://pyttmientrung.moh.gov.vn/c23/tim-kiem.html" id="hid_catid"
+                        <input type="hidden" value="{{ route('search')}}" id="hid_catid"
                             name="hid_catid">
                         <input type="text" class="inputtextsearch" onblur="searchOnBlur(this)"
                             onkeydown="enterClick(event)" onfocus="searchOnFocus(this)" value="Tìm kiếm" id="txtKey"
@@ -73,7 +73,6 @@
                             name="btnSearch">
                     </div>
                 </div>
-                <script src="js/search_vn.js" type="text/javascript"></script>
             </div>
         </div>
         <div class="clearfloat"></div>

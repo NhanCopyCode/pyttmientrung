@@ -11,6 +11,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\FlashSlide;
 use App\Models\News;
+use App\Models\Post;
 use App\Models\Video;
 use Modules\Theme\Entities\Menu;
 
@@ -35,10 +36,32 @@ class FrontendController extends Controller
     public function index()
     {
         $videos = Video::orderBy('postdate', 'desc')->get();
-        // dd($videos);
         return view('theme::front-end.pages.home', compact('videos'));
     }
 
+    public function search(Request $request) {
+        $videos = Video::orderBy('postdate', 'desc')->get();
+        $keyword = $request->get('s'); 
+        $perPage = 20;
+
+        $search_result = Post::query()
+            ->when($keyword, function ($query, $keyword) {
+                $query->where(function ($q) use ($keyword) {
+                    $q->where('title', 'like', "%$keyword%")
+                        ->orWhere('summary', 'like', "%$keyword%");
+                });
+            })
+            ->paginate($perPage)
+            ->appends(['s' => $keyword]);
+        return view('theme::front-end.pages.search_page', compact('search_result', 'videos'));
+    }
+    
+    public function showPost($postId)
+    {
+        $post = Post::findOrFail($postId);
+        $relatedPosts = Post::where('id', '<>', $post->id)->orderBy('created_at', 'desc')->take(3)->get();
+        return view('theme::front-end.pages.post', compact('post', 'relatedPosts'));
+    }
     public function menu($position = 1)
     {
         $menus = Category::with('parent')->whereNull('parent_id')->orderBy('arrange', 'ASC')->select(['id', 'name', 'slug', 'parent_id'])->get();

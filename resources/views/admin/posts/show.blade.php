@@ -52,11 +52,9 @@
                         <th> {{ trans('theme::posts.title') }} </th>
                         <td> {{ $post->title }} </td>
                     </tr>
-
-
                     <tr>
                         <th> {{ trans('theme::posts.url') }} </th>
-                        <td> <a href="/{{$post->url}}">{{ $post->url }}</a> </td>
+                        <td> <a href="/{{ $post->url }}">{{ $post->url }}</a> </td>
 
                     </tr>
 
@@ -75,9 +73,9 @@
                         <th> {{ trans('Sắp xếp') }} </th>
                         <td> {{ $post->arrange }} </td>
                     </tr>
-                      <tr>
+                    <tr>
                         <th> {{ trans('theme::posts.active') }} </th>
-                        <td> {{ $post->approved == 1 ? 'Duyệt' : "Chưa duyệt" }} </td>
+                        <td> {{ $post->approved == 1 ? 'Duyệt' : 'Chưa duyệt' }} </td>
                     </tr>
 
                 </tbody>
