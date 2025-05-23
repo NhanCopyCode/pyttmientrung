@@ -17,7 +17,7 @@ return [
     'parent' => 'Danh mục cha',
     'parent1' => 'Tên danh mục sản phẩm cha',
     'related_categories' => 'Danh mục liên quan',
-
+    'position' => 'Vị trí',
 
 
     'keywords' => 'Từ khóa',

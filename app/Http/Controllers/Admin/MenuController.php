@@ -8,6 +8,7 @@ use App\Models\SysPosition;
 use Illuminate\Http\Request;
 use RealRashid\SweetAlert\Facades\Alert;
 use Illuminate\Support\Str;
+
 class MenuController extends Controller
 {
     /**
@@ -20,7 +21,6 @@ class MenuController extends Controller
         $keyword = $request->get('search');
         $perPage = 20;
 
-        // Only parent menus (ptypeid is null or 0), eager load children
         $menus = SysMenu::with(['children' => function ($query) {
             $query->where('approved', 1)->orderBy('arrange');
         }])
@@ -36,16 +36,23 @@ class MenuController extends Controller
             })
             ->orderBy('arrange')
             ->paginate($perPage);
-
+        
         return view('admin.menus.index', compact('menus'));
     }
 
+    public function getPositionsByParent($ptypeid)
+    {
+        $menu = SysMenu::with('menu_position')->where("menu_id", $ptypeid)->get();
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+        if (!$menu) {
+            return response()->json([]);
+        }
+
+        return response()->json($menu->positions->pluck('id'));
+    }
+
+
+   
     public function create()
     {
         //
@@ -63,16 +70,15 @@ class MenuController extends Controller
      */
     public function store(Request $request)
     {
-        //
-        // dd($request->all());
         $validated = $request->validate([
             'title'     => 'required|string|max:255',
-            'ptypeid' => "nullable|integer|exists:sys_menu,id",
-            'position'  => 'array', // optional: you can require it
-            'position.*' => 'exists:sys_position,id',
+            'ptypeid'   => 'required|integer',
+            'position'  => 'nullable|array', // make it nullable
+            'position.*' => 'exists:sys_position,id', // also validate each item
             'arrange'   => 'nullable|integer',
-            'active'    => 'boolean',
+            'active'    => 'nullable|boolean',
         ]);
+
         $slug = Str::slug($validated['title'], '-');
         $data = [
             'title' => $validated['title'],
@@ -82,9 +88,9 @@ class MenuController extends Controller
             'approved' => $validated['active'],
         ];
 
-        // Create the menu
         $menu = SysMenu::create($data);
-        $menu->positions()->attach($validated['position']);
+        $menu->positions()->sync($validated['position'] ?? []);
+
 
         return redirect('admin/menus');
     }
@@ -114,7 +120,6 @@ class MenuController extends Controller
         $menu = SysMenu::findOrFail($id);
         $listParent = SysMenu::where('ptypeid', 0)->where('approved', 1)->orderBy('arrange')->get();
         $listPosition = SysPosition::all();
-
         return view('admin.menus.edit', compact('menu', 'listParent', 'listPosition'));
     }
 
@@ -128,12 +133,14 @@ class MenuController extends Controller
     public function update(Request $request, $id)
     {
         $validatedData = $request->validate([
-            'title' => 'required|string|max:255',
-            'ptypeid' => 'required|integer',
-            'position' => 'array', // optional, default empty array if none selected
-            'arrange' => 'nullable|integer',
-            'active' => 'nullable|boolean',
+            'title'     => 'required|string|max:255',
+            'ptypeid'   => 'required|integer',
+            'position'  => 'nullable|array',
+            'position.*' => 'exists:sys_position,id',
+            'arrange'   => 'nullable|integer',
+            'active'    => 'nullable|boolean',
         ]);
+
         $slug = Str::slug($validatedData['title'], '-');
 
         $menu = SysMenu::findOrFail($id);
@@ -146,7 +153,8 @@ class MenuController extends Controller
 
         $menu->save();
 
-        $menu->positions()->sync($request->input('position', []));
+        $menu->positions()->sync($validatedData['position'] ?? []);
+
         Alert::success(__('message.menu.updated_success'));
 
         return redirect()->route('menus.index')->with('success', 'Cập nhật menu thành công!');
@@ -164,9 +172,6 @@ class MenuController extends Controller
         SysMenu::destroy($id);
 
         Alert::success(trans('message.menu.deleted_success'));
-
-
-        // toastr()->success(trans('message.role.role.deleted_success'));
 
         return redirect('admin/menus');
     }

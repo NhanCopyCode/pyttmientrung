@@ -50,12 +50,12 @@
                         </th>
                         <th class="text-center" style="width: 3.5%">{{ trans('message.index') }}</th>
                         <th>@sortablelink('title', trans('slides.title'))</th>
+                        <th class="text-center">{{ trans('slides.position') }}</th>
                         <th class="text-center">{{ trans('slides.arrange') }}</th>
                         <th class="text-center">{{ trans('slides.active') }}</th>
                         <th style="width: 7%;"></th>
                     </tr>
                     @foreach ($menus as $parent)
-                        {{-- Only show parent menu --}}
                         <tr>
                             <td class="text-center">
                                 <input type="checkbox" name="chkId" id="chkId" value="{{ $parent->id }}"
@@ -64,8 +64,15 @@
                             <td class="text-center">{{ ++$index }}</td>
                             <td class="">
                                 <a href="{{ url('/admin/menus/' . $parent->id) }}" style="color: black;">
-                                    <strong>{{ $parent->title }}</strong> {{-- Parent: bold --}}
+                                    <strong>{{ $parent->title }}</strong>
                                 </a>
+                            </td>
+                            <td>
+                                <div class="row gap-2">
+                                  @foreach ($parent->positions as $position)
+                                    <div class="col-6 py-2">{{ $position->title}}</div>
+                                  @endforeach
+                                </div>
                             </td>
                             <td class="text-center d-flex align-items-center justify-content-center gap-2">
                                 <input type="text" class="w-25 form-control arrange-input"
@@ -126,6 +133,13 @@
                                     <a href="{{ url('/admin/menus/' . $child->id) }}" style="color: gray;">
                                         &nbsp;&nbsp;&nbsp;└ {{ $child->title }}
                                     </a>
+                                </td>
+                                <td>
+                                    <div class="row gap-2">
+                                      @foreach ($child->positions as $position)
+                                        <div class="col-6 py-2">{{ $position->title}}</div>
+                                      @endforeach
+                                    </div>
                                 </td>
                                 <td class="text-center d-flex align-items-center justify-content-center gap-2">
                                     <input type="text" class="w-25 form-control arrange-input"

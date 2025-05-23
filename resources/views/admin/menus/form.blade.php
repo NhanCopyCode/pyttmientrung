@@ -22,9 +22,9 @@
                 {!! Form::label('ptypeid', 'Chọn thể loại cha', ['class' => 'control-label']) !!}
             </td>
             <td class="col-md-8 col-lg-9">
-                <select name="ptypeid" class="form-control input-sm" required>
+                <select  id="ptypeid"  name="ptypeid" class="form-control input-sm" required>
                     <option value="">-- Chọn thể loại cha --</option>
-                    <option value="0">Không có thể loại cha</option>
+                    <option value="0" {{ isset($menu->ptypeid) && $menu->ptypeid == '0' ? 'selected' : '' }}>Không có thể loại cha</option>
                     @foreach ($listParent as $parent)
                         <option value="{{ $parent->id }}"
                             {{ old('ptypeid', $menu->ptypeid ?? '') == $parent->id ? 'selected' : '' }}>
@@ -36,9 +36,7 @@
             </td>
         </tr>
 
-
-
-        <tr class="row {{ $errors->has('position') ? 'has-error' : '' }}">
+        <tr id="position-row"  class="row {{ $errors->has('position') ? 'has-error' : '' }}">
             <td class="col-md-4 col-lg-3">
                 {!! Form::label('position', trans('menus.position'), ['class' => 'control-label']) !!}
             </td>
@@ -179,5 +177,6 @@
                 }
             })
         });
+      
     </script>
 @endsection

@@ -55,10 +55,22 @@
                     <tr>
                         <th> {{ 'Thể loại cha' }} </th>
                         @if (isset($menu->parent->title))
-                            <td > {{ $menu->parent->title }} </td>
+                            <td> {{ $menu->parent->title }} </td>
                         @else
                             <td style="color: red;"> {{ 'Không có' }} </td>
                         @endif
+                    </tr>
+                    <tr>
+                        <th> {{ 'Vị trí hiển thị' }} </th>
+                        <td>
+                            <div class="row">
+                                @foreach ($menu->positions as $item)
+                                    <div class="col-6 py-2">{{ $item->title}}</div>
+                                @endforeach
+
+
+                            </div>
+                        </td>
                     </tr>
                     <tr>
                         <th> {{ trans('theme::categories.url') }} </th>

@@ -29,25 +29,25 @@ Route::get('ajax/{action}', 'AjaxController@index');
 Route::post('ajaxPost/{action}', 'AjaxPostController@index');
 
 
-Route::group(['prefix' => 'admin','middleware' => ['auth', 'locale']], function () {
+Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'locale']], function () {
 	Route::get('/', 'HomeController@index');
 
 	Route::resource('roles', 'Admin\RolesController');
 	Route::resource('permissions', 'Admin\PermissionsController');
 	Route::resource('users', 'Admin\UsersController');
 
-    Route::resource('news', 'Admin\NewsController');
-    Route::resource('categories', 'Admin\CategoryController');
-    Route::resource('provinces', 'Admin\ProvinceController');
-    Route::resource('districts', 'Admin\DistrictController');
-    Route::resource('wards', 'Admin\WardController');
+	Route::resource('news', 'Admin\NewsController');
+	Route::resource('categories', 'Admin\CategoryController');
+	Route::resource('provinces', 'Admin\ProvinceController');
+	Route::resource('districts', 'Admin\DistrictController');
+	Route::resource('wards', 'Admin\WardController');
 
 	Route::resource('agents', 'Admin\AgentController');
 	Route::get('profile', 'Admin\ProfileController@getProfile');
 	Route::post('profile', 'Admin\ProfileController@postProfile');
 	Route::get('company-settings', 'CompanySettingsController@edit');
 	Route::patch('company-settings', 'CompanySettingsController@update');
-    Route::get('settings', 'SettingController@index');
+	Route::get('settings', 'SettingController@index');
 	Route::patch('settings', 'SettingController@update');
 	Route::post('change_locale', 'LocaleController@changeLocale');
 
@@ -62,5 +62,5 @@ Route::group(['prefix' => 'admin','middleware' => ['auth', 'locale']], function 
 	Route::post('admin/videos/update-arrange', [VideoController::class, 'updateArrange'])->name('videos.updateArrange');
 	Route::post('admin/ads/update-arrange', [AdsController::class, 'updateArrange'])->name('ads.updateArrange');
 	Route::post('admin/posts/update-arrange', [PostController::class, 'updateArrange'])->name('posts.updateArrange');
-
+	Route::get('menus/positions-by-parent/{ptypeid}', [MenuController::class, 'getPositionsByParent']);
 });

@@ -15,6 +15,7 @@
 Route::get('/', 'FrontendController@index');
 Route::get('/tim-kiem', 'FrontendController@search')->name('search');
 Route::get('/bai-viet/{postId}', 'FrontendController@showPost')->name('post.show');
+
 Route::get('ajaxFE/{action}', 'AjaxFrontEntController@index');
 
 
