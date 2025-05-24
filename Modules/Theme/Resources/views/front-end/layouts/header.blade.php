@@ -29,36 +29,23 @@
         <script type="text/javascript" src="js/stuHover.js"></script>
         <div id="main_menu" style="float: left">
             <ul id="nav">
-                <!--<li style="width: 20px;height: 20px;float: left;"></li>-->
-                <li class="top active"><a href="https://pyttmientrung.moh.gov.vn/c1/trang-chu.html"
-                        class="top_link"><span>Trang chủ</span></a>
-                </li>
-                <li class="top normal"><a href="https://pyttmientrung.moh.gov.vn/c11/gioi-thieu.html"
-                        class="top_link"><span>Giới thiệu</span></a>
-                    <ul class="sub">
-                        <li><a href="https://pyttmientrung.moh.gov.vn/c12/lich-su-hinh-thanh.html">Lịch sử hình
-                                thành</a></li>
-                        <li><a href="https://pyttmientrung.moh.gov.vn/c13/so-do-to-chuc.html">Sơ đồ tổ chức</a></li>
-                        <li><a href="https://pyttmientrung.moh.gov.vn/c14/chuc-nang-nhiem-vu-quyen-han.html">Chức năng,
-                                nhiệm vụ, quyền hạn</a></li>
-                        <li><a href="https://pyttmientrung.moh.gov.vn/c26/cac-khoa-phong.html">Các khoa, phòng</a></li>
-                        <li><a href="https://pyttmientrung.moh.gov.vn/c38/thanh-tich-dat-duoc.html">Thành tích đạt
-                                được</a></li>
-                    </ul>
-                </li>
-                <li class="top normal"><a href="https://pyttmientrung.moh.gov.vn/c56/danh-ba.html"
-                        class="top_link"><span>Danh bạ</span></a>
-                </li>
-                <li class="top normal"><a href="https://pyttmientrung.moh.gov.vn/c57/tiep-nhan-y-kien.html"
-                        class="top_link"><span>Tiếp nhận ý kiến</span></a>
-                </li>
-                <li class="top normal"><a href="https://pyttmientrung.moh.gov.vn/c58/hoi--dap.html"
-                        class="top_link"><span>Hỏi - đáp</span></a>
-                </li>
-                <li class="top normal"><a href="https://pyttmientrung.moh.gov.vn/c10/lien-he.html"
-                        class="top_link"><span>Liên hệ</span></a>
-                </li>
+                @foreach ($menus_top as $menu)
+                    <li class="top {{ $loop->first ? 'active' : 'normal' }}">
+                        <a href="{{ $menu->url }}" class="top_link">
+                            <span>{{ $menu->title }}</span>
+                        </a>
+            
+                        @if ($menu->children->isNotEmpty())
+                            <ul class="sub">
+                                @foreach ($menu->children as $child)
+                                    <li><a href="{{ $child->url }}">{{ $child->title }}</a></li>
+                                @endforeach
+                            </ul>
+                        @endif
+                    </li>
+                @endforeach
             </ul>
+            
         </div>
         <div style="float: right; z-index: 100;">
             <div class="panel">

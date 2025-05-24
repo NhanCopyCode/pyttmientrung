@@ -39,4 +39,6 @@ class SysMenu extends Model
     {
         return $this->belongsToMany(SysPosition::class, 'menu_position', 'menu_id', 'position_id');
     }
+
+
 }

@@ -4,97 +4,29 @@
         <div class="leftmenu">
             <div class="sidebarmenu">
                 <ul id="sidebarmenu1">
-                    <li class="normal_item" style="background: url('{{ asset('img/nav.png')}}')"> <a href="https://pyttmientrung.moh.gov.vn/c11/gioi-thieu.html"
-                            class=" subfolderstyle">Giới thiệu</a>
-                        <ul class="fly" style="z-index: 99; left: 248px; visibility: visible; display: none;">
-                            <li><a href="https://pyttmientrung.moh.gov.vn/c12/lich-su-hinh-thanh.html">Lịch sử hình
-                                    thành</a></li>
-                            <li><a href="https://pyttmientrung.moh.gov.vn/c13/so-do-to-chuc.html">Sơ đồ tổ chức</a></li>
-                            <li><a href="https://pyttmientrung.moh.gov.vn/c14/chuc-nang-nhiem-vu-quyen-han.html">Chức
-                                    năng, nhiệm vụ, quyền hạn</a></li>
-                            <li><a href="https://pyttmientrung.moh.gov.vn/c26/cac-khoa-phong.html">Các khoa, phòng</a>
-                            </li>
-                            <li><a href="https://pyttmientrung.moh.gov.vn/c38/thanh-tich-dat-duoc.html">Thành tích đạt
-                                    được</a></li>
-                        </ul>
-                    </li>
-                    <li class="normal_item" style="background: url('{{ asset('img/nav.png')}}')"> <a href="https://pyttmientrung.moh.gov.vn/c24/tin-tuc--su-kien.html"
-                            class=" subfolderstyle">Tin tức - Sự kiện</a>
-                        <ul class="fly" style="z-index: 99; left: 248px; visibility: visible; display: none;">
-                            <li><a href="https://pyttmientrung.moh.gov.vn/c39/tin-hoat-dong.html">Tin hoạt động</a></li>
-                            <li><a href="https://pyttmientrung.moh.gov.vn/c40/tin-trong-nganh.html">Tin trong ngành</a>
-                            </li>
-                            <li><a href="https://pyttmientrung.moh.gov.vn/c41/tin-quoc-te.html">Tin quốc tế</a></li>
-                            <li><a href="https://pyttmientrung.moh.gov.vn/c42/bai-viet-chuyen-mon.html">Bài viết chuyên
-                                    môn</a></li>
-                        </ul>
-                    </li>
-                    <li class="normal_item" style="background: url('{{ asset('img/nav.png')}}')"> <a href="https://pyttmientrung.moh.gov.vn/c2/giam-dinh-phap-y.html"
-                            class=" subfolderstyle">Giám định Pháp y</a>
-                        <ul class="fly" style="z-index: 99; left: 248px; visibility: visible; display: none;">
-                            <li><a href="https://pyttmientrung.moh.gov.vn/c43/giam-dinh-phap-y-tam-than.html">Giám định
-                                    Pháp y Tâm thần</a></li>
-                            <li><a href="https://pyttmientrung.moh.gov.vn/c44/ky-thuat-giam-dinh.html">Kỹ thuật giám
-                                    định</a></li>
-                        </ul>
-                    </li>
-                    <li class="normal_item" style="background: url('{{ asset('img/nav.png')}}')"> <a href="https://pyttmientrung.moh.gov.vn/c45/hoat-dong-khoa-hoc.html"
-                            class=" subfolderstyle">Hoạt động Khoa học</a>
-                        <ul class="fly" style="z-index: 99; left: 248px; visibility: visible; display: none;">
-                            <li><a href="https://pyttmientrung.moh.gov.vn/c46/tin-tuc-nghien-cuu-khoa-hoc.html">Tin tức
-                                    nghiên cứu khoa học</a></li>
-                            <li><a href="https://pyttmientrung.moh.gov.vn/c47/cac-de-tai-nghien-cuu-khoa-hoc.html">Các
-                                    đề tài nghiên cứu khoa học</a></li>
-                            <li><a href="https://pyttmientrung.moh.gov.vn/c72/cac-chuyen-de-khoa-hoc.html">Các chuyên đề
-                                    khoa học</a></li>
-                        </ul>
-                    </li>
-                    <li class="normal_item" style="background: url('{{ asset('img/nav.png')}}')"> <a href="https://pyttmientrung.moh.gov.vn/c48/thong-tin-y-hoc.html"
-                            class=" subfolderstyle">Thông tin y học</a>
-                        <ul class="fly" style="z-index: 99; left: 248px; visibility: visible; display: none;">
-                            <li><a href="https://pyttmientrung.moh.gov.vn/c49/suc-khoe-tam-than.html">Sức khỏe tâm
-                                    thần</a></li>
-                            <li><a href="https://pyttmientrung.moh.gov.vn/c50/giao-duc-suc-khoe.html">Giáo dục sức
-                                    khỏe</a></li>
-                            <li><a href="https://pyttmientrung.moh.gov.vn/c68/thong-tin-thuoc-va-dieu-tri.html">Thông
-                                    tin thuốc và điều trị</a></li>
-                            <li><a href="https://pyttmientrung.moh.gov.vn/c69/tin-khac.html">Tin khác</a></li>
-                        </ul>
-                    </li>
-                    <li class="normal_item" style="background: url('{{ asset('img/nav.png')}}')"> <a href="https://pyttmientrung.moh.gov.vn/c52/kham-chua-benh.html"
-                            class=" subfolderstyle">Khám chữa bệnh</a>
-                        <ul class="fly" style="z-index: 99; left: 248px; visibility: visible; display: none;">
-                            <li><a href="https://pyttmientrung.moh.gov.vn/c70/cac-dich-vu-ky-thuat.html">Các dịch vụ kỹ
-                                    thuật</a></li>
-                            <li><a href="https://pyttmientrung.moh.gov.vn/c71/tin-kham-chua-benh.html">Tin khám chữa
-                                    bệnh</a></li>
-                        </ul>
-                    </li>
-                    <li class="normal_item" style="background: url('{{ asset('img/nav.png')}}')"> <a
-                            href="https://pyttmientrung.moh.gov.vn/c53/dao-tao--hop-tac-quoc-te.html">Đào tạo - Hợp tác
-                            quốc tế</a></li>
-                    <li class="normal_item" style="background: url('{{ asset('img/nav.png')}}')"> <a
-                            href="https://pyttmientrung.moh.gov.vn/c54/van-ban-chuyen-nganh.html">Văn bản chuyên
-                            ngành</a></li>
-                    <li class="normal_item" style="background: url('{{ asset('img/nav.png')}}')"> <a href="https://pyttmientrung.moh.gov.vn/c55/chi-dao-tuyen.html">Chỉ đạo
-                            tuyến</a></li>
-                    <li class="normal_item" style="background: url('{{ asset('img/nav.png')}}')"> <a href="https://pyttmientrung.moh.gov.vn/c59/phap-luat.html">Pháp luật</a>
-                    </li>
-                    <li class="normal_item" style="background: url('{{ asset('img/nav.png')}}')"> <a href="https://pyttmientrung.moh.gov.vn/c60/hoat-dong-doan-the.html"
-                            class=" subfolderstyle">Hoạt động đoàn thể</a>
-                        <ul class="fly" style="z-index: 99; left: 248px; visibility: visible; display: none;">
-                            <li><a href="https://pyttmientrung.moh.gov.vn/c62/chi-bo.html">Chi bộ</a></li>
-                            <li><a href="https://pyttmientrung.moh.gov.vn/c63/cong-doan.html">Công đoàn</a></li>
-                            <li><a href="https://pyttmientrung.moh.gov.vn/c64/doan-thanh-nien.html">Đoàn thanh niên</a>
-                            </li>
-                        </ul>
-                    </li>
-                    <li class="normal_item" style="background: url('{{ asset('img/nav.png')}}')"> <a href="https://pyttmientrung.moh.gov.vn/c8/thu-vien-anh.html">Thư viện
-                            ảnh</a></li>
-                    <li class="normal_item" style="background: url('{{ asset('img/nav.png')}}')"> <a href="https://pyttmientrung.moh.gov.vn/c9/video.html">Video</a></li>
-                    <li class="normal_item" style="background: url('{{ asset('img/nav.png')}}')"> <a href="https://pyttmientrung.moh.gov.vn/c61/goc-thu-gian.html">Góc thư
-                            giản</a></li>
+                    @foreach ($menus_left as $menu)
+                        <li class="normal_item" style="background: url('{{ asset('img/nav.png') }}')">
+                            <a href="{{ $menu->url }}"
+                                class="{{ $menu->children->isNotEmpty() ? 'subfolderstyle' : '' }}">
+                                {{ $menu->title }}
+                            </a>
+
+                            @if ($menu->children->isNotEmpty())
+                                <ul class="fly"
+                                    style="z-index: 99; left: 248px; visibility: visible; display: none;">
+                                    @foreach ($menu->children as $child)
+                                        <li>
+                                            <a href="{{ $child->url }}">
+                                                {{ $child->title }}
+                                            </a>
+                                        </li>
+                                    @endforeach
+                                </ul>
+                            @endif
+                        </li>
+                    @endforeach
                 </ul>
+
             </div>
         </div>
         <script type="text/javascript">
@@ -154,8 +86,8 @@
                         style="border: solid 1px #CCCCCC;width: 246px;height: auto;" alt="BV Tâm thần"></a>
             </div>
             <div>
-                <a href="http://www.bvtwhue.com.vn/index.asp?lang=vn" target="_blank"
-                    title="Bênh viện Trung Ương"><img src="/upload/image/quangcao/adv_01_06.png"
+                <a href="http://www.bvtwhue.com.vn/index.asp?lang=vn" target="_blank" title="Bênh viện Trung Ương"><img
+                        src="/upload/image/quangcao/adv_01_06.png"
                         style="border: solid 1px #CCCCCC;width: 246px;height: auto;" alt="Bênh viện Trung Ương"></a>
             </div>
             <div>
@@ -182,8 +114,7 @@
             <div>
                 <a href="http://www.cimsi.org.vn/" target="_blank" title="Thông tin Y học Việt Nam"><img
                         src="/upload/image/quangcao/adv_01_11.png"
-                        style="border: solid 1px #CCCCCC;width: 246px;height: auto;"
-                        alt="Thông tin Y học Việt Nam"></a>
+                        style="border: solid 1px #CCCCCC;width: 246px;height: auto;" alt="Thông tin Y học Việt Nam"></a>
             </div>
         </div>
     </div>

@@ -12,6 +12,7 @@ use App\Http\Controllers\Controller;
 use App\Models\FlashSlide;
 use App\Models\News;
 use App\Models\Post;
+use App\Models\SysMenu;
 use App\Models\Video;
 use Modules\Theme\Entities\Menu;
 
@@ -20,16 +21,38 @@ class FrontendController extends Controller
 {
     public function __construct()
     {
+        $menu_top_id = 4;
+        $menu_main_id = 1;
+        $menu_left_id = 2;
+        $menu_right_id = 3;
         $settings = Setting::allConfigsKeyValue();
         $slides = FlashSlide::where('approved', 1)
             ->orderBy('arrange')
             ->get();
         $videos = Video::orderBy('postdate', 'desc')->get();
+        
+        $menus_left = SysMenu::whereHas('positions', function ($query) use ($menu_left_id) {
+            $query->where('position_id', $menu_left_id);
+        })->where('approved', 1)->orderBy('arrange')->get();
+        $menus_right = SysMenu::whereHas('positions', function ($query) use ($menu_right_id) {
+            $query->where('position_id', $menu_right_id);
+        })->where('approved', 1)->orderBy('arrange')->get();
+        $menus_top = SysMenu::whereHas('positions', function ($query) use ($menu_top_id) {
+            $query->where('position_id', $menu_top_id);
+        })->where('approved', 1)->orderBy('arrange')->get();
+        $menus_main = SysMenu::whereHas('positions', function ($query) use ($menu_main_id) {
+            $query->where('position_id', $menu_main_id);
+        })->where('approved', 1)->orderBy('arrange')->get();
+
 
         \View::share([
             'settings' => $settings,
             'slides' => $slides,
             'videos' => $videos,
+            'menus_left' => $menus_left,
+            'menus_right' => $menus_right,
+            'menus_top' => $menus_top,
+            'menus_main' => $menus_main,
         ]);
     }
 
