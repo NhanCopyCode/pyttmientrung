@@ -11,10 +11,14 @@
 |
 */
 
+use Modules\Theme\Http\Controllers\FaqController;
 
 Route::get('/', 'FrontendController@index');
 Route::get('/tim-kiem', 'FrontendController@search')->name('search');
 Route::get('/bai-viet/{postId}', 'FrontendController@showPost')->name('post.show');
+Route::get('/hoi-dap', 'FrontendController@faq')->name('faq');
+Route::post('/', [FaqController::class, 'submitQuestion'])->name('faq.submit');
+
 
 Route::get('ajaxFE/{action}', 'AjaxFrontEntController@index');
 

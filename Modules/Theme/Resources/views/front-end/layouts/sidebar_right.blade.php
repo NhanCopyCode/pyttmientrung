@@ -50,16 +50,16 @@
          <div class="panel">
              <div class="panel_tcat faq"
                  style="background: url('{{ asset('img/faq.png') }}') 5px 3px no-repeat #156aec;">
-                 <a href="{{ url('c58/hoi--dap.html') }}">Hỏi - đáp</a>
+                 <a href="{{ url('hoi-dap') }}">Hỏi - đáp</a>
              </div>
 
              <div class="swiper mySwiper" style="height: 330px;">
                  <div class="swiper-wrapper">
-                     @foreach ($faqs as $faq)
+                     @foreach ($faqs_homepage as $faq)
                          <div class="swiper-slide" style="list-style: none; height: auto !important;">
                              <li
                                  style="list-style-image: url('{{ asset('img/dotter.png') }}'); list-style-position: inside; height: auto !important;">
-                                 <a href="{{ url('c58/hoi--dap.html?faq_id=' . $faq->id) }}">
+                                 <a href="{{ url('hoi-dap?faq_id=' . $faq->id) }}">
                                      {{ \Illuminate\Support\Str::limit(strip_tags($faq->question), 150) }}
                                  </a>
                              </li>
@@ -106,7 +106,7 @@
              type="text/css" media="screen">
          <div class="panel_tcat gallerys"
              style="background: url(' {{ asset('img/icon_gallery.png') }}') 5px 3px no-repeat #156aec;">
-             <a href="#">Thư viện ảnh</a>
+             <a href="/thu-vien-anh">Thư viện ảnh</a>
          </div>
          <div id="room_slide">
              <div id="list">
@@ -140,7 +140,7 @@
          <script src="/jscripts/swfobject.js" type="text/javascript"></script>
          <div class="panel_tcat videos"
              style="background: url(' {{ asset('img/icon_video.png') }}') 5px 3px no-repeat #156aec;">
-             <a href="#">Video</a>
+             <a href="/video">Video</a>
          </div>
          <center>
              <div class="swiper mySwiper videoSwiper">

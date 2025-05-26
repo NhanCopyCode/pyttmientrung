@@ -29,13 +29,13 @@ class FrontendController extends Controller
         $menu_right_id = 3;
         $ads_left_id = 1;
         $ads_right_id_1 = 4;
-        $ads_right_id_2= 5;
+        $ads_right_id_2 = 5;
         $settings = Setting::allConfigsKeyValue();
         $slides = FlashSlide::where('approved', 1)
             ->orderBy('arrange')
             ->get();
         $videos = Video::orderBy('postdate', 'desc')->get();
-        
+
         $menus_left = SysMenu::whereHas('positions', function ($query) use ($menu_left_id) {
             $query->where('position_id', $menu_left_id);
         })->where('approved', 1)->orderBy('arrange')->get();
@@ -64,7 +64,7 @@ class FrontendController extends Controller
             ->orderBy('arrange')
             ->get();
 
-        $faqs = Faq::where('approved', 1)
+        $faqs_homepage = Faq::where('approved', 1)
             ->orderBy('postdate', 'desc')
             ->limit(6)
             ->get();
@@ -80,7 +80,7 @@ class FrontendController extends Controller
             'ads_left' => $ads_left,
             'ads_right_1' => $ads_right_1,
             'ads_right_2' => $ads_right_2,
-            'faqs' => $faqs,
+            'faqs_homepage' => $faqs_homepage,
         ]);
     }
 
@@ -91,8 +91,9 @@ class FrontendController extends Controller
         return view('theme::front-end.pages.home', compact('videos'));
     }
 
-    public function search(Request $request) {
-        $keyword = $request->get('s'); 
+    public function search(Request $request)
+    {
+        $keyword = $request->get('s');
         $perPage = 20;
 
         $search_result = Post::query()
@@ -106,7 +107,27 @@ class FrontendController extends Controller
             ->appends(['s' => $keyword]);
         return view('theme::front-end.pages.search_page', compact('search_result'));
     }
-    
+
+    public function faq(Request $request)
+    {
+        if ($request->has('faq_id')) {
+            $faq_id = $request->get('faq_id');
+
+            $faq = Faq::where('id', $faq_id)
+                ->where('approved', 1)
+                ->first();
+
+            return view('theme::front-end.pages.faq-detail', compact('faq'));
+        }
+
+        $faqs = Faq::where('approved', 1)
+            ->orderByDesc('postdate')
+            ->paginate(10);
+
+
+        return view('theme::front-end.pages.faq', compact('faqs'));
+    }
+   
     public function showPost($postId)
     {
         $post = Post::where('url', $postId)->first();
