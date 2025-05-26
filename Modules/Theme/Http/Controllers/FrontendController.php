@@ -9,6 +9,7 @@ use App\Models\Setting;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\Ads;
 use App\Models\FlashSlide;
 use App\Models\News;
 use App\Models\Post;
@@ -25,6 +26,9 @@ class FrontendController extends Controller
         $menu_main_id = 1;
         $menu_left_id = 2;
         $menu_right_id = 3;
+        $ads_left_id = 1;
+        $ads_right_id_1 = 4;
+        $ads_right_id_2= 5;
         $settings = Setting::allConfigsKeyValue();
         $slides = FlashSlide::where('approved', 1)
             ->orderBy('arrange')
@@ -44,6 +48,20 @@ class FrontendController extends Controller
             $query->where('position_id', $menu_main_id);
         })->where('approved', 1)->orderBy('arrange')->get();
 
+        $ads_left = Ads::where('approved', 1)
+            ->where('vitri', $ads_left_id)
+            ->orderBy('arrange')
+            ->get();
+
+        $ads_right_1 = Ads::where('approved', 1)
+            ->where('vitri', $ads_right_id_1)
+            ->orderBy('arrange')
+            ->get();
+
+        $ads_right_2 = Ads::where('approved', 1)
+            ->where('vitri', $ads_right_id_2)
+            ->orderBy('arrange')
+            ->get();
 
         \View::share([
             'settings' => $settings,
@@ -53,6 +71,9 @@ class FrontendController extends Controller
             'menus_right' => $menus_right,
             'menus_top' => $menus_top,
             'menus_main' => $menus_main,
+            'ads_left' => $ads_left,
+            'ads_right_1' => $ads_right_1,
+            'ads_right_2' => $ads_right_2,
         ]);
     }
 

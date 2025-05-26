@@ -52,11 +52,11 @@
                         <th class="text-center" style="width: 3.5%">{{ trans('message.index') }}</th>
                         <th>@sortablelink('title', trans('slides.title'))</th>
                         <th class="text-center">{{ trans('ads.link') }}</th>
+                        <th class="text-center">{{ trans('ads.position') }}</th>
                         <th class="text-center">{{ trans('ads.pathimage') }}</th>
                         <th class="text-center">{{ trans('ads.arrange') }}</th>
 
                         <th class="text-center">{{ trans('slides.active') }}</th>
-                        <th class="text-center">{{ trans('slides.updated_at') }}</th>
                         <th style="width: 7%;"></th>
                     </tr>
                     @foreach ($ads as $item)
@@ -72,26 +72,26 @@
                                         {{ $item->title }}
                                     </a></td>
                             @endcan
-                            <td class="text-center">
+                            <td class="text-center" style="width: 10%;">
                                 <a href=" {{ $item->link }}" target="_blank"> {{ $item->link }} </a>
                             </td>
-                            <td class="text-center">
-                                <img src="{{asset($item->pathimage)}}" alt="{{$item->pathimage}}">
+                            <td>
+                                <span>{{ $item->position->comment}}</span>
+                            </td>
+                            <td class="text-center" style="width: 30%;">
+                                <img src="{{asset($item->pathimage)}}" alt="{{$item->pathimage}}" style="width: 100%;object-fit: cover; ">
                           </td>
 
                           
-
                             <td class="text-center d-flex align-items-center justify-content-center gap-2">
                                 <input type="text" class="w-25 form-control arrange-input" value="{{ $item->arrange }}"
-                                    data-id="{{ $item->id }}" />
+                                    data-id="{{ $item->id }}" style="width: 50px !important;"/>
                                 <button class="btn btn-primary ml-2 btn-update-arrange" data-id="{{ $item->id }}">
                                     Thay đổi
                                 </button>
                             </td>
                             <td class="text-center">{!! $item->approved == config('settings.active') ? '<i class="fa fa-check text-primary"></i>' : '' !!}</td>
-                            <td class="text-center">
-                                {{ Carbon\Carbon::parse($item->postdate)->format(config('settings.format.date')) }}</td>
-
+                          
                             <td class="dropdown">
                                 <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown"
                                     aria-haspopup="true" aria-expanded="false">

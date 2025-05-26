@@ -45,30 +45,7 @@
 
          </div>
      </div>
-     <div id="ads_04">
-         <div class="panel">
-             <div>
-                 <a href="http://pyttmientrung.moh.gov.vn/c65/lich-cong-tac.html" target="_blank"
-                     title="Lịch công tác"><img src="/templates/default/images/noimage.gif"
-                         style="border: solid 1px #CCCCCC;width: 246px;height: auto;" alt="Lịch công tác"></a>
-             </div>
-             <div>
-                 <a href="http://pyttmientrung.moh.gov.vn/c67/gia-dich-vu-y-te.html" target="_blank" title="Giá"><img
-                         src="/upload/image/quangcao/adv_04_03.png"
-                         style="border: solid 1px #CCCCCC;width: 246px;height: auto;" alt="Giá"></a>
-             </div>
-             <div>
-                 <a href="http://pyttmientrung.moh.gov.vn/c52/kham-chua-benh.html" target="_blank"
-                     title="Khám chữa bệnh"><img src="/upload/image/quangcao/adv_04_02.png"
-                         style="border: solid 1px #CCCCCC;width: 246px;height: auto;" alt="Khám chữa bệnh"></a>
-             </div>
-             <div>
-                 <a href="http://pyttmientrung.moh.gov.vn/c73/chi-hoi-tam-than-hoc.html" target="_blank"
-                     title="Chi hội Tâm thần học"><img src="/upload/image/quangcao/chtth.jpg"
-                         style="border: solid 1px #CCCCCC;width: 246px;height: auto;" alt="Chi hội Tâm thần học"></a>
-             </div>
-         </div>
-     </div>
+    @include('theme::front-end.sections.ads_04')
      <div id="faqs">
          <div class="panel">
              <div class="panel_tcat faq"
@@ -110,23 +87,17 @@
          </div>
      </div>
      <div id="ads_05">
-         <div class="panel">
-             <div>
-                 <a href="http://pyttmientrung.moh.gov.vn/c54/van-ban-chuyen-nganh.html" target="_blank"
-                     title="Văn bản chuyên ngành"><img src="/upload/image/quangcao/adv_05_01.png"
-                         style="border: solid 1px #CCCCCC;width: 246px;height: auto;" alt="Văn bản chuyên ngành"></a>
-             </div>
-             <div>
-                 <a href="http://pyttmientrung.moh.gov.vn/cmsadmin/" target="_blank" title="Tin nội bộ"><img
-                         src="/upload/image/quangcao/adv_05_02.png"
-                         style="border: solid 1px #CCCCCC;width: 246px;height: auto;" alt="Tin nội bộ"></a>
-             </div>
-             <div>
-                 <a href="http://suckhoedoisong.vn/" target="_blank" title="Sức khỏe đời sống"><img
-                         src="/upload/image/quangcao/adv_05_03.png"
-                         style="border: solid 1px #CCCCCC;width: 246px;height: auto;" alt="Sức khỏe đời sống"></a>
-             </div>
-         </div>
+        <div class="panel">
+            @foreach ($ads_right_2 as $ad)
+                <div>
+                    <a href="{{ $ad->link }}" target="_blank" title="{{ $ad->title }}">
+                        <img src="{{ asset($ad->pathimage ?: 'templates/default/images/noimage.gif') }}"
+                             style="border: solid 1px #CCCCCC;width: 246px;height: auto;"
+                             alt="{{ $ad->title }}">
+                    </a>
+                </div>
+            @endforeach
+        </div>
      </div>
      <div id="gallery">
          <script type="text/javascript"

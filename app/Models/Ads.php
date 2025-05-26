@@ -21,4 +21,9 @@ class Ads extends Model
         'lang',
     ];
     public $timestamps = false;
+
+    public function position()
+    {
+        return $this->belongsTo(AdsPosition::class, 'vitri');
+    }
 }
