@@ -45,59 +45,57 @@
 
          </div>
      </div>
-    @include('theme::front-end.sections.ads_04')
+     @include('theme::front-end.sections.ads_04')
      <div id="faqs">
          <div class="panel">
              <div class="panel_tcat faq"
-                 style="background: url(' {{ asset('img/faq.png') }}') 5px 3px no-repeat #156aec;">
-                 <a href="https://pyttmientrung.moh.gov.vn/c58/hoi--dap.html">Hỏi - đáp</a>
-             </div>
-             <div class="smartmarquee example" style="height: 250px">
-                 <ul class="container" style="margin-top: -186.643px;">
-                     <li style="list-style-image: url('{{ asset('img/dotter.png') }}')"><a
-                             href="https://pyttmientrung.moh.gov.vn/c58/hoi--dap.html?faq_id=19"> Em muốn hỏi hồ sơ
-                             giám định tâm thần gồm những giấy tờ nào???
-                             Em của em có vấn đế từ nhỏ được nhà nước...</a></li>
-                     <li style="list-style-image: url('{{ asset('img/dotter.png') }}')"><a
-                             href="https://pyttmientrung.moh.gov.vn/c58/hoi--dap.html?faq_id=17"> Kính gửi: Trung tâm
-                             pháp y tâm thần khu vực miền Trung
-
-
-                             Con gái tôi 42 tuổi, bị khuyết tật từ nhỏ và:
-                             - Đã...</a></li>
-                     <li style="list-style-image: url('{{ asset('img/dotter.png') }}')"><a
-                             href="https://pyttmientrung.moh.gov.vn/c58/hoi--dap.html?faq_id=16"> xin Bác sĩ cho cháu
-                             hỏi: Cháu ỏ tỉnh Quảng Ngãi; cháu có một người quen có ý định muốn chuyển quyền sử dụng
-                             đất;...</a></li>
-                     <li style="list-style-image: url('{{ asset('img/dotter.png') }}')"><a
-                             href="https://pyttmientrung.moh.gov.vn/c58/hoi--dap.html?faq_id=15"> Một người có sổ
-                             điều trị ngoại trú tâm thần thực hiện hành vi vi phạm pháp luật chưa bị khởi tố hình sự.
-                             Cơ...</a></li>
-                     <li style="list-style-image: url('{{ asset('img/dotter.png') }}')"><a
-                             href="https://pyttmientrung.moh.gov.vn/c58/hoi--dap.html?faq_id=14">thủ tục và thời gian
-                             giám đinh tâm thần cho bị can như thế nào? và chí phí cho việc giám định là bao nhiêu.
-                         </a></li>
-                     <li style="list-style-image: url('{{ asset('img/dotter.png') }}')"><a
-                             href="https://pyttmientrung.moh.gov.vn/c58/hoi--dap.html?faq_id=13"> Việc đề nghị giám
-                             định một người mất năng lực hành vi dân sự ( trong vụ việc dân sự) thì hết bao nhiêu
-                             tiền....</a></li>
-                 </ul>
+                 style="background: url('{{ asset('img/faq.png') }}') 5px 3px no-repeat #156aec;">
+                 <a href="{{ url('c58/hoi--dap.html') }}">Hỏi - đáp</a>
              </div>
 
+             <div class="swiper mySwiper" style="height: 330px;">
+                 <div class="swiper-wrapper">
+                     @foreach ($faqs as $faq)
+                         <div class="swiper-slide" style="list-style: none; height: auto !important;">
+                             <li
+                                 style="list-style-image: url('{{ asset('img/dotter.png') }}'); list-style-position: inside; height: auto !important;">
+                                 <a href="{{ url('c58/hoi--dap.html?faq_id=' . $faq->id) }}">
+                                     {{ \Illuminate\Support\Str::limit(strip_tags($faq->question), 150) }}
+                                 </a>
+                             </li>
+                         </div>
+                     @endforeach
+                 </div>
+             </div>
          </div>
      </div>
+
+     <script>
+         const swiper = new Swiper('.mySwiper', {
+             direction: 'vertical',
+             loop: true,
+             slidesPerView: 4,
+             autoplay: {
+                 delay: 3000,
+                 disableOnInteraction: false,
+             },
+             allowTouchMove: false,
+             pagination: false,
+             navigation: false,
+         });
+     </script>
+
      <div id="ads_05">
-        <div class="panel">
-            @foreach ($ads_right_2 as $ad)
-                <div>
-                    <a href="{{ $ad->link }}" target="_blank" title="{{ $ad->title }}">
-                        <img src="{{ asset($ad->pathimage ?: 'templates/default/images/noimage.gif') }}"
-                             style="border: solid 1px #CCCCCC;width: 246px;height: auto;"
-                             alt="{{ $ad->title }}">
-                    </a>
-                </div>
-            @endforeach
-        </div>
+         <div class="panel">
+             @foreach ($ads_right_2 as $ad)
+                 <div>
+                     <a href="{{ $ad->link }}" target="_blank" title="{{ $ad->title }}">
+                         <img src="{{ asset($ad->pathimage ?: 'templates/default/images/noimage.gif') }}"
+                             style="border: solid 1px #CCCCCC;width: 246px;height: auto;" alt="{{ $ad->title }}">
+                     </a>
+                 </div>
+             @endforeach
+         </div>
      </div>
      <div id="gallery">
          <script type="text/javascript"
@@ -150,7 +148,8 @@
                      @foreach ($videos as $video)
                          <div class="swiper-slide">
                              <div class="video-container">
-                                 <h5 style="font-size: 14px; font-weight: lighter; padding-top: 8px;">{{ $video->title }}</h5>
+                                 <h5 style="font-size: 14px; font-weight: lighter; padding-top: 8px;">
+                                     {{ $video->title }}</h5>
 
                                  @php
                                      parse_str(parse_url($video->pathfile, PHP_URL_QUERY), $queryParams);

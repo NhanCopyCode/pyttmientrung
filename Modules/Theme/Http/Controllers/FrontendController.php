@@ -10,6 +10,7 @@ use App\Models\Setting;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Ads;
+use App\Models\Faq;
 use App\Models\FlashSlide;
 use App\Models\News;
 use App\Models\Post;
@@ -63,6 +64,11 @@ class FrontendController extends Controller
             ->orderBy('arrange')
             ->get();
 
+        $faqs = Faq::where('approved', 1)
+            ->orderBy('postdate', 'desc')
+            ->limit(6)
+            ->get();
+
         \View::share([
             'settings' => $settings,
             'slides' => $slides,
@@ -74,6 +80,7 @@ class FrontendController extends Controller
             'ads_left' => $ads_left,
             'ads_right_1' => $ads_right_1,
             'ads_right_2' => $ads_right_2,
+            'faqs' => $faqs,
         ]);
     }
 
