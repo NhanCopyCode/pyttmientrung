@@ -65,6 +65,12 @@
                     'href' => 'admin/videos',
                     'permission' => "VideoController@index"
                 ],
+                [
+                    'icon' => 'fa fa-question',
+                    'title' => __('message.faq_management'),
+                    'href' => 'admin/faqs',
+                    'permission' => "FaqController@index"
+                ],
                 //   [
 
                 //     'icon' => 'fad fa-newspaper' ,

@@ -57,6 +57,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'locale']], function
 	Route::resource('videos', 'Admin\VideoController');
 	Route::resource('ads', 'Admin\AdsController');
 	Route::resource('posts', 'Admin\PostController');
+	Route::resource('faqs', 'Admin\FaqController');
 	Route::post('admin/slides/update-arrange', [SlideController::class, 'updateArrange'])->name('slides.updateArrange');
 	Route::post('admin/menus/update-arrange', [MenuController::class, 'updateArrange'])->name('menus.updateArrange');
 	Route::post('admin/videos/update-arrange', [VideoController::class, 'updateArrange'])->name('videos.updateArrange');

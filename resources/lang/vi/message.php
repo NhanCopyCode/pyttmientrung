@@ -123,6 +123,12 @@ return [
         "deleted_success" => "Bài viết đã được xóa!",
 
     ],
+    "faq" => [
+        "created_success" => "Câu trả lời đã được thêm!",
+        "updated_success" => "Câu trả lời đã được cập nhật!",
+        "deleted_success" => "Câu trả lời đã được xóa!",
+
+    ],
     'embed_form' => [
         'title' => 'Đăng ký thông tin',
         'title_register' => 'Đăng ký tham gia chương trình',
@@ -311,4 +317,5 @@ return [
 	"video_management" => "Quản lý video",
     "post_management" => "Quản lý bài viết",
     "ads_management" => "Quản lý quảng cáo",
+    "faq_management" => "Quản lý hỏi đáp",
 ];
