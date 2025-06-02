@@ -23,10 +23,12 @@ class FrontendController extends Controller
 {
     public function __construct()
     {
-        $menu_top_id = 4;
-        $menu_main_id = 1;
-        $menu_left_id = 2;
-        $menu_right_id = 3;
+        $menu_chinh_id = 2;
+        $menu_trai_id = 5;
+        $menu_trang_chu_id = 4;
+        $menu_panel_trai_id = 3;
+        $menu_panel_phai_id = 6;
+
         $ads_left_id = 1;
         $ads_right_id_1 = 4;
         $ads_right_id_2 = 5;
@@ -36,18 +38,27 @@ class FrontendController extends Controller
             ->get();
         $videos = Video::orderBy('postdate', 'desc')->get();
 
-        $menus_left = SysMenu::whereHas('positions', function ($query) use ($menu_left_id) {
-            $query->where('position_id', $menu_left_id);
-        })->where('approved', 1)->orderBy('arrange')->get();
-        $menus_right = SysMenu::whereHas('positions', function ($query) use ($menu_right_id) {
-            $query->where('position_id', $menu_right_id);
-        })->where('approved', 1)->orderBy('arrange')->get();
-        $menus_top = SysMenu::whereHas('positions', function ($query) use ($menu_top_id) {
-            $query->where('position_id', $menu_top_id);
-        })->where('approved', 1)->orderBy('arrange')->get();
-        $menus_main = SysMenu::whereHas('positions', function ($query) use ($menu_main_id) {
-            $query->where('position_id', $menu_main_id);
-        })->where('approved', 1)->orderBy('arrange')->get();
+
+        $menu_chinh = SysMenu::whereRaw("FIND_IN_SET(?, position)", [$menu_chinh_id])
+            ->orderBy('arrange')
+            ->get();
+
+        $menu_trai = SysMenu::whereRaw("FIND_IN_SET(?, position)", [$menu_trai_id])
+            ->orderBy('arrange')
+            ->get();
+
+        $menu_trang_chu = SysMenu::whereRaw("FIND_IN_SET(?, position)", [$menu_trang_chu_id])
+            ->orderBy('arrange')
+            ->get();
+
+        $menu_panel_trai = SysMenu::whereRaw("FIND_IN_SET(?, position)", [$menu_panel_trai_id])
+            ->orderBy('arrange')
+            ->get();
+
+
+
+        // dd($menu_panel_phai);
+
 
         $ads_left = Ads::where('approved', 1)
             ->where('vitri', $ads_left_id)
@@ -69,18 +80,48 @@ class FrontendController extends Controller
             ->limit(6)
             ->get();
 
+        $notices = Post::where('typeid', 37)
+            ->where('approved', 1)
+            ->orderBy('postdate', 'desc')
+            ->take(10)
+            ->get();
+
+        // dd($menus_left);
+
+        $posts_trang_chu = SysMenu::whereRaw("FIND_IN_SET(?, position)", [$menu_trang_chu_id])
+            ->with(['posts' => function ($q) {
+                $q->where('approved', 1)
+                    ->orderByDesc('postdate')
+                    ->limit(10);
+            }])
+            ->orderBy('arrange')
+            ->get();
+        // dd($menus);
+        $menu_panel_phai = SysMenu::whereRaw("FIND_IN_SET(?, position)", [$menu_panel_phai_id])
+            ->with(['posts' => function ($q) {
+                $q->where('approved', 1)
+                    ->orderByDesc('postdate')
+                    ->limit(10);
+            }])
+            ->orderBy('arrange')
+            ->get();
+
+
         \View::share([
             'settings' => $settings,
             'slides' => $slides,
             'videos' => $videos,
-            'menus_left' => $menus_left,
-            'menus_right' => $menus_right,
-            'menus_top' => $menus_top,
-            'menus_main' => $menus_main,
+            'menu_trai' => $menu_trai,
+            'menu_panel_trai' => $menu_panel_trai,
+            'menu_trang_chu' => $menu_trang_chu,
+            'menu_chinh' => $menu_chinh,
+            'menu_panel_phai' => $menu_panel_phai,
             'ads_left' => $ads_left,
             'ads_right_1' => $ads_right_1,
             'ads_right_2' => $ads_right_2,
             'faqs_homepage' => $faqs_homepage,
+            'notices' => $notices,
+            'posts_trang_chu' => $posts_trang_chu,
         ]);
     }
 
@@ -127,7 +168,7 @@ class FrontendController extends Controller
 
         return view('theme::front-end.pages.faq', compact('faqs'));
     }
-   
+
     public function showPost($postId)
     {
         $post = Post::where('url', $postId)->first();

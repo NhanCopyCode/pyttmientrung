@@ -17,15 +17,7 @@
                 {!! $errors->first('title', '<p class="help-block">:message</p>') !!}
             </td>
         </tr>
-        <tr class="row {{ $errors->has('typeid') ? 'has-error' : '' }}">
-            <td class="col-md-4 col-lg-3">
-                {!! Form::label('typeid', trans('posts.typeid'), ['class' => 'control-label']) !!}
-            </td>
-            <td class="col-md-8 col-lg-9">
-                {!! Form::number('typeid', null, ['class' => 'form-control input-sm']) !!}
-                {!! $errors->first('typeid', '<p class="help-block">:message</p>') !!}
-            </td>
-        </tr>
+    
         {{-- <tr class="row {{ $errors->has('pathfile') ? 'has-error' : '' }}">
             <td class="col-md-4 col-lg-3">
                 {!! Form::label('pathfile', trans('posts.pathfile'), ['class' => 'control-label']) !!}
@@ -35,6 +27,16 @@
                 {!! $errors->first('pathfile', '<p class="help-block">:message</p>') !!}
             </td>
         </tr> --}}
+        <tr class="row {{ $errors->has('ptypeid') ? 'has-error' : '' }}">
+            <td class="col-md-4 col-lg-3">
+                {!! Form::label('ptypeid', 'Chọn Menu', ['class' => 'control-label']) !!}
+            </td>
+            <td class="col-md-8 col-lg-9">
+                {!! Form::select('ptypeid', $list_menu, null, ['class' => 'form-control input-sm']) !!}
+                {!! $errors->first('ptypeid', '<p class="help-block">:message</p>') !!}
+            </td>
+        </tr>
+
         <tr class="row {{ $errors->has('avatar') ? 'has-error' : '' }}">
             <td class="col-md-4 col-lg-3">
                 {!! Form::label('avatar', trans('posts.avatar'), ['class' => 'control-label']) !!}
@@ -58,8 +60,7 @@
                     <div class="clearfix"></div>
                     <div class="imgprev-wrap" style="display:{{ !empty($post->pathimage) ? 'block' : 'none' }}">
                         <input type="hidden" value="" name="img-hidden" />
-                        <img class="img-preview"
-                            src="{{ !empty($post->pathimage) ? asset( $post->pathimage) : ''}}"
+                        <img class="img-preview" src="{{ !empty($post->pathimage) ? asset($post->pathimage) : '' }}"
                             alt="{{ trans('posts.avatar') }}" />
                         <i class="fa fa-trash text-danger"></i>
                     </div>
@@ -87,7 +88,7 @@
             </td>
         </tr>
 
-        <tr class="row {{ $errors->has('arrange') ? 'has-error' : '' }}">
+        {{-- <tr class="row {{ $errors->has('arrange') ? 'has-error' : '' }}">
             <td class="col-md-4 col-lg-3">
                 {!! Form::label('arrange', trans('slides.arrange'), ['class' => 'control-label label-required']) !!}
             </td>
@@ -95,7 +96,7 @@
                 {!! Form::number('arrange', null, ['class' => 'form-control input-sm', 'required' => 'required']) !!}
                 {!! $errors->first('arrange', '<p class="help-block">:message</p>') !!}
             </td>
-        </tr>
+        </tr> --}}
 
         <tr class="row {{ $errors->has('approved') ? 'has-error' : '' }}">
             <td class="col-md-4 col-lg-3">

@@ -1,50 +1,65 @@
  <div id="wrapper_right">
      <div id="notice">
-         <div class="panel">
+         {{-- <div class="panel">
              <div class="panel_tcat notice"
-                 style="background: url(' {{ asset('img/icon_thongbao.png') }}') 5px 3px no-repeat #156aec;">
+                 style="background: url('{{ asset('img/icon_thongbao.png') }}') 5px 3px no-repeat #156aec;">
                  <a href="https://pyttmientrung.moh.gov.vn/c37/thong-bao.html">Thông báo</a>
              </div>
-             <div class="smartmarquee example" style="height: 250px">
-                 <ul class="container" style="margin-top: -266.038px;">
-                     <li style="list-style-image: url('{{ asset('img/dotter.png') }}')"><a
-                             href="https://pyttmientrung.moh.gov.vn/c37/t37-478/quyet-dinh-so-4083-qd-byt-ngay-31-12-2024-ve-viec-giao-du-toan-thu-chi-ngan-sach-nha-nuoc-nam-2025-cua-bo-truong-bo-y-te.html">
-                             Quyết định số 4083/QĐ-BYT ngày 31/12/2024 về việc giao dự toán thu, chi ngân sách nhà
-                             nước năm 2025 của Bộ Trưởng Bộ Y...</a> </li>
-                     <li style="list-style-image: url('{{ asset('img/dotter.png') }}')"><a
-                             href="https://pyttmientrung.moh.gov.vn/c37/t37-473/lich-tiep-cong-dan-cua-lanh-dao-trung-tam-nam-2025.html">Lịch
-                             tiếp công dân của Lãnh đạo Trung tâm năm 2025</a> </li>
-                     <li style="list-style-image: url('{{ asset('img/dotter.png') }}')"><a
-                             href="https://pyttmientrung.moh.gov.vn/c37/t37-447/qd-4789-qd-byt-ve-viec-giao-du-toan-thu-chi-ngan-sach-nha-nuoc-nam-2024.html">QĐ
-                             4789/QĐ-BYT về việc giao dự toán thu, chi ngân sách nhà nước năm 2024</a> </li>
-                     <li style="list-style-image: url('{{ asset('img/dotter.png') }}')"><a
-                             href="https://pyttmientrung.moh.gov.vn/c37/t37-432/quyet-dinh-so-4215-qd-byt-ngay-14-11-2023-cua-bo-truong-bo-y-te-ve-viec-dieu-chinh-du-toan-ngan-sach-nha-nuoc-nam-2023.html">
-                             Quyết định số 4215/QĐ-BYT ngày 14/11/2023 của Bộ trưởng Bộ Y tế về việc điều chỉnh dự
-                             toán ngân sách nhà nước...</a> </li>
-                     <li style="list-style-image: url('{{ asset('img/dotter.png') }}')"><a
-                             href="https://pyttmientrung.moh.gov.vn/c37/t37-430/quyet-dinh-giao-quyen-tu-chu-tai-chinh-2023.html">Quyết
-                             định giao quyền tự chủ tài chính 2023</a> </li>
-                     <li style="list-style-image: url('{{ asset('img/dotter.png') }}')"><a
-                             href="https://pyttmientrung.moh.gov.vn/c37/t37-429/quyet-dinh-giao-du-toan-nam-2023.html">Quyết
-                             định giao Dự toán năm 2023</a> </li>
-                     <li style="list-style-image: url('{{ asset('img/dotter.png') }}')"><a
-                             href="https://pyttmientrung.moh.gov.vn/c37/t37-425/thong-bao-ket-qua-trung-tuyen-vien-chuc-dot-2-nam-2023.html">Thông
-                             báo kết quả trúng tuyển viên chức đợt 2 năm 2023</a> </li>
-                     <li style="list-style-image: url('{{ asset('img/dotter.png') }}')"><a
-                             href="https://pyttmientrung.moh.gov.vn/c37/t37-422/thong-bao-ve-viec-trieu-tap-thi-sinh-tham-du-ky-phong-van-xet-tuyen-vien-chuc-dot-2-nam-2023.html">Thông
-                             báo về việc triệu tập thí sinh tham dự kỳ phỏng vấn xét tuyển viên chức đợt 2 năm
-                             2023</a> </li>
-                     <li style="list-style-image: url('{{ asset('img/dotter.png') }}')"><a
-                             href="https://pyttmientrung.moh.gov.vn/c37/t37-421/noi-dung-on-tap-phong-van-tuyen-dung-vien-chuc-dot-2-nam-2023.html">Nội
-                             dung ôn tập phỏng vấn tuyển dụng viên chức đợt 2 năm 2023</a> </li>
-                     <li style="list-style-image: url('{{ asset('img/dotter.png') }}')"><a
-                             href="https://pyttmientrung.moh.gov.vn/c37/t37-420/danh-sach-thi-sinh-du-dieu-kien-tieu-chuan-de-tham-du-tuyen-dung-vong-2.html">Danh
-                             sách thí sinh đủ điều kiện, tiêu chuẩn để tham dự tuyển dụng vòng 2</a> </li>
-                 </ul>
-             </div>
 
-         </div>
+             <div class="swiper vertical-notice" style="height: 250px;">
+                 <div class="swiper-wrapper">
+                     @foreach ($notices as $item)
+                         <div class="swiper-slide">
+                             <li style="list-style-image: url('{{ asset('img/dotter.png') }}')">
+                                 <a href="{{ url('bai-viet/' .$item->url) }}">
+                                     {{ \Illuminate\Support\Str::limit($item->title, 100) }}
+                                 </a>
+                             </li>
+                         </div>
+                     @endforeach
+                 </div>
+             </div>
+         </div> --}}
+         @foreach ($menu_panel_phai as $menu)
+             @if ($menu->posts->isNotEmpty())
+                 <div class="panel">
+                     <div class="panel_tcat notice"
+                         style="background: url('{{ asset('img/icon_thongbao.png') }}') 5px 3px no-repeat #156aec;">
+                         <a href="{{ url('chuyen-muc/' . $menu->url) }}">{{ $menu->title }}</a>
+                     </div>
+
+                     <div class="swiper vertical-notice" style="height: 250px;">
+                         <div class="swiper-wrapper">
+                             @foreach ($menu->posts as $post)
+                                 <div class="swiper-slide">
+                                     <li style="list-style-image: url('{{ asset('img/dotter.png') }}')">
+                                         <a href="{{ url('bai-viet/' . $post->url) }}">
+                                             {{ \Illuminate\Support\Str::limit($post->title, 100) }}
+                                         </a>
+                                     </li>
+                                 </div>
+                             @endforeach
+                         </div>
+                     </div>
+                 </div>
+             @endif
+         @endforeach
      </div>
+     <script>
+         new Swiper('.vertical-notice', {
+             direction: 'vertical',
+             slidesPerView: 4,
+             spaceBetween: 10,
+             loop: true,
+             autoplay: {
+                 delay: 3000,
+                 disableOnInteraction: false,
+             },
+             speed: 500,
+             allowTouchMove: false,
+         });
+     </script>
+
      @include('theme::front-end.sections.ads_04')
      <div id="faqs">
          <div class="panel">

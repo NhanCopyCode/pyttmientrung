@@ -29,16 +29,16 @@
         <script type="text/javascript" src="js/stuHover.js"></script>
         <div id="main_menu" style="float: left">
             <ul id="nav">
-                @foreach ($menus_top as $menu)
+                @foreach ($menu_chinh as $menu)
                     <li class="top {{ $loop->first ? 'active' : 'normal' }}">
-                        <a href="{{ $menu->url }}" class="top_link">
+                        <a href="{{ '/'. $menu->url }}" class="top_link">
                             <span>{{ $menu->title }}</span>
                         </a>
             
                         @if ($menu->children->isNotEmpty())
                             <ul class="sub">
                                 @foreach ($menu->children as $child)
-                                    <li><a href="{{ $child->url }}">{{ $child->title }}</a></li>
+                                    <li><a href="{{ '/' . $child->url }}">{{ $child->title }}</a></li>
                                 @endforeach
                             </ul>
                         @endif

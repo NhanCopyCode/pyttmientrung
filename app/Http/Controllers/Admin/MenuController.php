@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\SysAttributes;
 use App\Models\SysMenu;
 use App\Models\SysPosition;
 use Illuminate\Http\Request;
@@ -22,22 +23,25 @@ class MenuController extends Controller
         $perPage = 20;
 
         $menus = SysMenu::with(['children' => function ($query) {
-            $query->where('approved', 1)->orderBy('arrange');
+            $query->orderBy('arrange');
         }])
             ->when($keyword, function ($query, $keyword) {
                 $query->where(function ($q) use ($keyword) {
                     $q->where('title', 'LIKE', "%{$keyword}%")
-                        ->orWhere('url', 'LIKE', "%{$keyword}%");
+                        ->orWhere('url', 'LIKE', "%{$keyword}%")
+                        ->orWhereHas('children', function ($qChild) use ($keyword) {
+                            $qChild->where('title', 'LIKE', "%{$keyword}%")
+                                ->orWhere('url', 'LIKE', "%{$keyword}%");
+                        });
                 });
             })
-            ->where('approved', 1)
             ->where(function ($query) {
                 $query->whereNull('ptypeid')->orWhere('ptypeid', 0);
             })
             ->orderBy('arrange')
             ->paginate($perPage);
-        
-        return view('admin.menus.index', compact('menus'));
+        $listPosition = SysAttributes::where('approved', 1)->get();
+        return view('admin.menus.index', compact('menus', 'listPosition'));
     }
 
     public function getPositionsByParent($ptypeid)
@@ -52,13 +56,16 @@ class MenuController extends Controller
     }
 
 
-   
+
     public function create()
     {
         //
 
         $listParent = SysMenu::where('ptypeid', 0)->where('approved', 1)->orderBy('arrange')->get();
-        $listPosition = SysPosition::all();
+        // $listParent = SysAttributes::where('approved', 1)->get();
+
+        // $listPosition = SysPosition::all();
+        $listPosition = SysAttributes::where('approved', 1)->get();
         return view('admin.menus.create', compact('listParent', 'listPosition'));
     }
 
@@ -71,29 +78,33 @@ class MenuController extends Controller
     public function store(Request $request)
     {
         $validated = $request->validate([
-            'title'     => 'required|string|max:255',
-            'ptypeid'   => 'required|integer',
-            'position'  => 'nullable|array', // make it nullable
-            'position.*' => 'exists:sys_position,id', // also validate each item
-            'arrange'   => 'nullable|integer',
-            'active'    => 'nullable|boolean',
+            'title'      => 'required|string|max:255',
+            'ptypeid'    => 'required|integer',
+            'position'   => 'nullable|array',
+            'arrange'    => 'nullable|integer',
+            'active'     => 'nullable|boolean',
         ]);
 
         $slug = Str::slug($validated['title'], '-');
+
+        $positionString = isset($validated['position']) && is_array($validated['position']) && count($validated['position']) > 0
+            ? implode(',', $validated['position'])
+            : '0,0,0,0,0,0';
+
         $data = [
-            'title' => $validated['title'],
-            'ptypeid' => $validated['ptypeid'],
-            'url' => $slug,
-            'arrange' => $validated['arrange'],
-            'approved' => $validated['active'],
+            'title'    => $validated['title'],
+            'ptypeid'  => $validated['ptypeid'],
+            'url'      => $slug,
+            'arrange'  => $validated['arrange'] ?? 0,
+            'approved' => $validated['active'] ?? 0,
+            'position' => $positionString,
         ];
 
-        $menu = SysMenu::create($data);
-        $menu->positions()->sync($validated['position'] ?? []);
+        SysMenu::create($data);
 
-
-        return redirect('admin/menus');
+        return redirect('admin/menus')->with('success', 'Thêm menu thành công!');
     }
+
 
     /**
      * Display the specified resource.
@@ -119,7 +130,7 @@ class MenuController extends Controller
         //
         $menu = SysMenu::findOrFail($id);
         $listParent = SysMenu::where('ptypeid', 0)->where('approved', 1)->orderBy('arrange')->get();
-        $listPosition = SysPosition::all();
+        $listPosition = SysAttributes::where('approved', 1)->get();
         return view('admin.menus.edit', compact('menu', 'listParent', 'listPosition'));
     }
 

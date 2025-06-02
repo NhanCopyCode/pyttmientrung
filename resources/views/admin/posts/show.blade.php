@@ -57,7 +57,7 @@
                         <td> <a href="/{{ $post->url }}">{{ $post->url }}</a> </td>
 
                     </tr>
-
+                    
                     <tr>
                         <th> {{ trans('theme::posts.summary') }} </th>
                         <td> {{ $post->summary }} </td>
@@ -66,7 +66,7 @@
 
                     <tr>
                         <th> {{ trans('theme::posts.content') }} </th>
-                        <td> {{ $post->content }} </td>
+                        <td> {!! html_entity_decode($post->content) !!} </td>
 
                     </tr>
                     <tr>

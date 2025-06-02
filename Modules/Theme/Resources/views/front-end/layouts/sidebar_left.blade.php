@@ -4,9 +4,9 @@
         <div class="leftmenu">
             <div class="sidebarmenu">
                 <ul id="sidebarmenu1">
-                    @foreach ($menus_left as $menu)
+                    @foreach ($menu_trai as $menu)
                         <li class="normal_item" style="background: url('{{ asset('img/nav.png') }}')">
-                            <a href="{{ $menu->url }}"
+                            <a href="{{ '/' .$menu->url }}"
                                 class="{{ $menu->children->isNotEmpty() ? 'subfolderstyle' : '' }}">
                                 {{ $menu->title }}
                             </a>
@@ -16,7 +16,7 @@
                                     style="z-index: 99; left: 248px; visibility: visible; display: none;">
                                     @foreach ($menu->children as $child)
                                         <li>
-                                            <a href="{{ $child->url }}">
+                                            <a href="{{ '/'. $child->url }}">
                                                 {{ $child->title }}
                                             </a>
                                         </li>

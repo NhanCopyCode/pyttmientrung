@@ -32,23 +32,6 @@
         {!! Form::close() !!}
     </div>
 
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const ptypeidSelect = document.getElementById('ptypeid');
-            const positionRow = document.getElementById('position-row');
-            console.log('positionRow: create ', positionRow)
-
-            function togglePositionRow() {
-                const value = ptypeidSelect.value;
-                if (value !== '0') {
-                    positionRow.style.display = 'none';
-                } else {
-                    positionRow.style.display = '';
-                }
-            }
-            togglePositionRow();
-            ptypeidSelect.addEventListener('change', togglePositionRow);
-        });
-    </script>
+   
 @endsection
 

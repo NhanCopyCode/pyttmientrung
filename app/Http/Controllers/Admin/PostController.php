@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Ads;
 use App\Models\Post;
 use App\Models\PositionAds;
+use App\Models\SysMenu;
 use Illuminate\Http\Request;
 use RealRashid\SweetAlert\Facades\Alert;
 use Illuminate\Support\Str;
@@ -29,8 +30,11 @@ class PostController extends Controller
                         ->orWhere('summary', 'like', "%$keyword%");
                 });
             })
+            ->orderBy('postdate', 'desc')
             ->paginate($perPage)
             ->appends($request->only('search'));
+
+
 
         return view('admin.posts.index', compact('posts'));
     }
@@ -44,9 +48,25 @@ class PostController extends Controller
      */
     public function create()
     {
+        $parents = SysMenu::with('children')
+            ->where('ptypeid', 0)
+            ->orderBy('arrange') 
+            ->get();
 
-        return view('admin.posts.create');
+        $list_menu = [];
+
+        foreach ($parents as $parent) {
+            $list_menu[$parent->id] = $parent->title;
+
+            foreach ($parent->children as $child) {
+                $list_menu[$child->id] = '-- ' . $child->title;
+            }
+        }
+
+        return view('admin.posts.create', compact('list_menu'));
     }
+
+
 
     /**
      * Store a newly created resource in storage.
@@ -56,14 +76,12 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
-
         $validated = $request->validate([
             'title'     => 'required|string|max:255',
-            'typeid'    => 'required|integer',
+            'ptypeid'    => 'required|integer',
             'avatar'    => 'nullable|image|mimes:jpeg,png,jpg,gif,svg,webp|max:2048',
             'content'   => 'nullable|string',
             'summary'   => 'nullable|string|max:255',
-            'arrange'   => 'nullable|integer',
             'approved'  => 'sometimes|boolean',
         ]);
 
@@ -72,10 +90,10 @@ class PostController extends Controller
         $post->title     = $validated['title'];
         $post->url = Str::slug($validated['title']) . '-' . now()->format('YmdHis');
 
-        $post->typeid    = $validated['typeid'];
+        $post->typeid    = $validated['ptypeid'];
         $post->content   = $validated['content'] ?? null;
         $post->summary   = $validated['summary'] ?? null;
-        $post->arrange   = $validated['arrange'] ?? 0;
+        $post->arrange   = 0;
         $post->approved  = $validated['approved'] ?? 0;
         $post->postdate = now();
         $post->author = 'Administrator';
@@ -136,7 +154,6 @@ class PostController extends Controller
             'avatar'    => 'nullable|image|mimes:jpeg,png,jpg,gif,svg,webp|max:2048',
             'content'   => 'nullable|string',
             'summary'   => 'nullable|string|max:255',
-            'arrange'   => 'nullable|integer',
             'approved'  => 'sometimes|boolean',
         ]);
 
@@ -148,7 +165,7 @@ class PostController extends Controller
         $post->typeid    = $validated['typeid'];
         $post->content   = $validated['content'] ?? null;
         $post->summary   = $validated['summary'] ?? null;
-        $post->arrange   = $validated['arrange'] ?? 0;
+        $post->arrange   =  0;
         $post->approved  = $validated['approved'] ?? 0;
         $post->changedate = now();
         $post->author    = 'Administrator';

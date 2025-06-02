@@ -22,9 +22,10 @@
                 {!! Form::label('ptypeid', 'Chọn thể loại cha', ['class' => 'control-label']) !!}
             </td>
             <td class="col-md-8 col-lg-9">
-                <select  id="ptypeid"  name="ptypeid" class="form-control input-sm" required>
+                <select id="ptypeid" name="ptypeid" class="form-control input-sm" required>
                     <option value="">-- Chọn thể loại cha --</option>
-                    <option value="0" {{ isset($menu->ptypeid) && $menu->ptypeid == '0' ? 'selected' : '' }}>Không có thể loại cha</option>
+                    <option value="0" {{ isset($menu->ptypeid) && $menu->ptypeid == '0' ? 'selected' : '' }}>Không
+                        có thể loại cha</option>
                     @foreach ($listParent as $parent)
                         <option value="{{ $parent->id }}"
                             {{ old('ptypeid', $menu->ptypeid ?? '') == $parent->id ? 'selected' : '' }}>
@@ -36,20 +37,23 @@
             </td>
         </tr>
 
-        <tr id="position-row"  class="row {{ $errors->has('position') ? 'has-error' : '' }}">
+        <tr id="position-row" class="row {{ $errors->has('position') ? 'has-error' : '' }}">
             <td class="col-md-4 col-lg-3">
                 {!! Form::label('position', trans('menus.position'), ['class' => 'control-label']) !!}
             </td>
             <td class="col-md-8 col-lg-9">
                 <div class="row">
+                    @php
+                        $selectedPositions = old(
+                            'position',
+                            isset($menu) && $menu->position ? explode(',', $menu->position) : [],
+                        );
+                    @endphp
+
                     @foreach ($listPosition as $key => $item)
                         <div class="col-md-3">
-                            <label>
-                                {!! Form::checkbox(
-                                    'position[]',
-                                    $item->id,
-                                    in_array($item->id, old('position', isset($menu) ? $menu->positions->pluck('id')->toArray() : [])),
-                                ) !!}
+                            <label class="p-1">
+                                {!! Form::checkbox('position[]', $item->id, in_array($item->id, $selectedPositions)) !!}
                                 {{ $item->title }}
                             </label>
                         </div>
@@ -59,6 +63,7 @@
                 {!! $errors->first('position', '<p class="help-block">:message</p>') !!}
             </td>
         </tr>
+
 
 
 
@@ -177,6 +182,5 @@
                 }
             })
         });
-      
     </script>
 @endsection

@@ -32,7 +32,7 @@
                 </div>
             @endif
 
-         
+
             <div class="box-container1">
 
                 <div class="box-cat">
@@ -489,9 +489,12 @@
                 <div style="clear:both;"></div>
             </div><br>
 
+           
 
         </div>
         @include('theme::front-end.layouts.sidebar_right')
         <div class="clear"></div>
     </div>
+
+
 @endsection

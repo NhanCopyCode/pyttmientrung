@@ -69,11 +69,12 @@
                             </td>
                             <td>
                                 <div class="row gap-2">
-                                  @foreach ($parent->positions as $position)
-                                    <div class="col-6 py-2">{{ $position->title}}</div>
-                                  @endforeach
+                                    @foreach ($parent->positions as $position)
+                                        <div class="col-6 py-2">{{ $position->title }}</div>
+                                    @endforeach
                                 </div>
                             </td>
+                            
                             <td class="text-center d-flex align-items-center justify-content-center gap-2">
                                 <input type="text" class="w-25 form-control arrange-input"
                                     value="{{ $parent->arrange }}" data-id="{{ $parent->id }}" />
@@ -136,9 +137,9 @@
                                 </td>
                                 <td>
                                     <div class="row gap-2">
-                                      @foreach ($child->positions as $position)
-                                        <div class="col-6 py-2">{{ $position->title}}</div>
-                                      @endforeach
+                                        @foreach ($child->positions as $position)
+                                            <div class="col-6 py-2">{{ $position->title }}</div>
+                                        @endforeach
                                     </div>
                                 </td>
                                 <td class="text-center d-flex align-items-center justify-content-center gap-2">

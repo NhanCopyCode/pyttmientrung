@@ -40,5 +40,16 @@ class SysMenu extends Model
         return $this->belongsToMany(SysPosition::class, 'menu_position', 'menu_id', 'position_id');
     }
 
+    public function getPositionsAttribute()
+    {
+        if (!$this->position) return collect();
 
+        $ids = array_filter(explode(',', $this->position));
+        return \App\Models\SysAttributes::whereIn('id', $ids)->get();
+    }
+
+    public function posts()
+    {
+        return $this->hasMany(Post::class, 'typeid', 'id');
+    }
 }

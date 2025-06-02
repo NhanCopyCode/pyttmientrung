@@ -54,7 +54,7 @@
                         <th> {{ trans('posts.summary') }} </th>
                         <th> {{ trans('posts.content') }} </th>
                         <th class="text-center">{{ trans('posts.image') }}</th>
-                        <th class="text-center">{{ trans('posts.arrange') }}</th>
+                        {{-- <th class="text-center">{{ trans('posts.arrange') }}</th> --}}
 
                         <th class="text-center">{{ trans('slides.active') }}</th>
                         <th class="text-center">{{ trans('slides.updated_at') }}</th>
@@ -75,8 +75,11 @@
                                 </td>
                             @endcan
                             <td class="text-center">
-                                <span> {{ $item->url }} </span>
+                                <a href="{{ url('/bai-viet/' .$item->url) }}" target="_blank">
+                                    {{ $item->url }}
+                                </a>
                             </td>
+                            
                             <td class="text-center">
                                 <span>{{ $item->summary }}</span>
                             </td>
@@ -85,16 +88,17 @@
                                     href="{{ $item->content ? 'posts/' . $item->id . '/edit' : 'Không có nội dung' }}">{{ $item->content ? '....' : 'Không có nội dung' }}</a>
                             </td>
                             <td class="text-center" style="width: 15%;">
-                                <img src="{{asset( $item->pathimage ) }}" alt="Hình ảnh" style="object-fit: cover; width: 100%;">
+                                <img src="{{ asset($item->pathimage) }}" alt="Hình ảnh"
+                                    style="object-fit: cover; width: 100%;">
                             </td>
-                            <td class="text-center d-flex align-items-center justify-content-center gap-2"
+                            {{-- <td class="text-center d-flex align-items-center justify-content-center gap-2"
                                 style="width: 120px;">
                                 <input type="text" class=" form-control arrange-input" value="{{ $item->arrange }}"
                                     data-id="{{ $item->id }}" />
                                 <button class="btn btn-primary ml-2 btn-update-arrange" data-id="{{ $item->id }}">
                                     Thay đổi
                                 </button>
-                            </td>
+                            </td> --}}
                             <td class="text-center">{!! $item->approved == config('settings.active') ? '<i class="fa fa-check text-primary"></i>' : '' !!}</td>
                             <td class="text-center">
                                 {{ Carbon\Carbon::parse($item->postdate)->format(config('settings.format.date')) }}</td>
