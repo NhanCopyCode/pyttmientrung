@@ -147,7 +147,6 @@ class MenuController extends Controller
             'title'     => 'required|string|max:255',
             'ptypeid'   => 'required|integer',
             'position'  => 'nullable|array',
-            'position.*' => 'exists:sys_position,id',
             'arrange'   => 'nullable|integer',
             'active'    => 'nullable|boolean',
         ]);

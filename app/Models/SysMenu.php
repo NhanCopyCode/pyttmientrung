@@ -27,7 +27,9 @@ class SysMenu extends Model
     public $timestamps = false;
     public function children()
     {
-        return $this->hasMany(SysMenu::class, 'ptypeid');
+        return $this->hasMany(SysMenu::class, 'ptypeid')
+            ->where('approved', 1)
+            ->orderBy('arrange');
     }
 
     public function parent()

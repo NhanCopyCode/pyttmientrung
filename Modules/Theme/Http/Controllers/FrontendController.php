@@ -38,22 +38,26 @@ class FrontendController extends Controller
             ->get();
         $videos = Video::orderBy('postdate', 'desc')->get();
 
-
         $menu_chinh = SysMenu::whereRaw("FIND_IN_SET(?, position)", [$menu_chinh_id])
+            ->where('approved', 1)
             ->orderBy('arrange')
             ->get();
 
         $menu_trai = SysMenu::whereRaw("FIND_IN_SET(?, position)", [$menu_trai_id])
+            ->where('approved', 1)
             ->orderBy('arrange')
             ->get();
 
         $menu_trang_chu = SysMenu::whereRaw("FIND_IN_SET(?, position)", [$menu_trang_chu_id])
+            ->where('approved', 1)
+            ->orderBy('arrange')
+            ->get();
+            
+        $menu_panel_trai = SysMenu::whereRaw("FIND_IN_SET(?, position)", [$menu_panel_trai_id])
+            ->where('approved', 1)
             ->orderBy('arrange')
             ->get();
 
-        $menu_panel_trai = SysMenu::whereRaw("FIND_IN_SET(?, position)", [$menu_panel_trai_id])
-            ->orderBy('arrange')
-            ->get();
 
 
 
