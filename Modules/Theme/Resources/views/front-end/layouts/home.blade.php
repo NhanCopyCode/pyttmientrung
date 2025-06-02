@@ -202,23 +202,7 @@
 
         </div>
         <div id="wrapper_right">
-            {{-- <div id="notice" class="swiper vertical-notice">
-                <div class="panel">
-                    <div class="panel_tcat notice">
-                        <a href="{{ url('c37/thong-bao.html') }}">Thông báo</a>
-                    </div>
-
-                    <div class="swiper-wrapper" style="height: 250px;">
-                        @foreach ($notices as $item)
-                            <div class="swiper-slide">
-                                <a href="{{ url($item->url) }}">
-                                    {{ \Illuminate\Support\Str::limit($item->title, 100) }}
-                                </a>
-                            </div>
-                        @endforeach
-                    </div>
-                </div>
-            </div> --}}
+        
 
             @foreach ($menus as $menu)
                 @if ($menu->posts->isNotEmpty())

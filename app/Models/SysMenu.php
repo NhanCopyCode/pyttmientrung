@@ -52,6 +52,8 @@ class SysMenu extends Model
 
     public function posts()
     {
-        return $this->hasMany(Post::class, 'typeid', 'id');
+        return $this->hasMany(Post::class, 'typeid', 'id')
+            ->where('approved', 1)
+            ->orderBy('postdate', 'desc');
     }
 }

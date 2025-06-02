@@ -1,25 +1,6 @@
  <div id="wrapper_right">
      <div id="notice">
-         {{-- <div class="panel">
-             <div class="panel_tcat notice"
-                 style="background: url('{{ asset('img/icon_thongbao.png') }}') 5px 3px no-repeat #156aec;">
-                 <a href="https://pyttmientrung.moh.gov.vn/c37/thong-bao.html">Thông báo</a>
-             </div>
 
-             <div class="swiper vertical-notice" style="height: 250px;">
-                 <div class="swiper-wrapper">
-                     @foreach ($notices as $item)
-                         <div class="swiper-slide">
-                             <li style="list-style-image: url('{{ asset('img/dotter.png') }}')">
-                                 <a href="{{ url('bai-viet/' .$item->url) }}">
-                                     {{ \Illuminate\Support\Str::limit($item->title, 100) }}
-                                 </a>
-                             </li>
-                         </div>
-                     @endforeach
-                 </div>
-             </div>
-         </div> --}}
          @foreach ($menu_panel_phai as $menu)
              @if ($menu->posts->isNotEmpty())
                  <div class="panel">
@@ -61,29 +42,32 @@
      </script>
 
      @include('theme::front-end.sections.ads_04')
-     <div id="faqs">
-         <div class="panel">
-             <div class="panel_tcat faq"
-                 style="background: url('{{ asset('img/faq.png') }}') 5px 3px no-repeat #156aec;">
-                 <a href="{{ url('hoi-dap') }}">Hỏi - đáp</a>
-             </div>
+     @if ($sys_faq_homepage)
+         <div id="faqs">
+             <div class="panel">
+                 <div class="panel_tcat faq"
+                     style="background: url('{{ asset('img/faq.png') }}') 5px 3px no-repeat #156aec;">
+                     <a href="{{ url('hoi-dap') }}">{{ $sys_faq_homepage->title}}</a>
+                 </div>
 
-             <div class="swiper mySwiper" style="height: 330px;">
-                 <div class="swiper-wrapper">
-                     @foreach ($faqs_homepage as $faq)
-                         <div class="swiper-slide" style="list-style: none; height: auto !important;">
-                             <li
-                                 style="list-style-image: url('{{ asset('img/dotter.png') }}'); list-style-position: inside; height: auto !important;">
-                                 <a href="{{ url('hoi-dap?faq_id=' . $faq->id) }}">
-                                     {{ \Illuminate\Support\Str::limit(strip_tags($faq->question), 150) }}
-                                 </a>
-                             </li>
-                         </div>
-                     @endforeach
+                 <div class="swiper mySwiper" style="height: 330px;">
+                     <div class="swiper-wrapper">
+                         @foreach ($faqs_homepage as $faq)
+                             <div class="swiper-slide" style="list-style: none; height: auto !important;">
+                                 <li
+                                     style="list-style-image: url('{{ asset('img/dotter.png') }}'); list-style-position: inside; height: auto !important;">
+                                     <a href="{{ url('hoi-dap?faq_id=' . $faq->id) }}">
+                                         {{ \Illuminate\Support\Str::limit(strip_tags($faq->question), 150) }}
+                                     </a>
+                                 </li>
+                             </div>
+                         @endforeach
+                     </div>
                  </div>
              </div>
          </div>
-     </div>
+     @endif
+
 
      <script>
          const swiper = new Swiper('.mySwiper', {
