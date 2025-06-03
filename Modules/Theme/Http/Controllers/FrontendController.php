@@ -85,16 +85,92 @@ class FrontendController extends Controller
 
 
         $posts_trang_chu = SysMenu::whereRaw("FIND_IN_SET(?, position)", [$menu_trang_chu_id])
-            ->with(['posts' => function ($q) {
-                $q->where('approved', 1)
-                    ->orderByDesc('postdate')
-                    ->limit(10);
+            ->with(['children' => function ($q) {
+                $q->with(['posts' => function ($query) {
+                    $query->where('approved', 1)
+                        ->orderByDesc('postdate')
+                        ->limit(10);
+                }]);
             }])
             ->orderBy('arrange')
             ->get();
 
+
+        // $firstMenu = $posts_trang_chu->first();
+        // $secondMenu = $posts_trang_chu->values()->get(1);
+
+
+        // $childPosts = $firstMenu->children->flatMap(function ($child) {
+        //     return $child->posts;
+        // });
+
+        // $secondChildPosts = $secondMenu->children->flatMap(function ($child) {
+        //     return $child->posts;
+        // });
+
+        // $posts = $childPosts->sortByDesc('postdate')->take(7);
+        // $otherPosts = $posts_trang_chu->skip(1);
+        // // dd($otherPosts);
+        // foreach ($otherPosts as $menu) {
+        //     // foreach ($menu->children as $child) {
+        //     //     dump("Menu con ID: " . $child->id);
+        //     //     dump("Số lượng bài viết: " . $child->posts->count());
+        //     //     foreach ($child->posts as $post) {
+        //     //         dump($post->title);
+        //     //     }
+        //     // }
+        //     $childPosts = $menu->children->flatMap(function ($child) {
+        //         return $child->posts;
+        //     });
+        //     dd($childPosts);  
+        //     foreach ($childPosts as $post) {
+        //         dd($post->title);
+        //     }
+        // }
+        $otherPosts = $posts_trang_chu->skip(1);
+        $list_post_trang_chu = [];
+
+        foreach ($otherPosts as $menu) {
+            $parentMenu = SysMenu::with([
+                'posts' => function ($query) {
+                    $query->where('approved', 1)->orderByDesc('postdate');
+                },
+                'children.posts' => function ($query) {
+                    $query->where('approved', 1)->orderByDesc('postdate');
+                }
+            ])
+                ->where('id', $menu->id)
+                ->where('approved', 1)
+                ->first();
+
+            if ($parentMenu) {
+                $parentPosts = $parentMenu->posts;
+
+                $childrenPosts = $parentMenu->children
+                    ->flatMap(function ($child) {
+                        return $child->posts;
+                    });
+
+                $posts = $parentPosts
+                    ->concat($childrenPosts)
+                    ->sortByDesc('postdate')
+                    ->take(5)
+                    ->values();
+
+                $list_post_trang_chu[] = [
+                    'parent' => $parentMenu,
+                    'posts' => $posts,
+                ];
+            }
+        }
+
+
+
+        // dd($list_post_trang_chu);
+
+
         $menu_panel_phai = SysMenu::whereRaw("FIND_IN_SET(?, position)", [$menu_panel_phai_id])
-            ->where('approved', 1) 
+            ->where('approved', 1)
             ->with(['posts' => function ($q) {
                 $q->where('approved', 1)
                     ->orderByDesc('postdate')
@@ -121,6 +197,7 @@ class FrontendController extends Controller
             'menu_notice' => $menu_notice,
             'posts_trang_chu' => $posts_trang_chu,
             'sys_faq_homepage' => $sys_faq_homepage,
+            'list_post_trang_chu' => $list_post_trang_chu,
         ]);
     }
 
