@@ -318,4 +318,6 @@ return [
     "post_management" => "Quản lý bài viết",
     "ads_management" => "Quản lý quảng cáo",
     "faq_management" => "Quản lý hỏi đáp",
+    'select_ads_position' => 'Chọn vị trí quảng cáo',
+    'select_position' => "Chọn vị trí",
 ];

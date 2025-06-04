@@ -20,8 +20,7 @@
                 {{ __('message.lists') }}
             </h5>
             @can('AdsController@store')
-                <a href="{{ url('/admin/ads/create') }}" class="btn btn-default float-right"
-                    title="{{ __('message.new_add') }}">
+                <a href="{{ url('/admin/ads/create') }}" class="btn btn-default float-right" title="{{ __('message.new_add') }}">
                     <i class="fa fa-plus-circle" aria-hidden="true"></i> <span class="hidden-xs">
                         {{ __('message.new_add') }}</span>
                 </a>
@@ -30,9 +29,19 @@
         <div class="box-header">
             <div class="box-tools">
                 {!! Form::open(['method' => 'GET', 'url' => '/admin/ads', 'class' => 'pull-left', 'role' => 'search']) !!}
+              
                 <div class="input-group" style="margin-right: 5px; display:flex;">
-                    <input type="text" value="{{ \Request::get('search') }}" class="form-control input-sm" name="search"
-                        placeholder="{{ __('message.search_keyword') }}" style="width: 250px; margin-right: 5px;">
+                    <select name="ads_pos_id" class="form-control input-sm" style="width: 200px; margin-right: 5px;">
+                        <option value="">{{ __('message.select_ads_position') }}</option>
+                        @foreach ($ads_pos as $pos)
+                            <option value="{{ $pos->id }}" {{ request('ads_pos_id') == $pos->id ? 'selected' : '' }}>
+                                {{ $pos->comment }}
+                            </option>
+                        @endforeach
+                    </select>
+                    <input type="text" value="{{ \Request::get('search') }}" class="form-control input-sm"
+                        name="search" placeholder="{{ __('message.search_keyword') }}"
+                        style="width: 250px; margin-right: 5px;">
                     <button class="btn btn-secondary btn-sm" type="submit">
                         <i class="fa fa-search"></i> {{ __('message.search') }}
                     </button>
@@ -76,22 +85,23 @@
                                 <a href=" {{ $item->link }}" target="_blank"> {{ $item->link }} </a>
                             </td>
                             <td>
-                                <span>{{ $item->position->comment}}</span>
+                                <span>{{ $item->position->comment }}</span>
                             </td>
                             <td class="text-center" style="width: 30%;">
-                                <img src="{{asset($item->pathimage)}}" alt="{{$item->pathimage}}" style="width: 100%;object-fit: cover; ">
-                          </td>
+                                <img src="{{ asset($item->pathimage) }}" alt="{{ $item->pathimage }}"
+                                    style="width: 100%;object-fit: cover; ">
+                            </td>
 
-                          
+
                             <td class="text-center d-flex align-items-center justify-content-center gap-2">
                                 <input type="text" class="w-25 form-control arrange-input" value="{{ $item->arrange }}"
-                                    data-id="{{ $item->id }}" style="width: 50px !important;"/>
+                                    data-id="{{ $item->id }}" style="width: 50px !important;" />
                                 <button class="btn btn-primary ml-2 btn-update-arrange" data-id="{{ $item->id }}">
                                     Thay đổi
                                 </button>
                             </td>
                             <td class="text-center">{!! $item->approved == config('settings.active') ? '<i class="fa fa-check text-primary"></i>' : '' !!}</td>
-                          
+
                             <td class="dropdown">
                                 <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown"
                                     aria-haspopup="true" aria-expanded="false">

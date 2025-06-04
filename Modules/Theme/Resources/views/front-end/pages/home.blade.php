@@ -236,11 +236,19 @@
             });
         </script>
         <div class="panel">
-            <div>
-                <a href="" target="_blank" title="30/4"><img src="/upload/image/30.4.2025.jpg"
+            @foreach ($ads_main_1 as $ad)
+                {{-- <div>
+                <a href="" target="_blank" title="30/4">
+                    <img src="/upload/image/30.4.2025.jpg"
                         style="width: 650px;height: auto;" alt="30/4"></a>
-            </div>
+            </div> --}}
+                <a href="{{ $ad->link }}" target="_blank" title="{{ $ad->title }}">
+                    <img src="{{ asset($ad->pathimage) }}" style="width: 650px;height: auto;"
+                        alt="{{ $ad->title }}">
+                </a>
         </div>
+        @endforeach
+
         <div class="box-container1">
 
             {{-- @foreach ($otherPosts as $menu)
@@ -307,7 +315,7 @@
             @endforeach --}}
 
 
-            @foreach ($list_post_trang_chu as $item)
+            @foreach ($list_post_trang_chu as $outerIndex => $item)
                 @if (!empty($item['posts']) && $item['posts']->isNotEmpty())
                     <div class="box-cat">
                         <div class="box-header">
@@ -316,11 +324,10 @@
                             </h2>
                         </div>
 
-                        @foreach ($item['posts'] as $index => $post)
-                            @if ($index === 0)
+                        @foreach ($item['posts'] as $postIndex => $post)
+                            @if ($postIndex === 0)
                                 <div class="list-item-first">
                                     <a href="{{ url('/bai-viet/' . $post->url) }}">
-
                                         <img align="left" class="image-left"
                                             src="{{ asset($post->pathimage ?? '/uploads/image/default.jpg') }}"
                                             width="180" border="0">
@@ -334,16 +341,31 @@
                             @else
                                 <div class="list-next">
                                     <a href="{{ url('/bai-viet/' . $post->url) }}">
-
                                         {{ Str::limit($post->title, 120) }}
                                     </a>
                                 </div>
                                 <div style="clear:both;"></div>
                             @endif
                         @endforeach
+
+                        {{-- Hiển thị quảng cáo sau mỗi item --}}
+                        @if (isset($ads_main_2[$outerIndex]))
+                            @php $ad = $ads_main_2[$outerIndex]; @endphp
+                            <div style="clear:both;"></div>
+                            <div class="panel">
+                                <div>
+                                    <a href="{{ $ad->link }}" target="_blank" title="{{ $ad->title }}">
+                                        <img src="{{ asset($ad->pathimage ?? '/uploads/image/default.jpg') }}"
+                                            style="border: solid 1px #CCCCCC;width: 650px;height: auto;"
+                                            alt="{{ $ad->title }}">
+                                    </a>
+                                </div>
+                            </div>
+                        @endif
                     </div>
                 @endif
             @endforeach
+
 
 
 
@@ -354,259 +376,7 @@
                             style="border: solid 1px #CCCCCC;width: 650px;height: auto;" alt="Y tế"></a>
                 </div>
             </div>
-            <div class="box-cat">
-                <div class="box-header">
-                    <h2><a class="title" href="https://pyttmientrung.moh.gov.vn/c45/hoat-dong-khoa-hoc.html">Hoạt
-                            động Khoa học</a></h2>
-                </div>
-                <div class="list-item-first"><a
-                        href="https://pyttmientrung.moh.gov.vn/c45/t45-454/nghien-cuu-dac-diem-lam-sang-roi-loan-tam-than-va-mot-so-yeu-to-lien-quan-thuc-day-hanh-vi-pham-toi-cac-doi-tuong-roi-loan-khi-sac-trong-giam-dinh-phap-y-tam-than.html"><img
-                            align="left" class="image-left" src="/upload/image/quangcao/roi-loan-khi-sac.jpg"
-                            width="180" border="0"></a> <a class="first-item-link"
-                        href="https://pyttmientrung.moh.gov.vn/c45/t45-454/nghien-cuu-dac-diem-lam-sang-roi-loan-tam-than-va-mot-so-yeu-to-lien-quan-thuc-day-hanh-vi-pham-toi-cac-doi-tuong-roi-loan-khi-sac-trong-giam-dinh-phap-y-tam-than.html">
-                        NGHIÊN CỨU ĐẶC ĐIỂM LÂM SÀNG RỐI LOẠN TÂM THẦN VÀ MỘT SỐ YẾU TỐ LIÊN QUAN THÚC ĐẨY HÀNH VI
-                        PHẠM...</a>
-                    <p> Rối loạn khí sắc, còn được gọi là rối loạn cảm xúc, là bất kỳ nhóm bệnh nào thuộc nhóm bệnh rối
-                        loạn tâm thần và hành vi [33] trong đó đặc điểm cơ bản chính là rối loạn khí sắc của...</p><br>
 
-                </div>
-                <div style="clear:both;"></div>
-                <div class="list-next"> <a
-                        href="https://pyttmientrung.moh.gov.vn/c45/t45-399/nghien-cuu-dac-diem-lam-sang-roi-loan-tam-than-va-mot-so-yeu-to-lien-quan-thuc-day-hanh-vi-pham-toi-cac-doi-tuong-roi-loan-phan-liet-cam-xuc-trong-giam-dinh-phap-y-tam-than.html">
-                        NGHIÊN CỨU ĐẶC ĐIỂM LÂM SÀNG RỐI LOẠN TÂM THẦN VÀ MỘT SỐ YẾU TỐ LIÊN QUAN THÚC ĐẨY HÀNH VI
-                        PHẠM...</a>
-
-                </div>
-                <div style="clear:both;"></div>
-                <div class="list-next"> <a
-                        href="https://pyttmientrung.moh.gov.vn/c45/t45-367/nghien-cuu-dac-diem-lam-sang--yeu-to-thuc-day-hanh-vi-pham-toi-cac-doi-tuong-roi-loan-tam-than-va-hanh-vi-do-su-dung-ruou-trong-gdpytt.html">
-                        NGHIÊN CỨU ĐẶC ĐIỂM LÂM SÀNG &amp; YẾU TỐ THÚC ĐẨY HÀNH VI PHẠM TỘI CÁC ĐỐI TƯỢNG RỐI LOẠN
-                        TÂM...</a>
-
-                </div>
-                <div style="clear:both;"></div>
-                <div class="list-next"> <a
-                        href="https://pyttmientrung.moh.gov.vn/c45/t45-315/nghien-cuu-dac-diem-lam-sang-va-yeu-to-thuc-day-hanh-vi-pham-toi-o-cac-doi-tuong-cham-phat-trien-tam-than-trong-giam-dinh-phap-y-tam-than.html">
-                        NGHIÊN CỨU ĐẶC ĐIỂM LÂM SÀNG VÀ YẾU TỐ THÚC ĐẨY HÀNH VI PHẠM TỘI Ở CÁC ĐỐI TƯỢNG CHẬM
-                        PHÁT...</a>
-
-                </div>
-                <div style="clear:both;"></div>
-                <div class="list-next"> <a
-                        href="https://pyttmientrung.moh.gov.vn/c45/t45-294/nghien-cuu-dac-diem-lam-sang-mot-so-yeu-to-thuc-day-hanh-vi-pham-toi-o-benh-nhan-tam-than-phan-liet-trong-giam-dinh-phap-y-tam-than.html">
-                        NGHIÊN CỨU ĐẶC ĐIỂM LÂM SÀNG, MỘT SỐ YẾU TỐ THÚC ĐẨY HÀNH VI PHẠM TỘI Ở BỆNH NHÂN TÂM
-                        THẦN...</a>
-
-                </div>
-                <div style="clear:both;"></div>
-            </div>
-
-            <div style="clear:both;"></div>
-
-            <div class="box-cat">
-                <div class="box-header">
-                    <h2><a class="title" href="https://pyttmientrung.moh.gov.vn/c48/thong-tin-y-hoc.html">
-                            Thông tin y học</a>
-                    </h2>
-                </div>
-                <div class="list-item-first"><a
-                        href="https://pyttmientrung.moh.gov.vn/c48/t48-424/huong-ung-ngay-suc-khoe-tam-than-the-gioi-10-10-2023.html"><img
-                            align="left" class="image-left" src="/upload/image/quangcao/untitled.png"
-                            width="180" border="0"></a> <a class="first-item-link"
-                        href="https://pyttmientrung.moh.gov.vn/c48/t48-424/huong-ung-ngay-suc-khoe-tam-than-the-gioi-10-10-2023.html">Hưởng
-                        ứng ngày Sức khỏe Tâm thần Thế giới 10/10/2023</a>
-                    <p> Hàng năm Tổ chức Y tế Thế giới (WHO) lấy ngày 10 tháng 10 để tổ chức các hoạt động truyền thông
-                        về Sức khoẻ Tâm thần với mục tiêu là tăng cường nhận thức của các quốc gia về tầm quan...</p>
-                    <br>
-
-                </div>
-                <div style="clear:both;"></div>
-                <div class="list-next"> <a
-                        href="https://pyttmientrung.moh.gov.vn/c48/t48-404/ngay-suc-khoe-the-gioi-7-4--suc-khoe-cho-moi-nguoi-.html">NGÀY
-                        SỨC KHỎE THẾ GIỚI (7/4) "SỨC KHỎE CHO MỌI NGƯỜI"</a>
-
-                </div>
-                <div style="clear:both;"></div>
-                <div class="list-next"> <a
-                        href="https://pyttmientrung.moh.gov.vn/c48/t48-377/huong-ung-ngay-suc-khoe-tam-than-the-gioi-10-10-2022--lam-cho-suc-khoe-tam-than-va-suc-khoe-cua-moi-nguoi-tro-thanh-uu-tien-toan-cau.html">
-                        HƯỞNG ỨNG NGÀY SỨC KHỎE TÂM THẦN THẾ GIỚI 10/10/2022 - LÀM CHO SỨC KHỎE TÂM THẦN VÀ SỨC KHỎE
-                        CỦA...</a>
-
-                </div>
-                <div style="clear:both;"></div>
-                <div class="list-next"> <a
-                        href="https://pyttmientrung.moh.gov.vn/c48/t48-366/ky-niem-110-nam-ngay-sinh-dong-chi-to-hieu-1912--2022-.html">Kỷ
-                        niệm 110 năm Ngày sinh đồng chí Tô Hiệu (1912 - 2022)</a>
-
-                </div>
-                <div style="clear:both;"></div>
-                <div class="list-next"> <a
-                        href="https://pyttmientrung.moh.gov.vn/c48/t48-354/fda-canh-bao-ve-bien-co-ho-hap-nghiem-trong-khi-su-dung--cac-thuoc-chong-dong-kinh-gabapentin-va-pregabalin.html">
-                        FDA: CẢNH BÁO VỀ BIẾN CỐ HÔ HẤP NGHIÊM TRỌNG KHI SỬ DỤNG - CÁC THUỐC CHỐNG ĐỘNG KINH GABAPENTIN
-                        VÀ...</a>
-
-                </div>
-                <div style="clear:both;"></div>
-            </div>
-
-            <div style="clear:both;"></div>
-
-            <div class="box-cat">
-                <div class="box-header">
-                    <h2><a class="title" href="https://pyttmientrung.moh.gov.vn/c52/kham-chua-benh.html">Khám chữa
-                            bệnh</a></h2>
-                </div>
-                <div class="list-item-first"><a
-                        href="https://pyttmientrung.moh.gov.vn/c52/t52-118/het-long-vi-benh-nhan.html"><img
-                            align="left" class="image-left"
-                            src="/upload/image/baiviet/khamchuabenh/het-long-vi-benh-nhan.jpg" width="180"
-                            border="0"></a> <a class="first-item-link"
-                        href="https://pyttmientrung.moh.gov.vn/c52/t52-118/het-long-vi-benh-nhan.html">HẾT LÒNG VÌ BỆNH
-                        NHÂN</a>
-                    <p> (TTH) - Tốt nghiệp Trường đại học Y khoa Huế hệ bác sĩ dài hạn 6 năm vào năm 1981, 34 năm gắn bó
-                        với công tác chăm sóc sức khỏe tâm thần (SKTT) cho người bệnh, thạc sĩ, bác sĩ Tôn Thất...</p>
-                    <br>
-
-                </div>
-                <div style="clear:both;"></div>
-                <div class="list-next"> <a
-                        href="https://pyttmientrung.moh.gov.vn/c52/t52-97/sinh-hoa-benh-tam-than-phan-liet-va-co-che-hoat-dong-cua-cac-thuoc-an-than-kinh.html">Sinh
-                        hóa bệnh Tâm thần phân liệt và cơ chế hoạt động của các thuốc an thần kinh</a>
-
-                </div>
-                <div style="clear:both;"></div>
-            </div>
-
-            <div style="clear:both;"></div>
-
-            <div class="box-cat">
-                <div class="box-header">
-                    <h2><a class="title"
-                            href="https://pyttmientrung.moh.gov.vn/c53/dao-tao--hop-tac-quoc-te.html">Đào tạo - Hợp tác
-                            quốc tế</a></h2>
-                </div>
-                <div class="list-item-first"><a
-                        href="https://pyttmientrung.moh.gov.vn/c53/t53-110/hoi-nghi-tap-huan-thong-tu-so-20-2014-tt-byt-quy-dinh-ton-thuong-co-the-su-dung-trong-giam-dinh-phap-y-giam-dinh-phap-y-tam-than.html"><img
-                            align="left" class="image-left" src="/upload/image/baiviet/daotaohoptac/1.jpg"
-                            width="180" border="0"></a> <a class="first-item-link"
-                        href="https://pyttmientrung.moh.gov.vn/c53/t53-110/hoi-nghi-tap-huan-thong-tu-so-20-2014-tt-byt-quy-dinh-ton-thuong-co-the-su-dung-trong-giam-dinh-phap-y-giam-dinh-phap-y-tam-than.html">
-                        Hội nghị Tập huấn Thông tư số 20/2014/TT-BYT Quy định tổn thương cơ thể sử dụng trong giám
-                        định...</a>
-                    <p> Bộ Y tế vừa tổ chức Hội nghị Tập huấn Thông tư số 20/2014/TT-BYT ngày 12/6/2014 của Bộ Y tế Quy
-                        định tổn thương cơ thể sử dụng trong giám định pháp y, giám định pháp y tâm thần vào ngày 8...
-                    </p><br>
-
-                </div>
-                <div style="clear:both;"></div>
-                <div class="list-next"> <a
-                        href="https://pyttmientrung.moh.gov.vn/c53/t53-109/tap-huan-thong-tu-18-va-thong-tu-31-2015-tt--byt-ve-giam-dinh-phap-y-tam-than.html">TẬP
-                        HUẤN THÔNG TƯ 18 VÀ THÔNG TƯ 31 /2015/TT - BYT VỀ GIÁM ĐỊNH PHÁP Y TÂM THẦN</a>
-
-                </div>
-                <div style="clear:both;"></div>
-                <div class="list-next"> <a
-                        href="https://pyttmientrung.moh.gov.vn/c53/t53-49/hoi-nghi-tap-huan--cap-nhat-chan-doan-va-dieu-tri-cac-roi-loan-tam-than-do-su-dung-cac-chat-dang-amphetamine--.html">
-                        Hội nghị Tập huấn “Cập nhật chẩn đoán và điều trị các rối loạn tâm thần do sử dụng các
-                        chất...</a>
-
-                </div>
-                <div style="clear:both;"></div>
-            </div>
-
-            <div style="clear:both;"></div>
-
-            <div class="box-cat">
-                <div class="box-header">
-                    <h2><a class="title" href="https://pyttmientrung.moh.gov.vn/c59/phap-luat.html">Pháp luật</a>
-                    </h2>
-                </div>
-                <div class="list-item-first"><a
-                        href="https://pyttmientrung.moh.gov.vn/c59/t59-462/thong-tu-so-11-2024-tt-byt-ngay-12-thang-7-nam-2024-cua-bo-truong-bo-y-te.html"><img
-                            align="left" class="image-left" src="/upload/image/14418529731410493625vbmoi.bmp"
-                            width="180" border="0"></a> <a class="first-item-link"
-                        href="https://pyttmientrung.moh.gov.vn/c59/t59-462/thong-tu-so-11-2024-tt-byt-ngay-12-thang-7-nam-2024-cua-bo-truong-bo-y-te.html">Thông
-                        tư số 11/2024/TT-BYT ngày 12 tháng 7 năm 2024 của Bộ trưởng Bộ Y tế</a>
-                    <p>Thông tư số 11/2024/TT-BYT ngày 12 tháng 7 năm 2024 của Bộ trưởng Bộ Y tế - Quy định cụ thể tiêu
-                        chuẩn, điều kiện xét thăng hặng chức danh nghề nghiệp viên chức chuyên ngành y, dược, dân số.
-                    </p><br>
-
-                </div>
-                <div style="clear:both;"></div>
-                <div class="list-next"> <a
-                        href="https://pyttmientrung.moh.gov.vn/c59/t59-352/luat-bao-ve-bi-mat-nha-nuoc-.html">LUẬT BẢO
-                        VỆ BÍ MẬT NHÀ NƯỚC.</a>
-
-                </div>
-                <div style="clear:both;"></div>
-                <div class="list-next"> <a
-                        href="https://pyttmientrung.moh.gov.vn/c59/t59-351/nghi-dinh-60-2021-nd-cp-cua-chinh-phu-ve-viec-quy-dinh-co-che-tu-chu-tai-chinh-cua-don-vi-su-nghiep-cong-lap.html">
-                        Nghị định 60/2021/NĐ-CP của Chính phủ về việc quy định cơ chế tự chủ tài chính của đơn vị
-                        sự...</a>
-
-                </div>
-                <div style="clear:both;"></div>
-                <div class="list-next"> <a
-                        href="https://pyttmientrung.moh.gov.vn/c59/t59-335/tim-hieu-noi-dung-dieu-125-blhs-nam-2015-ve---toi-giet-nguoi-trong-trang-thai-tinh-than-bi-kich-dong-manh--.html">
-                        Tìm hiểu nội dung Điều 125 BLHS năm 2015 về “ Tội giết người trong trạng thái tinh thần bị
-                        kích...</a>
-
-                </div>
-                <div style="clear:both;"></div>
-                <div class="list-next"> <a
-                        href="https://pyttmientrung.moh.gov.vn/c59/t59-334/phan-biet-cac-toi-hiep-dam-cuong-dam-dam-o-giao-cau-theo-quy-dinh-tai-bo-luat-hinh-su-nam-2015.html">Phân
-                        biệt các tội hiếp dâm, cưỡng dâm, dâm ô, giao cấu theo quy định tại Bộ luật hình sự năm 2015</a>
-
-                </div>
-                <div style="clear:both;"></div>
-            </div>
-
-            <div style="clear:both;"></div>
-
-            <div class="box-cat">
-                <div class="box-header">
-                    <h2><a class="title" href="https://pyttmientrung.moh.gov.vn/c64/doan-thanh-nien.html">Đoàn thanh
-                            niên</a></h2>
-                </div>
-                <div class="list-item-first"><a
-                        href="https://pyttmientrung.moh.gov.vn/c64/t64-457/huong-ung-ngay-moi-truong-the-gioi-2024.html"><img
-                            align="left" class="image-left" src="/upload/image/nam2024/mttg/ava.jpg"
-                            width="180" border="0"></a> <a class="first-item-link"
-                        href="https://pyttmientrung.moh.gov.vn/c64/t64-457/huong-ung-ngay-moi-truong-the-gioi-2024.html">HƯỞNG
-                        ỨNG NGÀY MÔI TRƯỜNG THẾ GIỚI 2024</a>
-                    <p> Ngày 05 tháng 6 hàng năm được Liên hợp quốc chọn là ngày Môi trường thế giới kể từ Hội nghị
-                        thượng đỉnh về con người và môi trường năm 1972 tại thủ đô Stockholm - Thủy Điển. Đây là một...
-                    </p><br>
-
-                </div>
-                <div style="clear:both;"></div>
-                <div class="list-next"> <a
-                        href="https://pyttmientrung.moh.gov.vn/c64/t64-455/chu-nhat-xanh-nam-2024.html">CHỦ NHẬT XANH
-                        NĂM 2024</a>
-
-                </div>
-                <div style="clear:both;"></div>
-                <div class="list-next"> <a
-                        href="https://pyttmientrung.moh.gov.vn/c64/t64-440/chuong-trinh--xuan-tinh-nguyen-2024--cua-chi-doan-trung-tam-phap-y-tam-than-khu-vuc-mien-trung-.html">CHƯƠNG
-                        TRÌNH “XUÂN TÌNH NGUYỆN 2024” CỦA CHI ĐOÀN TRUNG TÂM PHÁP Y TÂM THẦN KHU VỰC MIỀN TRUNG.</a>
-
-                </div>
-                <div style="clear:both;"></div>
-                <div class="list-next"> <a
-                        href="https://pyttmientrung.moh.gov.vn/c64/t64-396/nhieu-hoat-dong--thang-ba-bien-gioi--.html">Nhiều
-                        hoạt động “Tháng ba biên giới”</a>
-
-                </div>
-                <div style="clear:both;"></div>
-                <div class="list-next"> <a
-                        href="https://pyttmientrung.moh.gov.vn/c64/t64-385/hoat-dong--xuan-dong-day--tet-se-chia--nam-2023-cua-chi-doan-trung-tam-phap-y-tam-than-khu-vuc-mien-trung.html">
-                        Hoạt động “Xuân đong đầy - Tết sẻ chia” năm 2023 của Chi đoàn Trung tâm Pháp y tâm thần khu
-                        vực...</a>
-
-                </div>
-                <div style="clear:both;"></div>
-            </div>
-
-            <div style="clear:both;"></div>
         </div><br>
 
 

@@ -164,11 +164,17 @@ class FrontendController extends Controller
             }
         }
 
+        $ads_pos_main_1_id = 2;
+        $ads_pos_main_2_id = 3;
 
-
-        // dd($list_post_trang_chu);
-
-
+        $ads_main_1 = Ads::where('vitri', $ads_pos_main_1_id)
+            ->where('approved', 1)
+            ->orderBy('arrange')
+            ->get();
+        $ads_main_2 = Ads::where('vitri', $ads_pos_main_2_id)
+            ->where('approved', 1)
+            ->orderBy('arrange')
+            ->get();
         $menu_panel_phai = SysMenu::whereRaw("FIND_IN_SET(?, position)", [$menu_panel_phai_id])
             ->where('approved', 1)
             ->with(['posts' => function ($q) {
@@ -198,6 +204,8 @@ class FrontendController extends Controller
             'posts_trang_chu' => $posts_trang_chu,
             'sys_faq_homepage' => $sys_faq_homepage,
             'list_post_trang_chu' => $list_post_trang_chu,
+            'ads_main_1' => $ads_main_1,
+            'ads_main_2' => $ads_main_2,
         ]);
     }
 

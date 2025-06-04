@@ -32,10 +32,14 @@
                 {!! Form::label('position', trans('ads.position'), ['class' => 'control-label']) !!}
             </td>
             <td class="col-md-8 col-lg-9">
-                {!! Form::select('position', $positions->pluck('comment', 'id'), null, ['class' => 'form-control input-sm']) !!}
+                {!! Form::select('position', $positions->pluck('comment', 'id'), $ads->vitri ?? null, [
+                    'class' => 'form-control input-sm',
+                ]) !!}
+
                 {!! $errors->first('position', '<p class="help-block">:message</p>') !!}
             </td>
         </tr>
+
 
         <tr class="row {{ $errors->has('avatar') ? 'has-error' : '' }}">
             <td class="col-md-4 col-lg-3">
@@ -60,8 +64,7 @@
                     <div class="clearfix"></div>
                     <div class="imgprev-wrap" style="display:{{ !empty($ads->pathimage) ? 'block' : 'none' }}">
                         <input type="hidden" value="" name="img-hidden" />
-                        <img class="img-preview"
-                            src="{{ !empty($ads->pathimage) ? asset( $ads->pathimage) : '' }}"
+                        <img class="img-preview" src="{{ !empty($ads->pathimage) ? asset($ads->pathimage) : '' }}"
                             alt="{{ trans('ads.avatar') }}" />
                         <i class="fa fa-trash text-danger"></i>
                     </div>

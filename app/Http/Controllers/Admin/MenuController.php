@@ -20,6 +20,7 @@ class MenuController extends Controller
     public function index(Request $request)
     {
         $keyword = $request->get('search');
+        $position = $request->get('position');
         $perPage = 20;
 
         $menus = SysMenu::with(['children' => function ($query) {
@@ -35,14 +36,21 @@ class MenuController extends Controller
                         });
                 });
             })
+            ->when($position, function ($query, $position) {
+                $query->whereRaw('FIND_IN_SET(?, position)', [$position]);
+            })
             ->where(function ($query) {
                 $query->whereNull('ptypeid')->orWhere('ptypeid', 0);
             })
             ->orderBy('arrange')
             ->paginate($perPage);
-        $listPosition = SysAttributes::where('approved', 1)->get();
+
+        $listPosition = SysAttributes::where('approved', 1)->pluck('title', 'id');
+
         return view('admin.menus.index', compact('menus', 'listPosition'));
     }
+
+
 
     public function getPositionsByParent($ptypeid)
     {

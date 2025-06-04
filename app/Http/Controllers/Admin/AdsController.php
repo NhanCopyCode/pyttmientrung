@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Ads;
+use App\Models\AdsPosition;
 use App\Models\PositionAds;
 use App\Models\SysMenu;
 use App\Models\SysPosition;
@@ -22,19 +23,24 @@ class AdsController extends Controller
     public function index(Request $request)
     {
         $keyword = $request->get('search');
+        $adsPosId = $request->get('ads_pos_id'); 
         $perPage = 20;
-
-
 
         $ads = Ads::query()
             ->when($keyword, function ($query, $keyword) {
                 $query->where('title', 'like', "%$keyword%");
             })
+            ->when($adsPosId, function ($query, $adsPosId) {
+                $query->where('vitri', $adsPosId); 
+            })
             ->paginate($perPage)
-            ->appends($request->only('search'));
+            ->appends($request->only(['search', 'ads_pos_id']));
 
-        return view('admin.ads.index', compact('ads'));
+        $ads_pos = AdsPosition::all();
+
+        return view('admin.ads.index', compact('ads', 'ads_pos'));
     }
+
 
 
     /**
@@ -58,7 +64,6 @@ class AdsController extends Controller
      */
     public function store(Request $request)
     {
-
         $validated = $request->validate([
             'position' => 'required|exists:ads_pos,id',
             'title'     => 'required|string|max:255',
@@ -114,7 +119,6 @@ class AdsController extends Controller
         //
         $ads = Ads::findOrFail($id);
         $positions = PositionAds::select('id', 'comment')->where('approved', true)->orderBy('arrange')->get();
-
         return view('admin.ads.edit', compact('ads', 'positions'));
     }
 
@@ -138,7 +142,6 @@ class AdsController extends Controller
 
         // Create new Video instance
         $ads = Ads::findOrFail($id);
-
         $ads->title = $validated['title'];
         $ads->type = 1;
         $ads->vitri = $validated['position'];
