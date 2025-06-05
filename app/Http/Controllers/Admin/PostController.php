@@ -21,6 +21,7 @@ class PostController extends Controller
     public function index(Request $request)
     {
         $keyword = $request->get('search');
+        $typeid = $request->get('ptypeid'); 
         $perPage = 20;
 
         $posts = Post::query()
@@ -30,14 +31,31 @@ class PostController extends Controller
                         ->orWhere('summary', 'like', "%$keyword%");
                 });
             })
+            ->when($typeid, function ($query, $typeid) {
+                $query->where('typeid', $typeid);
+            })
             ->orderBy('postdate', 'desc')
             ->paginate($perPage)
-            ->appends($request->only('search'));
+            ->appends($request->only('search', 'typeid'));
 
+        $parents = SysMenu::with('children')
+            ->where('ptypeid', 0)
+            ->orderBy('arrange')
+            ->get();
 
+        $list_menu = [];
 
-        return view('admin.posts.index', compact('posts'));
+        foreach ($parents as $parent) {
+            $list_menu[$parent->id] = $parent->title;
+
+            foreach ($parent->children as $child) {
+                $list_menu[$child->id] = '-- ' . $child->title;
+            }
+        }
+
+        return view('admin.posts.index', compact('posts', 'list_menu'));
     }
+
 
 
 
@@ -50,7 +68,7 @@ class PostController extends Controller
     {
         $parents = SysMenu::with('children')
             ->where('ptypeid', 0)
-            ->orderBy('arrange') 
+            ->orderBy('arrange')
             ->get();
 
         $list_menu = [];
@@ -76,6 +94,7 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
+        // dd($request->all());
         $validated = $request->validate([
             'title'     => 'required|string|max:255',
             'ptypeid'    => 'required|integer',

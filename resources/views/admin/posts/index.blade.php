@@ -29,14 +29,26 @@
         <div class="box-header">
             <div class="box-tools">
                 {!! Form::open(['method' => 'GET', 'url' => '/admin/posts', 'class' => 'pull-left', 'role' => 'search']) !!}
-                <div class="input-group" style="margin-right: 5px; display:flex;">
-                    <input type="text" value="{{ \Request::get('search') }}" class="form-control input-sm" name="search"
-                        placeholder="{{ __('message.search_keyword') }}" style="width: 250px; margin-right: 5px;">
+                <div class="input-group" style="margin-right: 5px; display:flex; gap: 5px;">
+                    {{-- Select menu filter --}}
+                    {!! Form::select('ptypeid', ['' => '-- Chọn menu --'] + $list_menu, request('ptypeid'), [
+                        'class' => 'form-control input-sm',
+                        'style' => 'width: 200px;',
+                    ]) !!}
+                    {{-- Search keyword input --}}
+                    <input type="text" value="{{ request('search') }}" class="form-control input-sm" name="search"
+                        placeholder="{{ __('message.search_keyword') }}" style="width: 250px;">
+
+
+
+                    {{-- Submit --}}
                     <button class="btn btn-secondary btn-sm" type="submit">
                         <i class="fa fa-search"></i> {{ __('message.search') }}
                     </button>
+
                 </div>
                 {!! Form::close() !!}
+
 
             </div>
         </div>
@@ -75,11 +87,11 @@
                                 </td>
                             @endcan
                             <td class="text-center">
-                                <a href="{{ url('/bai-viet/' .$item->url) }}" target="_blank">
+                                <a href="{{ url('/bai-viet/' . $item->url) }}" target="_blank">
                                     {{ $item->url }}
                                 </a>
                             </td>
-                            
+
                             <td class="text-center">
                                 <span>{{ $item->summary }}</span>
                             </td>
