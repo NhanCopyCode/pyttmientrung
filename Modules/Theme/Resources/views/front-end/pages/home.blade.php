@@ -53,21 +53,27 @@
                     <div class="box-container1">
                         <div class="box-cat">
                             <div class="box-header">
-                                <h2><a class="title" href="{{ $firstMenu->url ?? '#' }}">{{ $firstMenu->title }}</a>
+                                <h2>
+                                    <a class="title"
+                                        href="{{ $firstMenu->url ? url('bai-viet/' . $firstMenu->url) : '#' }}">
+                                        {{ $firstMenu->title }}
+                                    </a>
                                 </h2>
+
                             </div>
                             <div id="slider" style="...">
                                 <ul style="...">
                                     @foreach ($posts as $post)
                                         <li style="float: left;">
-                                            <a href="{{ $post->url }}">
+                                            <a href="{{ $post->url ? url('bai-viet/' . $post->url) : '#' }}">
                                                 <img src="{{ $post->image_url }}" width="413" height="232px"
-                                                    border="0">
+                                                    border="0" />
                                             </a>
-                                            <a class="first-item-link1" href="{{ $post->url }}">
+                                            <a class="first-item-link1"
+                                                href="{{ $post->url ? url('bai-viet/' . $post->url) : '#' }}">
                                                 {{ Str::limit($post->title, 100) }}
                                             </a>
-                                            <p>{{ Str::limit($post->summary, 150) }}</p>
+                                            <p style="min-height: 50px;">{{ Str::limit($post->summary, 150) }}</p>
                                         </li>
                                     @break
                                 @endforeach
@@ -82,9 +88,11 @@
                         @endphp
                         @foreach ($postsWithoutFirst as $post)
                             <div class="list-next1">
-                                <a href="{{ $post->url }}">{{ Str::limit($post->title, 100) }}</a>
+                                <a
+                                    href="{{ $post->url ? url('bai-viet/' . $post->url) : '#' }}">{{ Str::limit($post->title, 100) }}</a>
                             </div>
                         @endforeach
+
 
                         <div style="clear:both;"></div>
                     </div>

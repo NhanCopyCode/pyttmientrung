@@ -17,7 +17,7 @@
                 {!! $errors->first('title', '<p class="help-block">:message</p>') !!}
             </td>
         </tr>
-    
+
         {{-- <tr class="row {{ $errors->has('pathfile') ? 'has-error' : '' }}">
             <td class="col-md-4 col-lg-3">
                 {!! Form::label('pathfile', trans('posts.pathfile'), ['class' => 'control-label']) !!}
@@ -32,7 +32,10 @@
                 {!! Form::label('ptypeid', 'Chọn Menu', ['class' => 'control-label']) !!}
             </td>
             <td class="col-md-8 col-lg-9">
-                {!! Form::select('ptypeid', $list_menu, null, ['class' => 'form-control input-sm']) !!}
+                {!! Form::select('ptypeid', $list_menu, old('ptypeid', $post->ptypeid ?? null), [
+                    'class' => 'form-control input-sm',
+                ]) !!}
+
                 {!! $errors->first('ptypeid', '<p class="help-block">:message</p>') !!}
             </td>
         </tr>

@@ -135,8 +135,21 @@ class PostController extends Controller
     {
         //
         $post = Post::findOrFail($id);
+        $list_menu = [];
+        $parents = SysMenu::with('children')
+            ->where('ptypeid', 0)
+            ->orderBy('arrange')
+            ->get();
+        foreach ($parents as $parent) {
+            $list_menu[$parent->id] = $parent->title;
 
-        return view('admin.posts.edit', compact('post'));
+            foreach ($parent->children as $child) {
+                $list_menu[$child->id] = '-- ' . $child->title;
+            }
+        }
+        // dd($post, $parents);
+
+        return view('admin.posts.edit', compact('post', 'list_menu'));
     }
 
     /**
@@ -150,7 +163,7 @@ class PostController extends Controller
     {
         $validated = $request->validate([
             'title'     => 'required|string|max:255',
-            'typeid'    => 'required|integer',
+            'ptypeid'    => 'required|integer',
             'avatar'    => 'nullable|image|mimes:jpeg,png,jpg,gif,svg,webp|max:2048',
             'content'   => 'nullable|string',
             'summary'   => 'nullable|string|max:255',
@@ -162,7 +175,7 @@ class PostController extends Controller
         $post->title     = $validated['title'];
         $post->url = Str::slug($validated['title']) . '-' . now()->format('YmdHis');
 
-        $post->typeid    = $validated['typeid'];
+        $post->typeid    = $validated['ptypeid'];
         $post->content   = $validated['content'] ?? null;
         $post->summary   = $validated['summary'] ?? null;
         $post->arrange   =  0;

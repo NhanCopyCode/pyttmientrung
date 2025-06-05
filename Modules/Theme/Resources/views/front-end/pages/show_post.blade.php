@@ -14,7 +14,7 @@
                     <span>{{ $post->postdate }}</span>
                 </div>
                 <h3>{{ $post->title }}</h3>
-                <img src="{{ asset($post->pathimage) }}" alt="{{ $post->title }}">
+                <img src="{{ asset($post->pathimage) }}" alt="{{ $post->title }}" style="max-width: 100%; height: auto; margin-bottom: 20px; object-fit: cover;">
                 <p>{!! html_entity_decode($post->summary) !!}</p>
                 {!! html_entity_decode($post->content) !!}
             </div>
