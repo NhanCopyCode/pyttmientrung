@@ -378,12 +378,12 @@
 
 
             <div style="clear:both;"></div>
-            <div class="panel">
+            {{-- <div class="panel">
                 <div>
                     <a href="" target="_blank" title="Y tế"><img src="/upload/image/quangcao/adv_03_01.png"
                             style="border: solid 1px #CCCCCC;width: 650px;height: auto;" alt="Y tế"></a>
                 </div>
-            </div>
+            </div> --}}
 
         </div><br>
 
