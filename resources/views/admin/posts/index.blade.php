@@ -32,7 +32,7 @@
                 <div class="input-group" style="margin-right: 5px; display:flex; gap: 5px;">
                     {{-- Select menu filter --}}
                     <select name="ptypeid" class="form-control input-sm" style="width: 200px;">
-                        <option value="-1">-- Chọn menu --</option>
+                        <option value="">-- Chọn menu --</option>
                         @foreach ($list_menu as $id => $name)
                             <option value="{{ $id }}" {{ request('ptypeid') == $id ? 'selected' : '' }}>
                                 {{ $name }}

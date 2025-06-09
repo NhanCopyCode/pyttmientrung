@@ -1,5 +1,5 @@
     <div id="header">
-        <div id="header01" style="background: url('{{ asset('img/banner.png') }}')"></div>
+        <div id="header01" style="background: url('{{ asset('img/banner.png') }}')!important"></div>
 
         <div id="header02">
             <div id="featured_1" style="height:186px;">

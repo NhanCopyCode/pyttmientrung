@@ -5,8 +5,8 @@
             <div class="sidebarmenu">
                 <ul id="sidebarmenu1">
                     @foreach ($menu_trai as $menu)
-                        <li class="normal_item" style="background: url('{{ asset('img/nav.png') }}')">
-                            <a href="{{ '/' .$menu->url }}"
+                        <li class="normal_item" style="background: url('{{ asset('img/nav.png') }}') !important;">
+                            <a href="{{ '/' . $menu->url }}"
                                 class="{{ $menu->children->isNotEmpty() ? 'subfolderstyle' : '' }}">
                                 {{ $menu->title }}
                             </a>
@@ -16,7 +16,7 @@
                                     style="z-index: 99; left: 248px; visibility: visible; display: none;">
                                     @foreach ($menu->children as $child)
                                         <li>
-                                            <a href="{{ '/'. $child->url }}">
+                                            <a href="{{ '/' . $child->url }}">
                                                 {{ $child->title }}
                                             </a>
                                         </li>
@@ -30,32 +30,35 @@
             </div>
         </div>
         <script type="text/javascript">
-            var menuids = ["sidebarmenu1"]
+            const menuids = ["sidebarmenu1"];
 
             function initsidebarmenu() {
                 for (var i = 0; i < menuids.length; i++) {
-                    var ultags = document.getElementById(menuids[i]).getElementsByTagName("ul")
+                    var ultags = document.getElementById(menuids[i]).getElementsByTagName("ul");
                     for (var t = 0; t < ultags.length; t++) {
-                        ultags[t].parentNode.getElementsByTagName("a")[0].className += " subfolderstyle"
+                        ultags[t].parentNode.getElementsByTagName("a")[0].className += " subfolderstyle";
                         if (ultags[t].parentNode.parentNode.id == menuids[i]) ultags[t].style.left = ultags[t].parentNode
-                            .offsetWidth + "px"
+                            .offsetWidth + "px";
                         else
-                            ultags[t].style.left = ultags[t - 1].getElementsByTagName("a")[0].offsetWidth + "px"
+                            ultags[t].style.left = ultags[t - 1].getElementsByTagName("a")[0].offsetWidth + "px";
                         ultags[t].parentNode.onmouseover = function() {
-                            this.getElementsByTagName("ul")[0].style.display = "block"
-                        }
+                            this.getElementsByTagName("ul")[0].style.display = "block";
+                        };
                         ultags[t].parentNode.onmouseout = function() {
-                            this.getElementsByTagName("ul")[0].style.display = "none"
-                        }
+                            this.getElementsByTagName("ul")[0].style.display = "none";
+                        };
                     }
                     for (var t = ultags.length - 1; t > -1; t--) {
-                        ultags[t].style.visibility = "visible"
-                        ultags[t].style.display = "none"
+                        ultags[t].style.visibility = "visible";
+                        ultags[t].style.display = "none";
                     }
                 }
             }
-            if (window.addEventListener) window.addEventListener("load", initsidebarmenu, false)
-            else if (window.attachEvent) window.attachEvent("onload", initsidebarmenu)
+            if (window.addEventListener) {
+                window.addEventListener("load", initsidebarmenu, false);
+            } else if (window.attachEvent) {
+                window.attachEvent("onload", initsidebarmenu);
+            }
         </script>
     </div>
     @include('theme::front-end.sections.ads_left')
