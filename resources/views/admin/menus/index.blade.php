@@ -30,20 +30,26 @@
             <div class="box-tools">
                 {!! Form::open(['method' => 'GET', 'url' => '/admin/menus', 'class' => 'pull-left', 'role' => 'search']) !!}
                 <div class="input-group" style="margin-right: 5px; display:flex; align-items:center;">
-                    {!! Form::select('position', $listPosition, request('position'), [
-                        'class' => 'form-control input-sm',
-                        'placeholder' => __('message.select_position'),
-                        'style' => 'margin-right: 5px; width: 150px;',
-                    ]) !!}
-                    <input type="text" value="{{ \Request::get('search') }}" class="form-control input-sm" name="search"
-                        placeholder="{{ __('message.search_keyword') }}" style="width: 250px; margin-right: 5px;">
+                    <select name="position" class="form-control input-sm"
+                        style="width: 150px; padding: 5px 10px; margin-right: 14px; border: 1px solid #ccc;">
+                        <option value="">-- Chọn vị trí --</option>
+                        @foreach ($listPosition as $id => $name)
+                            <option value="{{ $id }}" {{ request('position') == $id ? 'selected' : '' }}>
+                                {{ $name }}
+                            </option>
+                        @endforeach
+                    </select>
 
+
+                    <input type="text" value="{{ request('search') }}" class="form-control input-sm" name="search"
+                        placeholder="{{ __('message.search_keyword') }}" style="width: 250px; margin-right: 5px;">
 
                     <button class="btn btn-secondary btn-sm" type="submit">
                         <i class="fa fa-search"></i> {{ __('message.search') }}
                     </button>
                 </div>
                 {!! Form::close() !!}
+
 
 
             </div>

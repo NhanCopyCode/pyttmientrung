@@ -37,19 +37,19 @@
             @endif
 
 
-            @if ($posts_trang_chu->isNotEmpty())
+            {{-- @if ($posts_trang_chu->isNotEmpty())
                 @php
-                    $firstMenu = $posts_trang_chu->first();
 
+                    // $firstMenu = $posts_trang_chu->first();
                     $childPosts = $firstMenu->children->flatMap(function ($child) {
                         return $child->posts;
                     });
 
                     $posts = $childPosts->sortByDesc('postdate')->take(7);
-                    $otherPosts = $posts_trang_chu->values()->slice(1);
                 @endphp
 
                 @if ($posts->isNotEmpty())
+
                     <div class="box-container1">
                         <div class="box-cat">
                             <div class="box-header">
@@ -61,8 +61,8 @@
                                 </h2>
 
                             </div>
-                            <div id="slider" style="...">
-                                <ul style="...">
+                            <div id="slider">
+                                <ul>
                                     @foreach ($posts as $post)
                                         <li style="float: left;">
                                             <a href="{{ $post->url ? url('bai-viet/' . $post->url) : '#' }}">
@@ -99,7 +99,7 @@
                     <div style="clear:both;"></div>
                 </div>
             @endif
-        @endif
+        @endif --}}
         {{-- <div class="box-container1">
 
             <div class="box-cat">
@@ -243,85 +243,9 @@
                 });
             });
         </script>
-        <div class="panel">
-            @foreach ($ads_main_1 as $ad)
-                {{-- <div>
-                <a href="" target="_blank" title="30/4">
-                    <img src="/upload/image/30.4.2025.jpg"
-                        style="width: 650px;height: auto;" alt="30/4"></a>
-            </div> --}}
-                <a href="{{ $ad->link }}" target="_blank" title="{{ $ad->title }}">
-                    <img src="{{ asset($ad->pathimage) }}" style="width: 650px;height: auto;"
-                        alt="{{ $ad->title }}">
-                </a>
-        </div>
-        @endforeach
 
-        <div class="box-container1">
 
-            {{-- @foreach ($otherPosts as $menu)
-                @php
-                    $parentMenu = SysMenu::with([
-                        'children.posts' => function ($query) {
-                            $query->where('approved', 1)->orderByDesc('postdate');
-                        },
-                    ])
-                        ->where('id', $menu->id)
-                        ->where('approved', 1)
-                        ->first();
-
-                    foreach ($parentMenu->children as $child) {
-                        $post = $child->posts->take(5);
-                        @if ($menuPosts->isNotEmpty())
-                    <div class="box-cat">
-                        <div class="box-header">
-                            <h2>
-                                <a class="title" href="{{ $menu->url }}">{{ $menu->title }}</a>
-                            </h2>
-                        </div>
-
-                        @php
-                            $firstPost = $menuPosts->first();
-                            $otherMenuPosts = $menuPosts->slice(1);
-                        @endphp
-
-                        <div class="list-item-first">
-                            <a href="{{ $firstPost->url }}">
-                                <img align="left" class="image-left"
-                                    src="{{ $firstPost->image_url ?? '/upload/image/default.jpg' }}" width="180"
-                                    border="0">
-                            </a>
-                            <a class="first-item-link" href="{{ $firstPost->url }}">
-                                {{ Str::limit($firstPost->title, 100) }}
-                            </a>
-                            <p>{{ Str::limit($firstPost->summary, 150) }}</p>
-                            <br>
-                        </div>
-
-                        <div style="clear:both;"></div>
-
-                        @foreach ($otherMenuPosts as $post)
-                            <div class="list-next">
-                                <a href="{{ $post->url }}">
-                                    {{ Str::limit($post->title, 100) }}
-                                </a>
-                            </div>
-                            <div style="clear:both;"></div>
-                        @endforeach
-                    </div>
-                @endif
-                    }
-                    $menuPosts = $menu->children
-                        ->flatMap(function ($child) {
-                            return $child->posts;
-                        })
-                        ->sortByDesc('postdate')
-                        ->take(5);
-                @endphp
-
-              
-            @endforeach --}}
-
+        {{-- <div class="box-container1">
 
             @foreach ($list_post_trang_chu as $outerIndex => $item)
                 @if (!empty($item['posts']) && $item['posts']->isNotEmpty())
@@ -356,7 +280,6 @@
                             @endif
                         @endforeach
 
-                        {{-- Hiển thị quảng cáo sau mỗi item --}}
                         @if (isset($ads_main_2[$outerIndex]))
                             @php $ad = $ads_main_2[$outerIndex]; @endphp
                             <div style="clear:both;"></div>
@@ -373,19 +296,145 @@
                     </div>
                 @endif
             @endforeach
-
-
-
-
             <div style="clear:both;"></div>
-            {{-- <div class="panel">
-                <div>
-                    <a href="" target="_blank" title="Y tế"><img src="/upload/image/quangcao/adv_03_01.png"
-                            style="border: solid 1px #CCCCCC;width: 650px;height: auto;" alt="Y tế"></a>
-                </div>
-            </div> --}}
 
-        </div><br>
+        </div><br> --}}
+        @if ($list_post_trang_chu && count($list_post_trang_chu))
+            @php
+                $firstItem = $list_post_trang_chu[0];
+                $firstMenu = $firstItem['parent'];
+                $childPosts = $firstItem['posts'];
+                $posts = $childPosts->sortByDesc('postdate')->take(7)->values();
+            @endphp
+
+            @if ($posts->isNotEmpty())
+                <div class="box-container1">
+                    <div class="box-cat">
+                        <div class="box-header">
+                            <h2>
+                                <a class="title"
+                                    href="{{ $firstMenu->url ? url('bai-viet/' . $firstMenu->url) : '#' }}">
+                                    {{ $firstMenu->title }}
+                                </a>
+                            </h2>
+                        </div>
+
+                        <div id="slider">
+                            <ul>
+                                @foreach ($posts as $index => $post)
+                                    @if ($index === 0)
+                                        <li style="float: left;">
+                                            <a href="{{ $post->url ? url('bai-viet/' . $post->url) : '#' }}">
+                                                <img src="{{ $post->image_url }}" width="413" height="232px"
+                                                    border="0" />
+                                            </a>
+                                            <a class="first-item-link1"
+                                                href="{{ $post->url ? url('bai-viet/' . $post->url) : '#' }}">
+                                                {{ Str::limit($post->title, 100) }}
+                                            </a>
+                                            <p style="min-height: 50px;">{{ Str::limit($post->summary, 150) }}</p>
+                                        </li>
+                                    @endif
+                                @endforeach
+                            </ul>
+                        </div>
+
+                        <span id="prevBtn"><a href="javascript:void(0);">Previous</a></span>
+                        <span id="nextBtn"><a href="javascript:void(0);">Next</a></span>
+
+
+                        @php
+                            $postsWithoutFirst = $posts->slice(1);
+                        @endphp
+
+
+                        @foreach ($postsWithoutFirst as $post)
+                            <div class="list-next1">
+                                <a href="{{ $post->url ? url('bai-viet/' . $post->url) : '#' }}">
+                                    {{ Str::limit($post->title, 100) }}
+                                </a>
+                            </div>
+                        @endforeach
+
+                        <div style="clear:both;"></div>
+                        {{-- Display ads_main_1 --}}
+                        <div class="panel">
+                            @foreach ($ads_main_1 as $ad)
+                                <a href="{{ $ad->link }}" target="_blank" title="{{ $ad->title }}">
+                                    <img src="{{ asset($ad->pathimage) }}" style="width: 650px;height: auto;"
+                                        alt="{{ $ad->title }}">
+                                </a>
+                            @endforeach
+
+                        </div>
+                    </div>
+                    <div style="clear:both;"></div>
+                </div>
+            @endif
+        @endif
+
+        <br>
+
+        @if (count($list_post_trang_chu) > 1)
+            <div class="box-container1">
+                @foreach ($list_post_trang_chu as $outerIndex => $item)
+                    @if ($outerIndex === 0)
+                        @continue
+                    @endif
+
+                    @if (!empty($item['posts']) && $item['posts']->isNotEmpty())
+                        <div class="box-cat">
+                            <div class="box-header">
+                                <h2>
+                                    <a class="title" href="{{ $item['parent']->url }}">
+                                        {{ $item['parent']->title }}
+                                    </a>
+                                </h2>
+                            </div>
+
+                            @foreach ($item['posts'] as $postIndex => $post)
+                                @if ($postIndex === 0)
+                                    <div class="list-item-first">
+                                        <a href="{{ url('/bai-viet/' . $post->url) }}">
+                                            <img align="left" class="image-left"
+                                                src="{{ asset($post->pathimage ?? '/uploads/image/default.jpg') }}"
+                                                width="180" border="0">
+                                        </a>
+                                        <a class="first-item-link" href="{{ url('/bai-viet/' . $post->url) }}">
+                                            {{ Str::limit($post->title, 150) }}
+                                        </a>
+                                        <p>{{ Str::limit($post->summary, 190) }}</p><br>
+                                    </div>
+                                    <div style="clear:both;"></div>
+                                @else
+                                    <div class="list-next">
+                                        <a href="{{ url('/bai-viet/' . $post->url) }}">
+                                            {{ Str::limit($post->title, 120) }}
+                                        </a>
+                                    </div>
+                                    <div style="clear:both;"></div>
+                                @endif
+                            @endforeach
+                         
+                            @if (isset($ads_main_2[$outerIndex - 1]))
+                                @php $ad = $ads_main_2[$outerIndex - 1]; @endphp
+                                <div style="clear:both;"></div>
+                                <div class="panel">
+                                    <div>
+                                        <a href="{{ $ad->link }}" target="_blank" title="{{ $ad->title }}">
+                                            <img src="{{ asset($ad->pathimage ?? '/uploads/image/default.jpg') }}"
+                                                style="border: solid 1px #CCCCCC;width: 650px;height: auto;"
+                                                alt="{{ $ad->title }}">
+                                        </a>
+                                    </div>
+                                </div>
+                            @endif
+                        </div>
+                    @endif
+                @endforeach
+                <div style="clear:both;"></div>
+            </div><br>
+        @endif
 
 
 

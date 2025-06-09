@@ -84,7 +84,8 @@ class FrontendController extends Controller
 
 
 
-        $posts_trang_chu = SysMenu::whereRaw("FIND_IN_SET(?, position)", [$menu_trang_chu_id])
+        $posts_trang_chu = SysMenu::where('approved', 1) 
+            ->whereRaw("FIND_IN_SET(?, position)", [$menu_trang_chu_id])
             ->with(['children' => function ($q) {
                 $q->with(['posts' => function ($query) {
                     $query->where('approved', 1)
@@ -96,38 +97,9 @@ class FrontendController extends Controller
             ->get();
 
 
-        // $firstMenu = $posts_trang_chu->first();
-        // $secondMenu = $posts_trang_chu->values()->get(1);
 
-
-        // $childPosts = $firstMenu->children->flatMap(function ($child) {
-        //     return $child->posts;
-        // });
-
-        // $secondChildPosts = $secondMenu->children->flatMap(function ($child) {
-        //     return $child->posts;
-        // });
-
-        // $posts = $childPosts->sortByDesc('postdate')->take(7);
-        // $otherPosts = $posts_trang_chu->skip(1);
-        // // dd($otherPosts);
-        // foreach ($otherPosts as $menu) {
-        //     // foreach ($menu->children as $child) {
-        //     //     dump("Menu con ID: " . $child->id);
-        //     //     dump("Số lượng bài viết: " . $child->posts->count());
-        //     //     foreach ($child->posts as $post) {
-        //     //         dump($post->title);
-        //     //     }
-        //     // }
-        //     $childPosts = $menu->children->flatMap(function ($child) {
-        //         return $child->posts;
-        //     });
-        //     dd($childPosts);  
-        //     foreach ($childPosts as $post) {
-        //         dd($post->title);
-        //     }
-        // }
-        $otherPosts = $posts_trang_chu->skip(1);
+        
+        $otherPosts = $posts_trang_chu;
         $list_post_trang_chu = [];
 
         foreach ($otherPosts as $menu) {
@@ -185,8 +157,7 @@ class FrontendController extends Controller
             ->orderBy('arrange')
             ->get();
 
-
-
+        $firstMenu = $posts_trang_chu->first();
         \View::share([
             'settings' => $settings,
             'slides' => $slides,
@@ -206,6 +177,7 @@ class FrontendController extends Controller
             'list_post_trang_chu' => $list_post_trang_chu,
             'ads_main_1' => $ads_main_1,
             'ads_main_2' => $ads_main_2,
+            'firstMenu' => $firstMenu,
         ]);
     }
 

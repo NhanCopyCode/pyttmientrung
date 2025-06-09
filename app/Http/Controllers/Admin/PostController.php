@@ -94,7 +94,6 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
-        // dd($request->all());
         $validated = $request->validate([
             'title'     => 'required|string|max:255',
             'ptypeid'    => 'required|integer',
@@ -204,6 +203,7 @@ class PostController extends Controller
         $post->lang      = 'vn';
 
         if ($request->hasFile('avatar')) {
+
             if (!empty($post->pathimage) && file_exists(public_path($post->pathimage))) {
                 @unlink(public_path($post->pathimage));
             }
