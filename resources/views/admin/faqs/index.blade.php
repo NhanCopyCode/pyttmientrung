@@ -78,11 +78,15 @@
                                     {{ Str::limit(strip_tags($item->question), 200) }}
                                 </a>
                             </td>
-                            <td class="text-center">
+                            <td class="text-center" style="width: 16%;">
                                 @if (!empty(strip_tags($item->answer)))
                                     <span class="text-success">Đã có câu trả lời</span>
                                 @else
-                                    <span class="text-danger">Chưa có câu trả lời</span>
+                                    <div class="d-flex items-center">
+                                        <span class="text-danger mr-2">Chưa có câu trả lời</span>
+                                        <a href="{{ '/admin/faqs/' . $item->id . '/edit' }}" class="btn btn-primary">Trả
+                                            lời</a>
+                                    </div>
                                 @endif
                             </td>
 

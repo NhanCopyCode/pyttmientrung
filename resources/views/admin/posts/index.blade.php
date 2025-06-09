@@ -31,23 +31,27 @@
                 {!! Form::open(['method' => 'GET', 'url' => '/admin/posts', 'class' => 'pull-left', 'role' => 'search']) !!}
                 <div class="input-group" style="margin-right: 5px; display:flex; gap: 5px;">
                     {{-- Select menu filter --}}
-                    {!! Form::select('ptypeid', ['' => '-- Chọn menu --'] + $list_menu, request('ptypeid'), [
-                        'class' => 'form-control input-sm',
-                        'style' => 'width: 200px;',
-                    ]) !!}
+                    <select name="ptypeid" class="form-control input-sm" style="width: 200px;">
+                        <option value="-1">-- Chọn menu --</option>
+                        @foreach ($list_menu as $id => $name)
+                            <option value="{{ $id }}" {{ request('ptypeid') == $id ? 'selected' : '' }}>
+                                {{ $name }}
+                            </option>
+                        @endforeach
+                    </select>
+
+
+
                     {{-- Search keyword input --}}
                     <input type="text" value="{{ request('search') }}" class="form-control input-sm" name="search"
                         placeholder="{{ __('message.search_keyword') }}" style="width: 250px;">
 
-
-
-                    {{-- Submit --}}
                     <button class="btn btn-secondary btn-sm" type="submit">
                         <i class="fa fa-search"></i> {{ __('message.search') }}
                     </button>
-
                 </div>
                 {!! Form::close() !!}
+
 
 
             </div>

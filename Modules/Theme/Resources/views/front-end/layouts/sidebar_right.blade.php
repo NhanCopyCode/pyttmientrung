@@ -47,7 +47,7 @@
              <div class="panel">
                  <div class="panel_tcat faq"
                      style="background: url('{{ asset('img/faq.png') }}') 5px 3px no-repeat #156aec;">
-                     <a href="{{ url('hoi-dap') }}">{{ $sys_faq_homepage->title}}</a>
+                     <a href="{{ url('hoi-dap') }}">{{ $sys_faq_homepage->title }}</a>
                  </div>
 
                  <div class="swiper mySwiper" style="height: 330px;">
@@ -169,17 +169,19 @@
                  </div>
 
                  <!-- Swiper navigation -->
-                 <div class="swiper-button-next"></div>
-                 <div class="swiper-button-prev"></div>
+                 <div class="swiper-button-next video-button-next"></div>
+                 <div class="swiper-button-prev video-button-prev"></div>
              </div>
 
 
              <script>
-                 var swiper = new Swiper(".videoSwiper", {
-                     navigation: {
-                         nextEl: ".swiper-button-next",
-                         prevEl: ".swiper-button-prev",
-                     },
+                 document.addEventListener("DOMContentLoaded", function() {
+                     var swiper = new Swiper(".videoSwiper", {
+                         navigation: {
+                             nextEl: ".video-button-next",
+                             prevEl: ".video-button-prev",
+                         },
+                     });
                  });
              </script>
              {{-- <div id="container1" style="text-align: center;">Đang tải ...</div>

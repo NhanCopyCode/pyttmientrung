@@ -25,6 +25,16 @@ class FaqController extends Controller
             'email' => 'required|email|max:255',
             'question' => 'required|string|max:1000',
             'g-recaptcha-response' => 'required|captcha',
+        ], [
+            'name.required' => 'Vui lòng nhập tên của bạn.',
+            'name.max' => 'Tên không được vượt quá 255 ký tự.',
+            'email.required' => 'Vui lòng nhập địa chỉ email.',
+            'email.email' => 'Địa chỉ email không hợp lệ.',
+            'email.max' => 'Email không được vượt quá 255 ký tự.',
+            'question.required' => 'Vui lòng nhập câu hỏi của bạn.',
+            'question.max' => 'Câu hỏi không được vượt quá 1000 ký tự.',
+            'g-recaptcha-response.required' => 'Vui lòng xác minh bạn không phải là robot.',
+            'g-recaptcha-response.captcha' => 'Xác minh reCAPTCHA không hợp lệ hoặc đã hết hạn.',
         ]);
 
         Faq::create([

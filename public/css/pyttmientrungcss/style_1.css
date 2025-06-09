@@ -62,7 +62,7 @@ a.button span {
 #wrapper_left{width: 248px; float: left;}
 #wrapper_center{width: 650px; margin: 0px 12px 0px 12px; float: left;}
 #wrapper_right{width: 248px; float: left;}
-#footer{background: url(../images/footer_bg.png) repeat-x; height: 154px; margin-top: 20px;color: #3a3a3a; text-align: center; line-height: 22px}
+#footer{ height: 154px; margin-top: 20px;color: #3a3a3a; text-align: center; line-height: 22px}
 
 
 .box-container1 {background:none;margin: 0px ;}
